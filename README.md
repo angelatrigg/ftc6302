@@ -1,5 +1,5 @@
 Code repository for FTC Team #6302
-# NEKOS - 6302 FTC Team
+# Odyssey - 6302 FTC Team
 
 Welcome to the NEKOS 6302 FTC Team repository. This repository is where 
 we upload our source code for our programers to understand and other teams to use 
