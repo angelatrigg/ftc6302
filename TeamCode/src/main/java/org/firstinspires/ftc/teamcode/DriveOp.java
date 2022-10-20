@@ -12,6 +12,7 @@ public class DriveOp extends LinearOpMode {
     private DcMotor motor_drive_lr;
     private DcMotor motor_drive_rf;
     private DcMotor motor_drive_rr;
+    private DcMotor motor_lift;
 
     /**
      * This function is executed when this Op Mode is selected from the Driver Station.
@@ -22,6 +23,7 @@ public class DriveOp extends LinearOpMode {
         motor_drive_lr = hardwareMap.get(DcMotor.class, "motor_drive_lr");
         motor_drive_rf = hardwareMap.get(DcMotor.class, "motor_drive_rf");
         motor_drive_rr = hardwareMap.get(DcMotor.class, "motor_drive_rr");
+        motor_lift = hardwareMap.get(DcMotor.class, "motor_lift");
 
         // Reverse one of the drive motors.
         // You will have to determine which motor to reverse for your robot.
@@ -84,6 +86,11 @@ public class DriveOp extends LinearOpMode {
                     motor_drive_lr.setPower(-1);
                     motor_drive_rf.setPower(-1);
                     motor_drive_rr.setPower(-1);
+                }
+                else if (gamepad2.a) {
+                    motor_lift.setPower(0.5);
+                } else if (gamepad2.b) {
+                    motor_lift.setPower(-1);
                 } else {
                     // The Y axis of a joystick ranges from -1 in its topmost position
                     // to +1 in its bottommost position. We negate this value so that
