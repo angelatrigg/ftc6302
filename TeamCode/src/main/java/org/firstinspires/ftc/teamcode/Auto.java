@@ -45,7 +45,7 @@ public class Auto extends LinearOpMode {
         motor_drive_rf.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         motor_drive_lr.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         motor_drive_rr.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-
+//m
         motor_drive_lf.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         motor_drive_rf.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         motor_drive_lr.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
