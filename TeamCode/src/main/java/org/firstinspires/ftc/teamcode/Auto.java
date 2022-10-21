@@ -18,17 +18,26 @@ public class Auto extends LinearOpMode {
 
     private ElapsedTime runtime = new ElapsedTime();
 
-    //Swivel and lift use arbitrary numbers since they aren't wheels. For instance, 500 on the swivel would not be 500mm, just a set encoder distance.
-    //There's probably a better way to do it but this works for now.
-    static final double     COUNTS_PER_MOTOR_GOBUILDA    = 537.7 ;    // eg: TETRIX Motor Encoder
-    static final double     COUNTS_PER_MOTOR_SWIVEL    = 537.7 ;
-    static final double     DRIVE_GEAR_REDUCTION    = 1.0 ;     // No External Gearing.
+    //REMEMBER TO SET NEW VALUES FOR LIFT AND SWIVEL MOTORS
+
+    //In theory, swivel uses degrees instead of millimeters
+    static final double     COUNTS_PER_MOTOR_REV    = 537.7 ;    // Drive motors
+    static final double     COUNTS_PER_MOTOR_REV_LIFT    = 537.7 ; //Unnecessary but just in case different motors are used for wheels and the lift / arm
+    static final double     COUNTS_PER_MOTOR_REV_SWIVEL    = 537.7 ; //Just for another motor type with different ticks per revolution
+    // For an example of gear reduction, use a value of 2.0 for a 12-tooth spur gear driving a 24-tooth spur gear.
+    // This is gearing DOWN for less speed and more torque.
+    // For gearing UP, use a gear ratio less than 1.0. Note this will affect the direction of wheel rotation.
+    static final double     DRIVE_GEAR_REDUCTION    = 1.0 ;     // 1 = No External Gearing.
+    static final double     LIFT_GEAR_REDUCTION    = 1.0 ;
     static final double     SWIVEL_GEAR_REDUCTION    = 1.0 ;
     static final double     WHEEL_DIAMETER_MM   = 95.0 ;     // For figuring circumference
-    static final double     COUNTS_PER_MM_GOBUILDA         = (COUNTS_PER_MOTOR_GOBUILDA * DRIVE_GEAR_REDUCTION) /
-            (WHEEL_DIAMETER_MM * 3.1415);
-    static final double     COUNTS_PER_MM_SWIVEL         = (COUNTS_PER_MOTOR_SWIVEL * SWIVEL_GEAR_REDUCTION) /
-            (WHEEL_DIAMETER_MM * 3.1415);
+    static final double     WHEEL_DIAMETER_MM_LIFT   = 95.0 ;
+    static final double     COUNTS_PER_MM         = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
+            (WHEEL_DIAMETER_MM * 3.1415); //Drive motors
+    static final double     COUNTS_PER_MM_LIFT         = (COUNTS_PER_MOTOR_REV_LIFT * LIFT_GEAR_REDUCTION) /
+            (WHEEL_DIAMETER_MM_LIFT * 3.1415); //Uses separate gear reduction and wheel diameter for lift / arm
+    static final double     COUNTS_PER_DG_SWIVEL         = (COUNTS_PER_MOTOR_REV_SWIVEL * SWIVEL_GEAR_REDUCTION) /
+            360; //Converts counts per rev into degrees
     static final double     DRIVE_SPEED             = 0.6;
     static final double     UP_LIFT_SPEED           = 0.5;
     static final double     DOWN_LIFT_SPEED         = 0.3;
@@ -103,7 +112,7 @@ public class Auto extends LinearOpMode {
          *  3) Driver stops the opmode running.
          */
         public void encoderDrive(double speed,
-        double lfMM, double rfMM, double lrMM, double rrMM, double lftMM, double swvMM,
+        double lfMM, double rfMM, double lrMM, double rrMM, double lftMM, double swvDG,
         double timeoutS) {
             int newlfTarget;
             int newrfTarget;
@@ -116,12 +125,12 @@ public class Auto extends LinearOpMode {
             if (opModeIsActive()) {
 
                 // Determine new target position, and pass to motor controller
-                newlfTarget = motor_drive_lf.getCurrentPosition() + (int)(lfMM * COUNTS_PER_MM_GOBUILDA);
-                newrfTarget = motor_drive_rf.getCurrentPosition() + (int)(rfMM * COUNTS_PER_MM_GOBUILDA);
-                newlrTarget = motor_drive_lr.getCurrentPosition() + (int)(lrMM * COUNTS_PER_MM_GOBUILDA);
-                newrrTarget = motor_drive_rr.getCurrentPosition() + (int)(rrMM * COUNTS_PER_MM_GOBUILDA);
-                newlftTarget = motor_lift.getCurrentPosition() + (int)(lftMM * COUNTS_PER_MM_GOBUILDA);
-                newswvTarget = motor_swivel.getCurrentPosition() + (int)(swvMM * COUNTS_PER_MM_SWIVEL);
+                newlfTarget = motor_drive_lf.getCurrentPosition() + (int)(lfMM * COUNTS_PER_MM);
+                newrfTarget = motor_drive_rf.getCurrentPosition() + (int)(rfMM * COUNTS_PER_MM);
+                newlrTarget = motor_drive_lr.getCurrentPosition() + (int)(lrMM * COUNTS_PER_MM);
+                newrrTarget = motor_drive_rr.getCurrentPosition() + (int)(rrMM * COUNTS_PER_MM);
+                newlftTarget = motor_lift.getCurrentPosition() + (int)(lftMM * COUNTS_PER_MM_LIFT);
+                newswvTarget = motor_swivel.getCurrentPosition() + (int)(swvDG * COUNTS_PER_DG_SWIVEL);
 
                 motor_drive_lf.setTargetPosition(newlfTarget);
                 motor_drive_rf.setTargetPosition(newrfTarget);
