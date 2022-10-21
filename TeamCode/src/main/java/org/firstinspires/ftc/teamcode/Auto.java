@@ -50,7 +50,7 @@ public class Auto extends LinearOpMode {
         motor_drive_rf.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         motor_drive_lr.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         motor_drive_rr.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
+//uh
         // Send telemetry message to indicate successful Encoder reset
         telemetry.addData("Starting at",  "%7d :%7d",
                 motor_drive_lf.getCurrentPosition(),
