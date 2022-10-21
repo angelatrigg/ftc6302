@@ -21,7 +21,7 @@ public class Auto extends LinearOpMode {
     //REMEMBER TO SET NEW VALUES FOR LIFT AND SWIVEL MOTORS
 
     //In theory, swivel uses degrees instead of millimeters
-    static final double     COUNTS_PER_MOTOR_REV    = 537.7 ;    // Drive motors
+    static final double     COUNTS_PER_MOTOR_REV_DRIVE    = 537.7 ;    // Drive motors
     static final double     COUNTS_PER_MOTOR_REV_LIFT    = 537.7 ; //Unnecessary but just in case different motors are used for wheels and the lift / arm
     static final double     COUNTS_PER_MOTOR_REV_SWIVEL    = 537.7 ; //Just for another motor type with different ticks per revolution
     // For an example of gear reduction, use a value of 2.0 for a 12-tooth spur gear driving a 24-tooth spur gear.
@@ -30,10 +30,10 @@ public class Auto extends LinearOpMode {
     static final double     DRIVE_GEAR_REDUCTION    = 1.0 ;     // 1 = No External Gearing.
     static final double     LIFT_GEAR_REDUCTION    = 1.0 ;
     static final double     SWIVEL_GEAR_REDUCTION    = 1.0 ;
-    static final double     WHEEL_DIAMETER_MM   = 95.0 ;     // For figuring circumference
+    static final double     WHEEL_DIAMETER_MM_DRIVE   = 95.0 ;     // For figuring circumference
     static final double     WHEEL_DIAMETER_MM_LIFT   = 95.0 ;
-    static final double     COUNTS_PER_MM         = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
-            (WHEEL_DIAMETER_MM * 3.1415); //Drive motors
+    static final double     COUNTS_PER_MM_DRIVE         = (COUNTS_PER_MOTOR_REV_DRIVE * DRIVE_GEAR_REDUCTION) /
+            (WHEEL_DIAMETER_MM_DRIVE * 3.1415); //Drive motors
     static final double     COUNTS_PER_MM_LIFT         = (COUNTS_PER_MOTOR_REV_LIFT * LIFT_GEAR_REDUCTION) /
             (WHEEL_DIAMETER_MM_LIFT * 3.1415); //Uses separate gear reduction and wheel diameter for lift / arm
     static final double     COUNTS_PER_DG_SWIVEL         = (COUNTS_PER_MOTOR_REV_SWIVEL * SWIVEL_GEAR_REDUCTION) /
@@ -125,10 +125,10 @@ public class Auto extends LinearOpMode {
             if (opModeIsActive()) {
 
                 // Determine new target position, and pass to motor controller
-                newlfTarget = motor_drive_lf.getCurrentPosition() + (int)(lfMM * COUNTS_PER_MM);
-                newrfTarget = motor_drive_rf.getCurrentPosition() + (int)(rfMM * COUNTS_PER_MM);
-                newlrTarget = motor_drive_lr.getCurrentPosition() + (int)(lrMM * COUNTS_PER_MM);
-                newrrTarget = motor_drive_rr.getCurrentPosition() + (int)(rrMM * COUNTS_PER_MM);
+                newlfTarget = motor_drive_lf.getCurrentPosition() + (int)(lfMM * COUNTS_PER_MM_DRIVE);
+                newrfTarget = motor_drive_rf.getCurrentPosition() + (int)(rfMM * COUNTS_PER_MM_DRIVE);
+                newlrTarget = motor_drive_lr.getCurrentPosition() + (int)(lrMM * COUNTS_PER_MM_DRIVE);
+                newrrTarget = motor_drive_rr.getCurrentPosition() + (int)(rrMM * COUNTS_PER_MM_DRIVE);
                 newlftTarget = motor_lift.getCurrentPosition() + (int)(lftMM * COUNTS_PER_MM_LIFT);
                 newswvTarget = motor_swivel.getCurrentPosition() + (int)(swvDG * COUNTS_PER_DG_SWIVEL);
 
