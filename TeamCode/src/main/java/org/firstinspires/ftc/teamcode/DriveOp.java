@@ -39,6 +39,7 @@ public class DriveOp extends LinearOpMode {
         //motor_drive_lr.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         //motor_drive_rf.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         //motor_drive_rr.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        motor_lift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         waitForStart();
         if (opModeIsActive()) {
             // Put run blocks here.
@@ -86,11 +87,10 @@ public class DriveOp extends LinearOpMode {
                     motor_drive_lr.setPower(-1);
                     motor_drive_rf.setPower(-1);
                     motor_drive_rr.setPower(-1);
-                }
-                else if (gamepad2.a) {
-                    motor_lift.setPower(0.5);
+                } else if (gamepad2.a) {
+                    motor_lift.setPower(-0.8);
                 } else if (gamepad2.b) {
-                    motor_lift.setPower(-1);
+                    motor_lift.setPower(0.3);
                 } else {
                     // The Y axis of a joystick ranges from -1 in its topmost position
                     // to +1 in its bottommost position. We negate this value so that
@@ -102,6 +102,7 @@ public class DriveOp extends LinearOpMode {
                     // the topmost position corresponds to maximum forward power.
                     motor_drive_lf.setPower(0);
                     motor_drive_rr.setPower(0);
+                    motor_lift.setPower(0);
                 }
                 telemetry.addData("Left Pow", motor_drive_lr.getPower());
                 telemetry.addData("Right Pow", motor_drive_lf.getPower());
