@@ -8,9 +8,11 @@ buildscript {
     repositories {
         mavenCentral()
         google()
+        //maven { url "https://chaquo.com/maven" }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.3.0'
+        classpath 'com.android.tools.build:gradle:7.3.1'
+        //classpath "com.chaquo.python:gradle:10.0.1"
     }
 }
 
