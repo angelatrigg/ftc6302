@@ -36,8 +36,8 @@ public class Auto extends LinearOpMode {
             (WHEEL_DIAMETER_MM_DRIVE * 3.1415); //Drive motors
     static final double     COUNTS_PER_MM_LIFT         = (COUNTS_PER_MOTOR_REV_LIFT * LIFT_GEAR_REDUCTION) /
             (WHEEL_DIAMETER_MM_LIFT * 3.1415); //Uses separate gear reduction and wheel diameter for lift / arm
-    static final double     COUNTS_PER_DG_SWIVEL       = (COUNTS_PER_MOTOR_REV_SWIVEL * SWIVEL_GEAR_REDUCTION) /
-            360; //Converts counts per rev into degrees
+    static final double     COUNTS_PER_DG_SWIVEL       = ((COUNTS_PER_MOTOR_REV_SWIVEL * SWIVEL_GEAR_REDUCTION) /
+            360) / (COUNTS_PER_MOTOR_REV_SWIVEL * SWIVEL_GEAR_REDUCTION); //Converts counts per rev into degrees
     static final double     DRIVE_SPEED             = 0.6;
     static final double     UP_LIFT_SPEED           = 0.5;
     static final double     DOWN_LIFT_SPEED         = 0.3;
