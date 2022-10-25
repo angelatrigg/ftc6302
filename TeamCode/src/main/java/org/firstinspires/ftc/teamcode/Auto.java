@@ -42,6 +42,7 @@ public class Auto extends LinearOpMode {
     static final double     UP_LIFT_SPEED           = 0.5;
     static final double     DOWN_LIFT_SPEED         = 0.3;
     static final double     SWIVEL_SPEED            = 0.3;
+    static final double     STRAFE_SPEED            = 0.6;
     static final double     TURN_SPEED              = 0.5;
 
     /**
@@ -93,9 +94,18 @@ public class Auto extends LinearOpMode {
 
         waitForStart();
 
+        /**
+         * NOTES FOR LATER *
+            Possibly add easier way to determine strafe distance
+         */
+
         // Step through each leg of the path,
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
         encoderDrive(DRIVE_SPEED,  500,  500, 500, 500, 0, 0, 5.0);
+        encoderDrive(UP_LIFT_SPEED, 0, 0, 0, 0, 500, 0, 5.0);
+        encoderDrive(DOWN_LIFT_SPEED, 0, 0, 0, 0, -500, 0, 5.0);
+        encoderDrive(SWIVEL_SPEED, 0, 0, 0, 0, 0, 45, 5.0);
+        encoderDrive(SWIVEL_SPEED, 0, 0, 0, 0, 0, -45, 5.0);
 
         telemetry.addData("Path", "Complete");
         telemetry.update();
