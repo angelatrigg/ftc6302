@@ -23,7 +23,7 @@ public class Auto extends LinearOpMode {
     //In theory, swivel uses degrees instead of millimeters
     static final double     COUNTS_PER_MOTOR_REV_DRIVE    = 537.7 ;    // Drive motors
     static final double     COUNTS_PER_MOTOR_REV_LIFT    = 537.7 ; //Unnecessary but just in case different motors are used for wheels and the lift / arm
-    static final double     COUNTS_PER_MOTOR_REV_SWIVEL    = 537.7 ; //Just for another motor type with different ticks per revolution
+    static final double     COUNTS_PER_MOTOR_REV_SWIVEL    = 1120 ; //Just for another motor type with different ticks per revolution
     // For an example of gear reduction, use a value of 2.0 for a 12-tooth spur gear driving a 24-tooth spur gear.
     // This is gearing DOWN for less speed and more torque.
     // For gearing UP, use a gear ratio less than 1.0. Note this will affect the direction of wheel rotation.
