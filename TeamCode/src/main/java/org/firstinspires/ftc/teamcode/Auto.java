@@ -41,7 +41,7 @@ public class Auto extends LinearOpMode {
     static final double     DRIVE_SPEED             = 0.6;
     static final double     UP_LIFT_SPEED           = 0.5;
     static final double     DOWN_LIFT_SPEED         = 0.3;
-    static final double     SWIVEL_SPEED            = 0.3;
+    static final double     SWIVEL_SPEED            = 0.2;
     static final double     STRAFE_SPEED            = 0.6;
     static final double     TURN_SPEED              = 0.5;
 
@@ -61,8 +61,9 @@ public class Auto extends LinearOpMode {
         // You will have to determine which motor to reverse for your robot.
         // In this example, the right motor was reversed so that positive
         // applied power makes it move the robot in the forward direction.
-        motor_drive_rf.setDirection(DcMotorSimple.Direction.REVERSE);
-        motor_drive_rr.setDirection(DcMotorSimple.Direction.REVERSE);
+        //motor_drive_rf.setDirection(DcMotorSimple.Direction.REVERSE);
+        //motor_drive_rr.setDirection(DcMotorSimple.Direction.REVERSE);
+        motor_drive_lr.setDirection(DcMotorSimple.Direction.REVERSE);
 
         motor_lift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         motor_swivel.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -174,7 +175,7 @@ public class Auto extends LinearOpMode {
                 // onto the next step, use (isBusy() || isBusy()) in the loop test.
                 while (opModeIsActive() &&
                         (runtime.seconds() < timeoutS) &&
-                        (motor_drive_lf.isBusy() && motor_drive_rf.isBusy() && motor_drive_lr.isBusy() && motor_drive_rr.isBusy() && motor_lift.isBusy() && motor_swivel.isBusy())) {
+                        (motor_drive_lf.isBusy() || motor_drive_rf.isBusy() || motor_drive_lr.isBusy() || motor_drive_rr.isBusy() || motor_lift.isBusy() || motor_swivel.isBusy())) {
 
                     // Display it for the driver.
                     telemetry.addData("Running to",  " %7d :%7d", newlfTarget,  newrfTarget, newlrTarget, newrrTarget);
