@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.Servo;
 
 @TeleOp(name = "DriveOp")
 public class DriveOp extends LinearOpMode {
@@ -14,6 +15,11 @@ public class DriveOp extends LinearOpMode {
     private DcMotor motor_drive_rr;
     private DcMotor motor_lift;
     private DcMotor motor_swivel;
+    private Servo claw_servo;
+    static final double SERVO_SPEED = 0.3;
+    static final double SERVO_MAX = 0.1;
+    static final double SERVO_MIN = 0.0;
+    double SERVO_POS = (SERVO_MAX - SERVO_MIN) / 2;
 
     /**
      * This function is executed when this Op Mode is selected from the Driver Station.
@@ -26,6 +32,7 @@ public class DriveOp extends LinearOpMode {
         motor_drive_rr = hardwareMap.get(DcMotor.class, "motor_drive_rr");
         motor_lift = hardwareMap.get(DcMotor.class, "motor_lift");
         motor_swivel = hardwareMap.get(DcMotor.class, "motor_swivel");
+        claw_servo = hardwareMap.get(Servo.class, "claw_servo");
 
         // Reverse one of the drive motors.
         // You will have to determine which motor to reverse for your robot.
@@ -98,6 +105,10 @@ public class DriveOp extends LinearOpMode {
                     motor_swivel.setPower(-0.5);
                 } else if (gamepad2.right_bumper) {
                     motor_swivel.setPower(0.5);
+                } else if (gamepad2.a) {
+                    SERVO_POS += SERVO_SPEED;
+                } else if (gamepad2.b) {
+                    SERVO_POS -= SERVO_SPEED;
                 } else {
                     // The Y axis of a joystick ranges from -1 in its topmost position
                     // to +1 in its bottommost position. We negate this value so that
@@ -112,6 +123,7 @@ public class DriveOp extends LinearOpMode {
                     motor_lift.setPower(0);
                     motor_swivel.setPower(0);
                 }
+                claw_servo.setPosition(SERVO_POS);
                 telemetry.addData("Left Pow", motor_drive_lr.getPower());
                 telemetry.addData("Right Pow", motor_drive_lf.getPower());
                 telemetry.update();
