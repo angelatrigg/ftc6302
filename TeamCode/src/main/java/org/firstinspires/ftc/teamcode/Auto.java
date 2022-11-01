@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 @Autonomous(name = "Auto")
@@ -15,6 +16,10 @@ public class Auto extends LinearOpMode {
     private DcMotor motor_drive_rr;
     private DcMotor motor_lift;
     private DcMotor motor_swivel;
+    private Servo claw_servo;
+    static final double SERVO_MAX = 1.0;
+    static final double SERVO_MIN = 0.0;
+    double SERVO_POS = (SERVO_MAX - SERVO_MIN) / 2;
 
     private ElapsedTime runtime = new ElapsedTime();
 
@@ -44,6 +49,7 @@ public class Auto extends LinearOpMode {
     static final double     SWIVEL_SPEED            = 0.2;
     static final double     STRAFE_SPEED            = 0.6;
     static final double     TURN_SPEED              = 0.5;
+    static final double     SERVO_SPEED             = 0.3;
 
     /**
      * This function is executed when this Op Mode is selected from the Driver Station.
@@ -56,6 +62,7 @@ public class Auto extends LinearOpMode {
         motor_drive_rr = hardwareMap.get(DcMotor.class, "motor_drive_rr");
         motor_lift = hardwareMap.get(DcMotor.class, "motor_lift");
         motor_swivel = hardwareMap.get(DcMotor.class, "motor_swivel");
+        claw_servo = hardwareMap.get(Servo.class, "claw_servo");
 
         // Reverse one of the drive motors.
         // You will have to determine which motor to reverse for your robot.
@@ -100,13 +107,15 @@ public class Auto extends LinearOpMode {
             Possibly add easier way to determine strafe distance
          */
 
+
         // Step through each leg of the path,
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
-        encoderDrive(DRIVE_SPEED,  500,  500, 500, 500, 0, 0, 5.0);
-        encoderDrive(UP_LIFT_SPEED, 0, 0, 0, 0, 500, 0, 5.0);
-        encoderDrive(DOWN_LIFT_SPEED, 0, 0, 0, 0, -500, 0, 5.0);
-        encoderDrive(SWIVEL_SPEED, 0, 0, 0, 0, 0, 45, 5.0);
-        encoderDrive(SWIVEL_SPEED, 0, 0, 0, 0, 0, -45, 5.0);
+        encoderDrive(DRIVE_SPEED,  500,  500, 500, 500, 0, 0, 0, 5.0);
+        encoderDrive(UP_LIFT_SPEED, 0, 0, 0, 0, 500, 0, 0, 5.0);
+        encoderDrive(DOWN_LIFT_SPEED, 0, 0, 0, 0, -500, 0, 0, 5.0);
+        encoderDrive(SWIVEL_SPEED, 0, 0, 0, 0, 0, 45, 0, 5.0);
+        encoderDrive(SWIVEL_SPEED, 0, 0, 0, 0, 0, -45, 0, 5.0);
+        encoderDrive(SERVO_SPEED, 0, 0, 0, 0, 0, 0, 50, 5.0);
 
         telemetry.addData("Path", "Complete");
         telemetry.update();
@@ -123,7 +132,7 @@ public class Auto extends LinearOpMode {
          *  3) Driver stops the opmode running.
          */
         public void encoderDrive(double speed,
-        double lfMM, double rfMM, double lrMM, double rrMM, double lftMM, double swvDG,
+        double lfMM, double rfMM, double lrMM, double rrMM, double lftMM, double swvDG, double cwSrv,
         double timeoutS) {
             int newlfTarget;
             int newrfTarget;
@@ -142,6 +151,9 @@ public class Auto extends LinearOpMode {
                 newrrTarget = motor_drive_rr.getCurrentPosition() + (int)(rrMM * COUNTS_PER_MM_DRIVE);
                 newlftTarget = motor_lift.getCurrentPosition() + (int)(lftMM * COUNTS_PER_MM_LIFT);
                 newswvTarget = motor_swivel.getCurrentPosition() + (int)(swvDG * COUNTS_PER_DG_SWIVEL);
+                if (SERVO_POS >= SERVO_MAX && SERVO_POS <= SERVO_MIN) {
+                    SERVO_POS += cwSrv;
+                }
 
                 motor_drive_lf.setTargetPosition(newlfTarget);
                 motor_drive_rf.setTargetPosition(newrfTarget);
@@ -177,6 +189,7 @@ public class Auto extends LinearOpMode {
                         (runtime.seconds() < timeoutS) &&
                         (motor_drive_lf.isBusy() || motor_drive_rf.isBusy() || motor_drive_lr.isBusy() || motor_drive_rr.isBusy() || motor_lift.isBusy() || motor_swivel.isBusy())) {
 
+                    claw_servo.setPosition(SERVO_POS);
                     // Display it for the driver.
                     telemetry.addData("Running to",  " %7d :%7d", newlfTarget,  newrfTarget, newlrTarget, newrrTarget);
                     telemetry.addData("Currently at",  " at %7d :%7d",
