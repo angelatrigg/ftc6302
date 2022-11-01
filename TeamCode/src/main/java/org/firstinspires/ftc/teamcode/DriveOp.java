@@ -106,9 +106,13 @@ public class DriveOp extends LinearOpMode {
                 } else if (gamepad2.right_bumper) {
                     motor_swivel.setPower(0.5);
                 } else if (gamepad2.a) {
-                    SERVO_POS += SERVO_SPEED;
+                    if (SERVO_POS >= SERVO_MAX && SERVO_POS <= SERVO_MIN) {
+                        SERVO_POS += SERVO_SPEED;
+                    }
                 } else if (gamepad2.b) {
-                    SERVO_POS -= SERVO_SPEED;
+                    if (SERVO_POS >= SERVO_MAX && SERVO_POS <= SERVO_MIN) {
+                        SERVO_POS -= SERVO_SPEED;
+                    }
                 } else {
                     // The Y axis of a joystick ranges from -1 in its topmost position
                     // to +1 in its bottommost position. We negate this value so that
