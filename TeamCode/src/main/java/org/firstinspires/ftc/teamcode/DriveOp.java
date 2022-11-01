@@ -17,7 +17,7 @@ public class DriveOp extends LinearOpMode {
     private DcMotor motor_swivel;
     private Servo claw_servo;
     static final double SERVO_SPEED = 0.3;
-    static final double SERVO_MAX = 0.1;
+    static final double SERVO_MAX = 1.0;
     static final double SERVO_MIN = 0.0;
     double SERVO_POS = (SERVO_MAX - SERVO_MIN) / 2;
 
