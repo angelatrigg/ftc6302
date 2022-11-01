@@ -43,6 +43,7 @@ public class DriveOp extends LinearOpMode {
         // In this example, the right motor was reversed so that positive
         // applied power makes it move the robot in the forward direction.
         motor_drive_lr.setDirection(DcMotorSimple.Direction.REVERSE);
+        motor_lift.setDirection(DcMotorSimple.Direction.REVERSE);
         //Below breaks drive
         //motor_drive_lf.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         //motor_drive_lr.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -98,9 +99,9 @@ public class DriveOp extends LinearOpMode {
                     motor_drive_rf.setPower(-1);
                     motor_drive_rr.setPower(-1);
                 } else if (gamepad2.a) {
-                    motor_lift.setPower(-0.8);
+                    motor_lift.setPower(0.8);
                 } else if (gamepad2.b) {
-                    motor_lift.setPower(0.3);
+                    motor_lift.setPower(-0.3);
                 } else if (gamepad2.left_bumper) {
                     motor_swivel.setPower(-0.5);
                 } else if (gamepad2.right_bumper) {

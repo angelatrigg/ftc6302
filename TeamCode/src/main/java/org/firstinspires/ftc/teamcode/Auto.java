@@ -71,6 +71,7 @@ public class Auto extends LinearOpMode {
         //motor_drive_rf.setDirection(DcMotorSimple.Direction.REVERSE);
         //motor_drive_rr.setDirection(DcMotorSimple.Direction.REVERSE);
         motor_drive_lr.setDirection(DcMotorSimple.Direction.REVERSE);
+        motor_lift.setDirection(DcMotorSimple.Direction.REVERSE);
 
         motor_lift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         motor_swivel.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -111,8 +112,8 @@ public class Auto extends LinearOpMode {
         // Step through each leg of the path,
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
         encoderDrive(DRIVE_SPEED,  500,  500, 500, 500, 0, 0, 0, 5.0);
-        encoderDrive(UP_LIFT_SPEED, 0, 0, 0, 0, 500, 0, 0, 5.0);
-        encoderDrive(DOWN_LIFT_SPEED, 0, 0, 0, 0, -500, 0, 0, 5.0);
+        encoderDrive(UP_LIFT_SPEED, 0, 0, 0, 0, 50, 0, 0, 5.0);
+        encoderDrive(DOWN_LIFT_SPEED, 0, 0, 0, 0, -25, 0, 0, 5.0);
         encoderDrive(SWIVEL_SPEED, 0, 0, 0, 0, 0, 45, 0, 5.0);
         encoderDrive(SWIVEL_SPEED, 0, 0, 0, 0, 0, -45, 0, 5.0);
         encoderDrive(SERVO_SPEED, 0, 0, 0, 0, 0, 0, 50, 5.0);
