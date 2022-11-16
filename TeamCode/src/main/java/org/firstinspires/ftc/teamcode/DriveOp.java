@@ -16,10 +16,10 @@ public class DriveOp extends LinearOpMode {
     private DcMotor motor_lift;
     private DcMotor motor_swivel;
     private Servo claw_servo;
-    static final double SERVO_SPEED = 0.3;
-    static final double SERVO_MAX = 1.0;
-    static final double SERVO_MIN = 0.0;
-    double SERVO_POS = (SERVO_MAX - SERVO_MIN) / 2;
+    static final double SERVO_SPEED = 0.1;
+    static final double SERVO_MAX = 1.5;
+    static final double SERVO_MIN = 0.75;
+    double SERVO_POS = SERVO_MAX;
 
     /**
      * This function is executed when this Op Mode is selected from the Driver Station.
@@ -99,21 +99,17 @@ public class DriveOp extends LinearOpMode {
                     motor_drive_rf.setPower(-1);
                     motor_drive_rr.setPower(-1);
                 } else if (gamepad2.a) {
-                    motor_lift.setPower(0.8);
+                    motor_lift.setPower(0.5);
                 } else if (gamepad2.b) {
-                    motor_lift.setPower(-0.3);
+                    motor_lift.setPower(-0.1);
                 } else if (gamepad2.left_bumper) {
-                    motor_swivel.setPower(-0.5);
+                    motor_swivel.setPower(0.1);
                 } else if (gamepad2.right_bumper) {
-                    motor_swivel.setPower(0.5);
-                } else if (gamepad2.a) {
-                    if (SERVO_POS >= SERVO_MAX && SERVO_POS <= SERVO_MIN) {
-                        SERVO_POS += SERVO_SPEED;
-                    }
-                } else if (gamepad2.b) {
-                    if (SERVO_POS >= SERVO_MAX && SERVO_POS <= SERVO_MIN) {
-                        SERVO_POS -= SERVO_SPEED;
-                    }
+                    motor_swivel.setPower(-0.1);
+                } else if (gamepad2.x) {
+                    SERVO_POS += SERVO_SPEED;
+                } else if (gamepad2.y) {
+                    SERVO_POS -= SERVO_SPEED;
                 } else {
                     // The Y axis of a joystick ranges from -1 in its topmost position
                     // to +1 in its bottommost position. We negate this value so that
