@@ -33,6 +33,7 @@ def write_bboxes(bboxes, classes, filename):
             p1 = p0 + size
 
             f.write("%s,%s,%s,%s,%s\n" % (p0[0], p0[1], p1[0], p1[1], cls))
+            f.write("%s\n%s\n%s\n%s\n%s\n" % (p0[0], p0[1], p1[0], p1[1], cls))
 
 
 def convert_rects_to_bboxes(rects):
