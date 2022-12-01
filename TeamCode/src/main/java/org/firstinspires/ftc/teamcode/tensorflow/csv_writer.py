@@ -1,3 +1,5 @@
+#Written by: Nathan Pritchett
+
 import os
 import argparse
 
