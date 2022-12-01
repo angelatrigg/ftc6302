@@ -465,4 +465,4 @@ for x in dir_list_5:
        file_name = "%s/%s%d.txt" % (args.folder5, frame_number_str, frame_number)
        file_name_png = "%s/%s%d.png" % (args.folder5, frame_number_str, frame_number)
     
-print("\n\nWriting complete!\n\n")
+print("\n\n-----------------\nWriting complete!\n-----------------\n\n")
