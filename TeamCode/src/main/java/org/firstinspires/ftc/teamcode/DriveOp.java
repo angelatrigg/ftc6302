@@ -66,7 +66,7 @@ public class DriveOp extends LinearOpMode {
                 // the topmost position corresponds to maximum forward power.
                 motor_drive_lr.setPower(-gamepad1.left_stick_y);
                 motor_drive_rr.setPower(-gamepad1.right_stick_y);
-                if (gamepad1.left_bumper || gamepad1.dpad_left) {
+                if (gamepad1.left_bumper) {
                     // The Y axis of a joystick ranges from -1 in its topmost position
                     // to +1 in its bottommost position. We negate this value so that
                     // the topmost position corresponds to maximum forward power.
@@ -77,7 +77,7 @@ public class DriveOp extends LinearOpMode {
                     // the topmost position corresponds to maximum forward power.
                     motor_drive_lf.setPower(-1);
                     motor_drive_rr.setPower(-1);
-                } else if (gamepad1.right_bumper || gamepad1.dpad_right) {
+                } else if (gamepad1.right_bumper) {
                     // The Y axis of a joystick ranges from -1 in its topmost position
                     // to +1 in its bottommost position. We negate this value so that
                     // the topmost position corresponds to maximum forward power.
@@ -88,16 +88,38 @@ public class DriveOp extends LinearOpMode {
                     // the topmost position corresponds to maximum forward power.
                     motor_drive_lf.setPower(1);
                     motor_drive_rr.setPower(1);
+                } else if (gamepad1.dpad_right) {
+                    // The Y axis of a joystick ranges from -1 in its topmost position
+                    // to +1 in its bottommost position. We negate this value so that
+                    // the topmost position corresponds to maximum forward power.
+                    motor_drive_rf.setPower(-0.5);
+                    motor_drive_lr.setPower(-0.5);
+                    // The Y axis of a joystick ranges from -1 in its topmost position
+                    // to +1 in its bottommost position. We negate this value so that
+                    // the topmost position corresponds to maximum forward power.
+                    motor_drive_lf.setPower(0.5);
+                    motor_drive_rr.setPower(0.5);
+                } else if (gamepad1.dpad_left) {
+                    // The Y axis of a joystick ranges from -1 in its topmost position
+                    // to +1 in its bottommost position. We negate this value so that
+                    // the topmost position corresponds to maximum forward power.
+                    motor_drive_rf.setPower(0.5);
+                    motor_drive_lr.setPower(0.5);
+                    // The Y axis of a joystick ranges from -1 in its topmost position
+                    // to +1 in its bottommost position. We negate this value so that
+                    // the topmost position corresponds to maximum forward power.
+                    motor_drive_lf.setPower(-0.5);
+                    motor_drive_rr.setPower(-0.5);
                 } else if (gamepad1.dpad_up) {
-                    motor_drive_lf.setPower(1);
-                    motor_drive_lr.setPower(1);
-                    motor_drive_rf.setPower(1);
-                    motor_drive_rr.setPower(1);
+                    motor_drive_lf.setPower(0.5);
+                    motor_drive_lr.setPower(0.5);
+                    motor_drive_rf.setPower(0.5);
+                    motor_drive_rr.setPower(0.5);
                 } else if (gamepad1.dpad_down) {
-                    motor_drive_lf.setPower(-1);
-                    motor_drive_lr.setPower(-1);
-                    motor_drive_rf.setPower(-1);
-                    motor_drive_rr.setPower(-1);
+                    motor_drive_lf.setPower(-0.5);
+                    motor_drive_lr.setPower(-0.5);
+                    motor_drive_rf.setPower(-0.5);
+                    motor_drive_rr.setPower(-0.5);
                 } else if (gamepad2.a) {
                     motor_lift.setPower(0.5);
                 } else if (gamepad2.b) {
