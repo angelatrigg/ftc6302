@@ -238,7 +238,7 @@ def load_bboxes(frame_number, run_path):
 
 def save_frame(frame, bboxes, classes, run_path, frame_number):
 
-    frame_path = os.path.join(run_path, "%05d.png" % frame_number)
+    frame_path = os.path.join(run_path, "%05d.jpg" % frame_number)
     bbox_path = os.path.join(run_path, "%05d.txt" % frame_number)
 
     if not os.path.isfile(frame_path):

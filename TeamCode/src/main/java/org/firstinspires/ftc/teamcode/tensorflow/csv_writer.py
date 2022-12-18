@@ -68,7 +68,7 @@ frame_number_str = zero_number(frame_number)
 
 #Creates a string that includes the folder directory and file name
 file_name = "%s/%s%d.txt" % (args.folder, frame_number_str, frame_number)
-file_name_png = "%s/%s%d.png" % (args.folder, frame_number_str, frame_number)
+file_name_jpg = "%s/%s%d.jpg" % (args.folder, frame_number_str, frame_number)
 
 #Defines variables for eighty and ten percent of the total files
 total = 0
@@ -123,7 +123,7 @@ for x in dir_list:
        elif number_assigned_test < ten_percent:
             file_csv.write("TEST,")
 
-       file_csv.write(file_name_png)
+       file_csv.write(file_name_jpg)
        file_csv.write(",")
        file_csv.write(label)
        file_csv.write(",")
@@ -145,14 +145,14 @@ for x in dir_list:
 
        #Redefines variables for file locations
        file_name = "%s/%s%d.txt" % (args.folder, frame_number_str, frame_number)
-       file_name_png = "%s/%s%d.png" % (args.folder, frame_number_str, frame_number)
+       file_name_jpg = "%s/%s%d.jpg" % (args.folder, frame_number_str, frame_number)
 
 #Repeats process for every other folder defined
 
 frame_number = 00000
 frame_number_str = zero_number(frame_number)
 file_name = "%s/%s%d.txt" % (args.folder2, frame_number_str, frame_number)
-file_name_png = "%s/%s%d.png" % (args.folder2, frame_number_str, frame_number)
+file_name_jpgjpg = "%s/%s%d.jpg" % (args.folder2, frame_number_str, frame_number)
 
 total = 0
 for x in dir_list_2:
@@ -204,7 +204,7 @@ for x in dir_list_2:
        elif number_assigned_test < ten_percent:
             file_csv.write("TEST,")
 
-       file_csv.write(file_name_png)
+       file_csv.write(file_name_jpg)
        file_csv.write(",")
        file_csv.write(label)
        file_csv.write(",")
@@ -226,12 +226,12 @@ for x in dir_list_2:
 
        #Redefines variables for file locations
        file_name = "%s/%s%d.txt" % (args.folder2, frame_number_str, frame_number)
-       file_name_png = "%s/%s%d.png" % (args.folder2, frame_number_str, frame_number)
+       file_name_jpg = "%s/%s%d.jpg" % (args.folder2, frame_number_str, frame_number)
     
 frame_number = 00000
 frame_number_str = zero_number(frame_number)
 file_name = "%s/%s%d.txt" % (args.folder3, frame_number_str, frame_number)
-file_name_png = "%s/%s%d.png" % (args.folder3, frame_number_str, frame_number)
+file_name_jpg = "%s/%s%d.jpg" % (args.folder3, frame_number_str, frame_number)
 
 total = 0
 for x in dir_list_3:
@@ -283,7 +283,7 @@ for x in dir_list_3:
        elif number_assigned_test < ten_percent:
             file_csv.write("TEST,")
 
-       file_csv.write(file_name_png)
+       file_csv.write(file_name_jpg)
        file_csv.write(",")
        file_csv.write(label)
        file_csv.write(",")
@@ -305,12 +305,12 @@ for x in dir_list_3:
 
        #Redefines variables for file locations
        file_name = "%s/%s%d.txt" % (args.folder3, frame_number_str, frame_number)
-       file_name_png = "%s/%s%d.png" % (args.folder3, frame_number_str, frame_number)
+       file_name_jpg = "%s/%s%d.jpg" % (args.folder3, frame_number_str, frame_number)
     
 frame_number = 00000
 frame_number_str = zero_number(frame_number)
 file_name = "%s/%s%d.txt" % (args.folder4, frame_number_str, frame_number)
-file_name_png = "%s/%s%d.png" % (args.folder4, frame_number_str, frame_number)
+file_name_jpg = "%s/%s%d.jpg" % (args.folder4, frame_number_str, frame_number)
 
 total = 0
 for x in dir_list_4:
@@ -362,7 +362,7 @@ for x in dir_list_4:
        elif number_assigned_test < ten_percent:
             file_csv.write("TEST,")
 
-       file_csv.write(file_name_png)
+       file_csv.write(file_name_jpg)
        file_csv.write(",")
        file_csv.write(label)
        file_csv.write(",")
@@ -384,12 +384,12 @@ for x in dir_list_4:
 
        #Redefines variables for file locations
        file_name = "%s/%s%d.txt" % (args.folder4, frame_number_str, frame_number)
-       file_name_png = "%s/%s%d.png" % (args.folder4, frame_number_str, frame_number)
+       file_name_jpg = "%s/%s%d.jpg" % (args.folder4, frame_number_str, frame_number)
     
 frame_number = 00000
 frame_number_str = zero_number(frame_number)
 file_name = "%s/%s%d.txt" % (args.folder5, frame_number_str, frame_number)
-file_name_png = "%s/%s%d.png" % (args.folder5, frame_number_str, frame_number)
+file_name_jpg = "%s/%s%d.jpg" % (args.folder5, frame_number_str, frame_number)
 
 total = 0
 for x in dir_list_5:
@@ -441,7 +441,7 @@ for x in dir_list_5:
        elif number_assigned_test < ten_percent:
             file_csv.write("TEST,")
 
-       file_csv.write(file_name_png)
+       file_csv.write(file_name_jpg)
        file_csv.write(",")
        file_csv.write(label)
        file_csv.write(",")
@@ -463,6 +463,6 @@ for x in dir_list_5:
 
        #Redefines variables for file locations
        file_name = "%s/%s%d.txt" % (args.folder5, frame_number_str, frame_number)
-       file_name_png = "%s/%s%d.png" % (args.folder5, frame_number_str, frame_number)
+       file_name_jpg = "%s/%s%d.jpg" % (args.folder5, frame_number_str, frame_number)
     
 print("\n\n-----------------\nWriting complete!\n-----------------\n\n")
