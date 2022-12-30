@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@Autonomous(name = "Auto")
+@Autonomous(name = "Autonomous")
 public class Auto extends LinearOpMode {
 
     private DcMotor motor_drive_lf;
