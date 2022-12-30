@@ -153,7 +153,7 @@ public class AutoWithObjectDetection extends LinearOpMode
             @Override
             public void onOpened()
             {
-                camera.startStreaming(800,448, OpenCvCameraRotation.UPRIGHT);
+                camera.startStreaming(1280,720, OpenCvCameraRotation.UPRIGHT);
             }
 
             @Override
@@ -264,7 +264,7 @@ public class AutoWithObjectDetection extends LinearOpMode
             //default trajectory here if preferred
         }else if(tagOfInterest.id == ONE){
             //one trajectory
-            encoderDrive(DRIVE_SPEED,  500,  500, 500, 500, 0, 0, 0, 5.0);
+            encoderDrive(DRIVE_SPEED,  50,  50, 50, 50, 0, 0, 0, 5.0);
         }else if(tagOfInterest.id == TWO){
             //two trajectory
             encoderDrive(UP_LIFT_SPEED, 0, 0, 0, 0, 50, 0, 0, 5.0);
