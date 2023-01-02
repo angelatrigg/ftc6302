@@ -75,7 +75,7 @@ public class DriveOp extends LinearOpMode {
 
                 if (-gamepad1.right_stick_y <= .80 && -gamepad1.right_stick_y >= -.80 && !gamepad1.left_bumper && !gamepad1.right_bumper && !gamepad1.dpad_right && !gamepad1.dpad_left && !gamepad1.dpad_up && !gamepad1.dpad_down) {
                     motor_drive_rf.setPower(-gamepad1.right_stick_y);
-                    motor_drive_rr.setPower(-gamepad1.left_stick_y);
+                    motor_drive_rr.setPower(-gamepad1.right_stick_y);
                 } else if (-gamepad1.right_stick_y > .80 && !gamepad1.left_bumper && !gamepad1.right_bumper && !gamepad1.dpad_right && !gamepad1.dpad_left && !gamepad1.dpad_up && !gamepad1.dpad_down) {
                     motor_drive_rf.setPower(.80);
                     motor_drive_rr.setPower(.80);

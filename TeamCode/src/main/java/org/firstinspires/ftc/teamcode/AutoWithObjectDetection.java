@@ -47,9 +47,8 @@ public class AutoWithObjectDetection extends LinearOpMode
     private DcMotor motor_lift;
     private DcMotor motor_swivel;
     private Servo claw_servo;
-    static final double SERVO_MAX = 1.0;
-    static final double SERVO_MIN = 0.0;
-    double SERVO_POS = (SERVO_MAX - SERVO_MIN) / 2;
+    static final double SERVO_CLOSED = 1.55;
+    static final double SERVO_OPEN = 0.9;
 
     private ElapsedTime runtime = new ElapsedTime();
 
@@ -97,11 +96,11 @@ public class AutoWithObjectDetection extends LinearOpMode
             (WHEEL_DIAMETER_MM_LIFT * 3.1415); //Uses separate gear reduction and wheel diameter for lift / arm
     static final double     COUNTS_PER_DG_SWIVEL       = ((COUNTS_PER_MOTOR_REV_SWIVEL * SWIVEL_GEAR_REDUCTION) /
             360) / (COUNTS_PER_MOTOR_REV_SWIVEL * SWIVEL_GEAR_REDUCTION); //Converts counts per rev into degrees
-    static final double     DRIVE_SPEED             = 0.6;
+    static final double     DRIVE_SPEED             = 0.3;
     static final double     UP_LIFT_SPEED           = 0.5;
     static final double     DOWN_LIFT_SPEED         = 0.3;
     static final double     SWIVEL_SPEED            = 0.2;
-    static final double     STRAFE_SPEED            = 0.6;
+    static final double     STRAFE_SPEED            = 0.3;
     static final double     TURN_SPEED              = 0.5;
     static final double     SERVO_SPEED             = 0.3;
 
@@ -263,23 +262,66 @@ public class AutoWithObjectDetection extends LinearOpMode
         /* Actually do something useful */
         if(tagOfInterest == null){
             //default trajectory here if preferred
+            encoderDrive(UP_LIFT_SPEED, 0, 0, 0, 0, 50, 0, SERVO_OPEN, 5.0);
+            encoderDrive(0, 0, 0, 0, 0, 0, 0, SERVO_CLOSED, 5.0);
+            encoderDrive(UP_LIFT_SPEED, 0, 0, 0, 0, 100, 0, SERVO_CLOSED, 5.0);
+            encoderDrive(DRIVE_SPEED, 670, 670, 670, 670, 0, 0, SERVO_CLOSED, 5.0);
+            encoderDrive(STRAFE_SPEED, 360, -360, -360, 360, 0, 0, SERVO_CLOSED, 5.0);
+            encoderDrive(UP_LIFT_SPEED, 0, 0, 0, 0, 610, 0, SERVO_CLOSED, 5.0);
+            encoderDrive(DRIVE_SPEED, 150, 150, 150, 150, 0, 0, SERVO_CLOSED, 5.0);
+            encoderDrive(0, 0, 0, 0, 0, 0, 0, SERVO_OPEN, 5.0);
+            encoderDrive(0, 0, 0, 0, 0, 0, 0, SERVO_CLOSED, 5.0);
+            encoderDrive(DRIVE_SPEED, -150, -150, -150, -150, 0, 0, SERVO_CLOSED, 5.0);
+            encoderDrive(DOWN_LIFT_SPEED, 0, 0, 0, 0, -610, 0, SERVO_CLOSED, 5.0);
         }else if(tagOfInterest.id == ONE){
             //one trajectory
-            encoderDrive(DRIVE_SPEED,  50,  50, 50, 50, 0, 0, 0, 5.0);
+            encoderDrive(UP_LIFT_SPEED, 0, 0, 0, 0, 50, 0, SERVO_OPEN, 5.0);
+            encoderDrive(0, 0, 0, 0, 0, 0, 0, SERVO_CLOSED, 5.0);
+            encoderDrive(UP_LIFT_SPEED, 0, 0, 0, 0, 100, 0, SERVO_CLOSED, 5.0);
+            encoderDrive(DRIVE_SPEED, 670, 670, 670, 670, 0, 0, SERVO_CLOSED, 5.0);
+            encoderDrive(STRAFE_SPEED, 360, -360, -360, 360, 0, 0, SERVO_CLOSED, 5.0);
+            encoderDrive(UP_LIFT_SPEED, 0, 0, 0, 0, 610, 0, SERVO_CLOSED, 5.0);
+            encoderDrive(DRIVE_SPEED, 150, 150, 150, 150, 0, 0, SERVO_CLOSED, 5.0);
+            encoderDrive(0, 0, 0, 0, 0, 0, 0, SERVO_OPEN, 5.0);
+            encoderDrive(0, 0, 0, 0, 0, 0, 0, SERVO_CLOSED, 5.0);
+            encoderDrive(DRIVE_SPEED, -150, -150, -150, -150, 0, 0, SERVO_CLOSED, 5.0);
+            encoderDrive(DOWN_LIFT_SPEED, 0, 0, 0, 0, -610, 0, SERVO_CLOSED, 5.0);
+            encoderDrive(STRAFE_SPEED, -900, 900, 900, -900, 0, 0, SERVO_CLOSED, 5.0);
         }else if(tagOfInterest.id == TWO){
             //two trajectory
-            encoderDrive(UP_LIFT_SPEED, 0, 0, 0, 0, 50, 0, 0, 5.0);
+            encoderDrive(UP_LIFT_SPEED, 0, 0, 0, 0, 50, 0, SERVO_OPEN, 5.0);
+            encoderDrive(0, 0, 0, 0, 0, 0, 0, SERVO_CLOSED, 5.0);
+            encoderDrive(UP_LIFT_SPEED, 0, 0, 0, 0, 100, 0, SERVO_CLOSED, 5.0);
+            encoderDrive(DRIVE_SPEED, 670, 670, 670, 670, 0, 0, SERVO_CLOSED, 5.0);
+            encoderDrive(STRAFE_SPEED, 360, -360, -360, 360, 0, 0, SERVO_CLOSED, 5.0);
+            encoderDrive(UP_LIFT_SPEED, 0, 0, 0, 0, 610, 0, SERVO_CLOSED, 5.0);
+            encoderDrive(DRIVE_SPEED, 150, 150, 150, 150, 0, 0, SERVO_CLOSED, 5.0);
+            encoderDrive(0, 0, 0, 0, 0, 0, 0, SERVO_OPEN, 5.0);
+            encoderDrive(0, 0, 0, 0, 0, 0, 0, SERVO_CLOSED, 5.0);
+            encoderDrive(DRIVE_SPEED, -150, -150, -150, -150, 0, 0, SERVO_CLOSED, 5.0);
+            encoderDrive(DOWN_LIFT_SPEED, 0, 0, 0, 0, -610, 0, SERVO_CLOSED, 5.0);
+            encoderDrive(STRAFE_SPEED, -300, 300, 300, -300, 0, 0, SERVO_CLOSED, 5.0);
         }else{
             //three trajectory
-            motor_swivel.setPower(0.1);
-            sleep(100);
+            encoderDrive(UP_LIFT_SPEED, 0, 0, 0, 0, 50, 0, SERVO_OPEN, 5.0);
+            encoderDrive(0, 0, 0, 0, 0, 0, 0, SERVO_CLOSED, 5.0);
+            encoderDrive(UP_LIFT_SPEED, 0, 0, 0, 0, 100, 0, SERVO_CLOSED, 5.0);
+            encoderDrive(DRIVE_SPEED, 670, 670, 670, 670, 0, 0, SERVO_CLOSED, 5.0);
+            encoderDrive(STRAFE_SPEED, 360, -360, -360, 360, 0, 0, SERVO_CLOSED, 5.0);
+            encoderDrive(UP_LIFT_SPEED, 0, 0, 0, 0, 610, 0, SERVO_CLOSED, 5.0);
+            encoderDrive(DRIVE_SPEED, 150, 150, 150, 150, 0, 0, SERVO_CLOSED, 5.0);
+            encoderDrive(0, 0, 0, 0, 0, 0, 0, SERVO_OPEN, 5.0);
+            encoderDrive(0, 0, 0, 0, 0, 0, 0, SERVO_CLOSED, 5.0);
+            encoderDrive(DRIVE_SPEED, -150, -150, -150, -150, 0, 0, SERVO_CLOSED, 5.0);
+            encoderDrive(DOWN_LIFT_SPEED, 0, 0, 0, 0, -610, 0, SERVO_CLOSED, 5.0);
+            encoderDrive(STRAFE_SPEED, 300, -300, -300, 300, 0, 0, SERVO_CLOSED, 5.0);
         }
         /* You wouldn't have this in your autonomous, this is just to prevent the sample from ending */
-        while (opModeIsActive()) {sleep(20);}
+        //while (opModeIsActive()) {sleep(20);}
     }
 
     public void encoderDrive(double speed,
-                             double lfMM, double rfMM, double lrMM, double rrMM, double lftMM, double swvDG, double cwSrv,
+                             double lfMM, double rfMM, double lrMM, double rrMM, double lftMM, double swvDG, double cwPos,
                              double timeoutS) {
         int newlfTarget;
         int newrfTarget;
@@ -298,9 +340,6 @@ public class AutoWithObjectDetection extends LinearOpMode
             newrrTarget = motor_drive_rr.getCurrentPosition() + (int)(rrMM * COUNTS_PER_MM_DRIVE);
             newlftTarget = motor_lift.getCurrentPosition() + (int)(lftMM * COUNTS_PER_MM_LIFT);
             newswvTarget = motor_swivel.getCurrentPosition() + (int)(swvDG * COUNTS_PER_DG_SWIVEL);
-            if (SERVO_POS >= SERVO_MAX && SERVO_POS <= SERVO_MIN) {
-                SERVO_POS += cwSrv;
-            }
 
             motor_drive_lf.setTargetPosition(newlfTarget);
             motor_drive_rf.setTargetPosition(newrfTarget);
@@ -325,6 +364,7 @@ public class AutoWithObjectDetection extends LinearOpMode
             motor_drive_rr.setPower(Math.abs(speed));
             motor_lift.setPower(Math.abs(speed));
             motor_swivel.setPower(Math.abs(speed));
+            claw_servo.setPosition(cwPos);
 
             // keep looping while we are still active, and there is time left, and both motors are running.
             // Note: We use (isBusy() && isBusy()) in the loop test, which means that when EITHER motor hits
@@ -336,7 +376,6 @@ public class AutoWithObjectDetection extends LinearOpMode
                     (runtime.seconds() < timeoutS) &&
                     (motor_drive_lf.isBusy() || motor_drive_rf.isBusy() || motor_drive_lr.isBusy() || motor_drive_rr.isBusy() || motor_lift.isBusy() || motor_swivel.isBusy())) {
 
-                claw_servo.setPosition(SERVO_POS);
                 // Display it for the driver.
                 telemetry.addData("Running to",  " %7d :%7d", newlfTarget,  newrfTarget, newlrTarget, newrrTarget);
                 telemetry.addData("Currently at",  " at %7d :%7d",

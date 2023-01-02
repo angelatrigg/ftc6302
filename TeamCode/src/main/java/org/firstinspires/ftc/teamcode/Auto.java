@@ -17,8 +17,8 @@ public class Auto extends LinearOpMode {
     private DcMotor motor_lift;
     private DcMotor motor_swivel;
     private Servo claw_servo;
-    static final double SERVO_MAX = 1.0;
-    static final double SERVO_MIN = 0.0;
+    static final double SERVO_MAX = 1.55;
+    static final double SERVO_MIN = 0.9;
     double SERVO_POS = (SERVO_MAX - SERVO_MIN) / 2;
 
     private ElapsedTime runtime = new ElapsedTime();
