@@ -71,6 +71,7 @@ public class Auto extends LinearOpMode {
         //motor_drive_rf.setDirection(DcMotorSimple.Direction.REVERSE);
         //motor_drive_rr.setDirection(DcMotorSimple.Direction.REVERSE);
         motor_drive_lr.setDirection(DcMotorSimple.Direction.REVERSE);
+        motor_drive_lf.setDirection(DcMotorSimple.Direction.REVERSE);
         motor_lift.setDirection(DcMotorSimple.Direction.REVERSE);
 
         motor_lift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);

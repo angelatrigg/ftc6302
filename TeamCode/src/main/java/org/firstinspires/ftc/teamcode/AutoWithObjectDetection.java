@@ -124,6 +124,7 @@ public class AutoWithObjectDetection extends LinearOpMode
         //motor_drive_rf.setDirection(DcMotorSimple.Direction.REVERSE);
         //motor_drive_rr.setDirection(DcMotorSimple.Direction.REVERSE);
         motor_drive_lr.setDirection(DcMotorSimple.Direction.REVERSE);
+        motor_drive_lf.setDirection(DcMotorSimple.Direction.REVERSE);
         motor_lift.setDirection(DcMotorSimple.Direction.REVERSE);
 
         motor_lift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -270,7 +271,7 @@ public class AutoWithObjectDetection extends LinearOpMode
             encoderDrive(UP_LIFT_SPEED, 0, 0, 0, 0, 50, 0, 0, 5.0);
         }else{
             //three trajectory
-            motor_lift.setPower(0.1);
+            motor_swivel.setPower(0.1);
             sleep(100);
         }
         /* You wouldn't have this in your autonomous, this is just to prevent the sample from ending */

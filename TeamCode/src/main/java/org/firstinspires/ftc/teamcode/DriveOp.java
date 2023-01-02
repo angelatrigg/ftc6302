@@ -43,6 +43,7 @@ public class DriveOp extends LinearOpMode {
         // In this example, the right motor was reversed so that positive
         // applied power makes it move the robot in the forward direction.
         motor_drive_lr.setDirection(DcMotorSimple.Direction.REVERSE);
+        motor_drive_lf.setDirection(DcMotorSimple.Direction.REVERSE);
         motor_lift.setDirection(DcMotorSimple.Direction.REVERSE);
         //Below breaks drive
         //motor_drive_lf.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
