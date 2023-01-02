@@ -192,8 +192,8 @@ public class Auto extends LinearOpMode {
 
                     claw_servo.setPosition(SERVO_POS);
                     // Display it for the driver.
-                    telemetry.addData("Running to",  " %7d :%7d", newlfTarget,  newrfTarget, newlrTarget, newrrTarget);
-                    telemetry.addData("Currently at",  " at %7d :%7d",
+                    telemetry.addData("Running to",  " %7d :%7d :%7d :%7d :%7d", newlfTarget,  newrfTarget, newlrTarget, newrrTarget, newlftTarget);
+                    telemetry.addData("Currently at",  " at %7d :%7d :%7d :%7d :%7d",
                             motor_drive_lf.getCurrentPosition(), motor_drive_rf.getCurrentPosition(), motor_drive_lr.getCurrentPosition(), motor_drive_rr.getCurrentPosition(),
                     motor_lift.getCurrentPosition(), motor_swivel.getCurrentPosition(), telemetry.update());
                 }
