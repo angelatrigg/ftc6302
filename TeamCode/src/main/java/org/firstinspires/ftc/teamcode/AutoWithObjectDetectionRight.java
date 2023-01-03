@@ -37,8 +37,8 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 
 import java.util.ArrayList;
 
-@Autonomous(name = "Autonomous With Object Detetection")
-public class AutoWithObjectDetection extends LinearOpMode
+@Autonomous(name = "Autonomous With Object Detetection Right")
+public class AutoWithObjectDetectionRight extends LinearOpMode
 {
     private DcMotor motor_drive_lf;
     private DcMotor motor_drive_rf;
@@ -266,12 +266,12 @@ public class AutoWithObjectDetection extends LinearOpMode
             encoderDrive(0, 0, 0, 0, 0, 0, 0, SERVO_CLOSED, 5.0);
             encoderDrive(UP_LIFT_SPEED, 0, 0, 0, 0, 300, 0, SERVO_CLOSED, 5.0);
             encoderDrive(DRIVE_SPEED, 670, 670, 670, 670, 0, 0, SERVO_CLOSED, 5.0);
-            encoderDrive(STRAFE_SPEED, 380, -380, -380, 380, 0, 0, SERVO_CLOSED, 5.0);
+            encoderDrive(STRAFE_SPEED, -380, 380, 380, -380, 0, 0, SERVO_CLOSED, 5.0);
             encoderDrive(UP_LIFT_SPEED, 0, 0, 0, 0, 410, 0, SERVO_CLOSED, 5.0);
             encoderDrive(DRIVE_SPEED, 150, 150, 150, 150, 0, 0, SERVO_CLOSED, 5.0);
             encoderDrive(0, 0, 0, 0, 0, 0, 0, SERVO_OPEN, 5.0);
             encoderDrive(DRIVE_SPEED, -150, -150, -150, -150, 0, 0, SERVO_OPEN, 5.0);
-            encoderDrive(STRAFE_SPEED, -320, 320, 320, -320, 0, 0, SERVO_OPEN, 5.0);
+            encoderDrive(STRAFE_SPEED, 320, -320, -320, 320, 0, 0, SERVO_OPEN, 5.0);
 
         }else if(tagOfInterest.id == ONE){
             //one trajectory
@@ -279,36 +279,36 @@ public class AutoWithObjectDetection extends LinearOpMode
             encoderDrive(0, 0, 0, 0, 0, 0, 0, SERVO_CLOSED, 5.0);
             encoderDrive(UP_LIFT_SPEED, 0, 0, 0, 0, 300, 0, SERVO_CLOSED, 5.0);
             encoderDrive(DRIVE_SPEED, 670, 670, 670, 670, 0, 0, SERVO_CLOSED, 5.0);
-            encoderDrive(STRAFE_SPEED, 380, -380, -380, 380, 0, 0, SERVO_CLOSED, 5.0);
+            encoderDrive(STRAFE_SPEED, -380, 380, 380, -380, 0, 0, SERVO_CLOSED, 5.0);
             encoderDrive(UP_LIFT_SPEED, 0, 0, 0, 0, 410, 0, SERVO_CLOSED, 5.0);
             encoderDrive(DRIVE_SPEED, 150, 150, 150, 150, 0, 0, SERVO_CLOSED, 5.0);
             encoderDrive(0, 0, 0, 0, 0, 0, 0, SERVO_OPEN, 5.0);
             encoderDrive(DRIVE_SPEED, -150, -150, -150, -150, 0, 0, SERVO_OPEN, 5.0);
-            encoderDrive(STRAFE_SPEED, -940, 940, 940, -940, 0, 0, SERVO_OPEN, 5.0);
+            encoderDrive(STRAFE_SPEED, -320, 320, 320, -320, 0, 0, SERVO_OPEN, 5.0);
         }else if(tagOfInterest.id == TWO){
             //two trajectory
             encoderDrive(UP_LIFT_SPEED, 0, 0, 0, 0, 50, 0, SERVO_OPEN, 5.0);
             encoderDrive(0, 0, 0, 0, 0, 0, 0, SERVO_CLOSED, 5.0);
             encoderDrive(UP_LIFT_SPEED, 0, 0, 0, 0, 300, 0, SERVO_CLOSED, 5.0);
             encoderDrive(DRIVE_SPEED, 670, 670, 670, 670, 0, 0, SERVO_CLOSED, 5.0);
-            encoderDrive(STRAFE_SPEED, 380, -380, -380, 380, 0, 0, SERVO_CLOSED, 5.0);
+            encoderDrive(STRAFE_SPEED, -380, 380, 380, -380, 0, 0, SERVO_CLOSED, 5.0);
             encoderDrive(UP_LIFT_SPEED, 0, 0, 0, 0, 410, 0, SERVO_CLOSED, 5.0);
             encoderDrive(DRIVE_SPEED, 150, 150, 150, 150, 0, 0, SERVO_CLOSED, 5.0);
             encoderDrive(0, 0, 0, 0, 0, 0, 0, SERVO_OPEN, 5.0);
             encoderDrive(DRIVE_SPEED, -150, -150, -150, -150, 0, 0, SERVO_OPEN, 5.0);
-            encoderDrive(STRAFE_SPEED, -320, 320, 320, -320, 0, 0, SERVO_OPEN, 5.0);
+            encoderDrive(STRAFE_SPEED, 320, -320, -320, 320, 0, 0, SERVO_OPEN, 5.0);
         }else{
             //three trajectory
             encoderDrive(UP_LIFT_SPEED, 0, 0, 0, 0, 50, 0, SERVO_OPEN, 5.0);
             encoderDrive(0, 0, 0, 0, 0, 0, 0, SERVO_CLOSED, 5.0);
             encoderDrive(UP_LIFT_SPEED, 0, 0, 0, 0, 300, 0, SERVO_CLOSED, 5.0);
             encoderDrive(DRIVE_SPEED, 670, 670, 670, 670, 0, 0, SERVO_CLOSED, 5.0);
-            encoderDrive(STRAFE_SPEED, 380, -380, -380, 380, 0, 0, SERVO_CLOSED, 5.0);
+            encoderDrive(STRAFE_SPEED, -380, 380, 380, -380, 0, 0, SERVO_CLOSED, 5.0);
             encoderDrive(UP_LIFT_SPEED, 0, 0, 0, 0, 410, 0, SERVO_CLOSED, 5.0);
             encoderDrive(DRIVE_SPEED, 150, 150, 150, 150, 0, 0, SERVO_CLOSED, 5.0);
             encoderDrive(0, 0, 0, 0, 0, 0, 0, SERVO_OPEN, 5.0);
             encoderDrive(DRIVE_SPEED, -150, -150, -150, -150, 0, 0, SERVO_OPEN, 5.0);
-            encoderDrive(STRAFE_SPEED, 320, -320, -320, 320, 0, 0, SERVO_OPEN, 5.0);
+            encoderDrive(STRAFE_SPEED, 940, -940, -940, 940, 0, 0, SERVO_OPEN, 5.0);
         }
         /* You wouldn't have this in your autonomous, this is just to prevent the sample from ending */
         //while (opModeIsActive()) {sleep(20);}
