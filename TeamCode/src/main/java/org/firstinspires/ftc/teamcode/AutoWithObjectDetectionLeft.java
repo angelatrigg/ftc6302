@@ -263,13 +263,13 @@ public class AutoWithObjectDetectionLeft extends LinearOpMode
         if(tagOfInterest == null){
             //default trajectory here if preferred
             encoderDrive(UP_LIFT_SPEED, 0, 0, 0, 0, 50, 0, SERVO_OPEN, 5.0);
-            encoderDrive(0, 0, 0, 0, 0, 0, 0, SERVO_CLOSED, 5.0);
+            encoderDrive(0, 0, 0, 0, 0, 0, 0, SERVO_CLOSED, 2.0);
             encoderDrive(UP_LIFT_SPEED, 0, 0, 0, 0, 300, 0, SERVO_CLOSED, 5.0);
             encoderDrive(DRIVE_SPEED, 670, 670, 670, 670, 0, 0, SERVO_CLOSED, 5.0);
             encoderDrive(STRAFE_SPEED, 380, -380, -380, 380, 0, 0, SERVO_CLOSED, 5.0);
             encoderDrive(UP_LIFT_SPEED, 0, 0, 0, 0, 410, 0, SERVO_CLOSED, 5.0);
             encoderDrive(DRIVE_SPEED, 150, 150, 150, 150, 0, 0, SERVO_CLOSED, 5.0);
-            encoderDrive(0, 0, 0, 0, 0, 0, 0, SERVO_OPEN, 5.0);
+            encoderDrive(0, 0, 0, 0, 0, 0, 0, SERVO_OPEN, 2.0);
             encoderDrive(DRIVE_SPEED, -150, -150, -150, -150, 0, 0, SERVO_OPEN, 5.0);
             encoderDrive(STRAFE_SPEED, -320, 320, 320, -320, 0, 0, SERVO_OPEN, 5.0);
 
