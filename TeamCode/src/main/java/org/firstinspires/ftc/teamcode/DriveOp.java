@@ -175,6 +175,7 @@ public class DriveOp extends LinearOpMode {
                 telemetry.addData("Right Front Pow", motor_drive_rf.getPower());
                 telemetry.addData("Left Joystick Y", gamepad1.left_stick_y);
                 telemetry.addData("Right Joystick Y", gamepad1.right_stick_y);
+                telemetry.addData("Joystick Max Speed", JOY_SPEED);
                 telemetry.update();
             }
         }
