@@ -152,33 +152,25 @@ public class DriveOp extends LinearOpMode {
                 }
                 if (gamepad2.a) {
                     motor_lift.setPower(0.65);
-                } else {
-                    motor_lift.setPower(0);
-                    motor_swivel.setPower(0);
                 }
                 if (gamepad2.b) {
                     motor_lift.setPower(-0.5);
-                } else {
-                    motor_lift.setPower(0);
-                    motor_swivel.setPower(0);
                 }
                 if (gamepad2.left_bumper) {
                     motor_swivel.setPower(0.3);
-                } else {
-                    motor_lift.setPower(0);
-                    motor_swivel.setPower(0);
                 }
                 if (gamepad2.right_bumper) {
                     motor_swivel.setPower(-0.3);
-                } else {
-                    motor_lift.setPower(0);
-                    motor_swivel.setPower(0);
                 }
                 if (gamepad2.x) {
                         SERVO_POS = SERVO_MAX;
                 }
                 if (gamepad2.y) {
                         SERVO_POS = SERVO_MIN;
+                }
+                if (!gamepad2.b && !gamepad2.a && !gamepad2.x && !gamepad2.y && !gamepad2.right_bumper && !gamepad2.left_bumper) {
+                    motor_lift.setPower(0);
+                    motor_swivel.setPower(0);
                 }
                 claw_servo.setPosition(SERVO_POS);
                 telemetry.addData("Left Rear Pow", motor_drive_lr.getPower());
