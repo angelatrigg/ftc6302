@@ -151,16 +151,16 @@ public class DriveOp extends LinearOpMode {
                     JOY_SPEED = 0.3;
                 }
                 if (gamepad2.a) {
-                    motor_lift.setPower(0.65);
+                    motor_lift.setPower(0.8);
                 }
                 if (gamepad2.b) {
-                    motor_lift.setPower(-0.5);
+                    motor_lift.setPower(-0.6);
                 }
                 if (gamepad2.left_bumper) {
-                    motor_swivel.setPower(0.3);
+                    motor_swivel.setPower(0.5);
                 }
                 if (gamepad2.right_bumper) {
-                    motor_swivel.setPower(-0.3);
+                    motor_swivel.setPower(-0.5);
                 }
                 if (gamepad2.x) {
                         SERVO_POS = SERVO_MAX;
