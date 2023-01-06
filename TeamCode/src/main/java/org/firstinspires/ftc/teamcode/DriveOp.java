@@ -88,25 +88,27 @@ public class DriveOp extends LinearOpMode {
                     // The Y axis of a joystick ranges from -1 in its topmost position
                     // to +1 in its bottommost position. We negate this value so that
                     // the topmost position corresponds to maximum forward power.
-                    motor_drive_rf.setPower(1);
-                    motor_drive_lr.setPower(1);
+                    motor_drive_rf.setPower(JOY_SPEED);
+                    motor_drive_lr.setPower(JOY_SPEED);
                     // The Y axis of a joystick ranges from -1 in its topmost position
                     // to +1 in its bottommost position. We negate this value so that
                     // the topmost position corresponds to maximum forward power.
-                    motor_drive_lf.setPower(-1);
-                    motor_drive_rr.setPower(-1);
-                } else if (gamepad1.right_bumper) {
+                    motor_drive_lf.setPower(-JOY_SPEED);
+                    motor_drive_rr.setPower(-JOY_SPEED);
+                }
+                if (gamepad1.right_bumper) {
                     // The Y axis of a joystick ranges from -1 in its topmost position
                     // to +1 in its bottommost position. We negate this value so that
                     // the topmost position corresponds to maximum forward power.
-                    motor_drive_rf.setPower(-1);
-                    motor_drive_lr.setPower(-1);
+                    motor_drive_rf.setPower(-JOY_SPEED);
+                    motor_drive_lr.setPower(-JOY_SPEED);
                     // The Y axis of a joystick ranges from -1 in its topmost position
                     // to +1 in its bottommost position. We negate this value so that
                     // the topmost position corresponds to maximum forward power.
-                    motor_drive_lf.setPower(1);
-                    motor_drive_rr.setPower(1);
-                } else if (gamepad1.dpad_right) {
+                    motor_drive_lf.setPower(JOY_SPEED);
+                    motor_drive_rr.setPower(JOY_SPEED);
+                }
+                if (gamepad1.dpad_right) {
                     // The Y axis of a joystick ranges from -1 in its topmost position
                     // to +1 in its bottommost position. We negate this value so that
                     // the topmost position corresponds to maximum forward power.
@@ -117,7 +119,8 @@ public class DriveOp extends LinearOpMode {
                     // the topmost position corresponds to maximum forward power.
                     motor_drive_lf.setPower(0.5);
                     motor_drive_rr.setPower(0.5);
-                } else if (gamepad1.dpad_left) {
+                }
+                if (gamepad1.dpad_left) {
                     // The Y axis of a joystick ranges from -1 in its topmost position
                     // to +1 in its bottommost position. We negate this value so that
                     // the topmost position corresponds to maximum forward power.
@@ -128,43 +131,44 @@ public class DriveOp extends LinearOpMode {
                     // the topmost position corresponds to maximum forward power.
                     motor_drive_lf.setPower(-0.5);
                     motor_drive_rr.setPower(-0.5);
-                } else if (gamepad1.dpad_up) {
+                }
+                if (gamepad1.dpad_up) {
                     motor_drive_lf.setPower(0.5);
                     motor_drive_lr.setPower(0.5);
                     motor_drive_rf.setPower(0.5);
                     motor_drive_rr.setPower(0.5);
-                } else if (gamepad1.dpad_down) {
+                }
+                if (gamepad1.dpad_down) {
                     motor_drive_lf.setPower(-0.5);
                     motor_drive_lr.setPower(-0.5);
                     motor_drive_rf.setPower(-0.5);
                     motor_drive_rr.setPower(-0.5);
-                } else if (gamepad1.a) {
+                }
+                if (gamepad1.a) {
                     JOY_SPEED = 0.8;
-                } else if (gamepad1.b) {
+                }
+                if (gamepad1.b) {
                     JOY_SPEED = 0.3;
-                } else if (gamepad2.a) {
+                }
+                if (gamepad2.a) {
                     motor_lift.setPower(0.65);
-                } else if (gamepad2.b) {
+                }
+                if (gamepad2.b) {
                     motor_lift.setPower(-0.5);
-                } else if (gamepad2.left_bumper) {
+                }
+                if (gamepad2.left_bumper) {
                     motor_swivel.setPower(0.3);
-                } else if (gamepad2.right_bumper) {
+                }
+                if (gamepad2.right_bumper) {
                     motor_swivel.setPower(-0.3);
-                } else if (gamepad2.x) {
+                }
+                if (gamepad2.x) {
                         SERVO_POS = SERVO_MAX;
-                } else if (gamepad2.y) {
+                }
+                if (gamepad2.y) {
                         SERVO_POS = SERVO_MIN;
-                } else {
-                    // The Y axis of a joystick ranges from -1 in its topmost position
-                    // to +1 in its bottommost position. We negate this value so that
-                    // the topmost position corresponds to maximum forward power.
-                    //motor_drive_rf.setPower(0);
-                    //motor_drive_lr.setPower(0);
-                    // The Y axis of a joystick ranges from -1 in its topmost position
-                    // to +1 in its bottommost position. We negate this value so that
-                    // the topmost position corresponds to maximum forward power.
-                    //motor_drive_lf.setPower(0);
-                    //motor_drive_rr.setPower(0);
+                }
+                if (!gamepad2.b && !gamepad2.a && !gamepad2.x && !gamepad2.y && !gamepad2.right_bumper && !gamepad2.left_bumper) {
                     motor_lift.setPower(0);
                     motor_swivel.setPower(0);
                 }
