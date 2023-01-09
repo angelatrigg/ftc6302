@@ -37,7 +37,7 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 
 import java.util.ArrayList;
 
-@Autonomous(name = "Autonomous With Object Detetection Right")
+@Autonomous(name = "Autonomous With Object Detection Right")
 public class AutoWithObjectDetectionRight extends LinearOpMode
 {
     private DcMotor motor_drive_lf;
