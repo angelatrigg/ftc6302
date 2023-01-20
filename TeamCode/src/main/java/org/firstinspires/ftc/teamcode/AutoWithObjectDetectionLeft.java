@@ -48,7 +48,7 @@ public class AutoWithObjectDetectionLeft extends LinearOpMode
     private DcMotor motor_swivel;
     private Servo claw_servo;
     static final double SERVO_CLOSED = 1.55;
-    static final double SERVO_OPEN = 0.9;
+    static final double SERVO_OPEN = 0.85;
 
     private ElapsedTime runtime = new ElapsedTime();
 
@@ -263,49 +263,43 @@ public class AutoWithObjectDetectionLeft extends LinearOpMode
         if(tagOfInterest == null){
             //default trajectory here if preferred
             //Initial lift to be able to grab cone
-            encoderDrive(UP_LIFT_SPEED, 0, 0, 0, 0, 50, 0, SERVO_OPEN, 5.0);
+            encoderDrive(1, 0, 0, 0, 0, 50, 0, SERVO_OPEN, 5.0);
             //Grab cone
-            encoderDrive(0, 0, 0, 0, 0, 0, 0, SERVO_CLOSED, 2.0);
+            encoderDrive(0, 0, 0, 0, 0, 0, 0, SERVO_CLOSED, 1.0);
             //Lift up to avoid hitting signal
-            encoderDrive(UP_LIFT_SPEED, 0, 0, 0, 0, 300, 0, SERVO_CLOSED, 5.0);
+            encoderDrive(1, 0, 0, 0, 0, 300, 0, SERVO_CLOSED, 1.5);
             //Drive forward for initial score
-            encoderDrive(DRIVE_SPEED, 1300, 1300, 1300, 1300, 0, 0, SERVO_CLOSED, 5.0);
+            encoderDrive(0.5, 1300, 1300, 1300, 1300, 0, 0, SERVO_CLOSED, 5.0);
             //Strafe to the right for initial score
-            encoderDrive(STRAFE_SPEED, 360, -360, -360, 360, 0, 0, SERVO_CLOSED, 5.0);
+            encoderDrive(0.5, 360, -360, -360, 360, 0, 0, SERVO_CLOSED, 5.0);
             //Lift up for initial score
-            encoderDrive(UP_LIFT_SPEED, 0, 0, 0, 0, 700, 0, SERVO_CLOSED, 5.0);
+            encoderDrive(1, 0, 0, 0, 0, 730, 0, SERVO_CLOSED, 5.0);
             //Forward for initial score
-            encoderDrive(DRIVE_SPEED, 150, 150, 150, 150, 0, 0, SERVO_CLOSED, 5.0);
+            encoderDrive(0.4, 150, 150, 150, 150, 0, 0, SERVO_CLOSED, 5.0);
             //Drop cone
-            encoderDrive(0, 0, 0, 0, 0, 0, 0, SERVO_OPEN, 1.5);
+            encoderDrive(0, 0, 0, 0, 0, 0, 0, SERVO_OPEN, 1.0);
             //Back up after initial score
-            encoderDrive(DRIVE_SPEED, -160, -160, -160, -160, 0, 0, SERVO_OPEN, 5.0);
-
-            //Move to the left for room to turn **MAY NOT BE NEEDED**
-            //encoderDrive(STRAFE_SPEED, -330, 330, 330, -330, 0, 0, SERVO_OPEN, 5.0);
-
+            encoderDrive(0.4, -160, -160, -160, -160, 0, 0, SERVO_OPEN, 5.0);
             //Turn towards cones and drop lift
-            encoderDrive(TURN_SPEED, -470, 470, -470, 470, -950, 0, SERVO_CLOSED, 5.0);
-            //Drive to cones
-            encoderDrive(DRIVE_SPEED, 900, 900, 900, 900, 0, 0, SERVO_OPEN, 5.0);
-            //Back up to score
-            //encoderDrive(DRIVE_SPEED, -700, -700, -700, -700, 0, 0, SERVO_CLOSED, 5.0);
-            //Strafe to score
-            //encoderDrive(STRAFE_SPEED, 350, -350, -350, 350, 0, 0, SERVO_CLOSED, 5.0);
-            //Lift to score
-            //encoderDrive(UP_LIFT_SPEED, 0, 0, 0, 0, 950, 0, SERVO_CLOSED, 5.0);
-            //**ROTATE CLAW**
-            //encoderDrive(SWIVEL_SPEED, 0, 0, 0, 0, 0, 180, SERVO_CLOSED, 5.0);
-            //Back up to score
-            //encoderDrive(DRIVE_SPEED, -300, -300, -300, -300, 0, 0, SERVO_CLOSED, 5.0);
-            //Open claw
-            //encoderDrive(0, 0, 0, 0, 0, 0, 0, SERVO_OPEN, 5.0);
-            //Move forward away from score
-            //encoderDrive(DRIVE_SPEED, 300, 300, 300, 300, 0, 0, SERVO_OPEN, 5.0);
-            //**ROTATE CLAW BACK**
-            //encoderDrive(SWIVEL_SPEED, 0, 0, 0, 0, 0, -180, SERVO_OPEN, 5.0);
-            //Strafe away from scoring and lower lift
-            //encoderDrive(STRAFE_SPEED, -350, 350, 350, -350, -950, 0, SERVO_CLOSED, 5.0);
+            encoderDrive(0.5, -470, 470, -470, 470, -950, 0, SERVO_CLOSED, 5.0);
+            //Drive to cones and lift claw
+            encoderDrive(0.5, 960, 960, 960, 960, 230, 0, SERVO_OPEN, 5.0);
+            //Close claw
+            encoderDrive(0.5, 0, 0, 0, 0, 0, 0, SERVO_CLOSED, 1.0);
+            //Lift cone
+            encoderDrive(1, 0, 0, 0, 0, 300, 0, SERVO_CLOSED, 2.0);
+            //Back up loop
+            encoderDrive(0.5, -960, -960, -960, -960, 0, 0, SERVO_CLOSED, 5.0);
+            //Turn towards junction and raise lift
+            encoderDrive(0.5, 470, -470, 470, -470, 950, 0, SERVO_CLOSED, 5.0);
+            //Forward to score
+            encoderDrive(0.4, 150, 150, 150, 150, 0, 0, SERVO_CLOSED, 5.0);
+            //Drop cone
+            encoderDrive(0, 0, 0, 0, 0, 0, 0, SERVO_OPEN, 1.0);
+            //Back up from score
+            encoderDrive(0.4, -150, -150, -150, -150, -950, 0, SERVO_CLOSED, 5.0);
+            //Park
+            encoderDrive(0.5, -360, 360, 360, -360, 0, 0, SERVO_CLOSED, 5.0);
         }else if(tagOfInterest.id == ONE){
             //Trajectory if tag one is detected
             encoderDrive(UP_LIFT_SPEED, 0, 0, 0, 0, 50, 0, SERVO_OPEN, 5.0);
