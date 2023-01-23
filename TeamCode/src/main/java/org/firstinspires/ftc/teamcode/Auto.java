@@ -112,12 +112,12 @@ public class Auto extends LinearOpMode {
 
         // Step through each leg of the path,
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
-        encoderDrive(DRIVE_SPEED,  500,  500, 500, 500, 0, 0, 0, 5.0);
-        encoderDrive(UP_LIFT_SPEED, 0, 0, 0, 0, 50, 0, 0, 5.0);
-        encoderDrive(DOWN_LIFT_SPEED, 0, 0, 0, 0, -25, 0, 0, 5.0);
+        //encoderDrive(DRIVE_SPEED,  500,  500, 500, 500, 0, 0, 0, 5.0);
+        //encoderDrive(UP_LIFT_SPEED, 0, 0, 0, 0, 50, 0, 0, 5.0);
+        //encoderDrive(DOWN_LIFT_SPEED, 0, 0, 0, 0, -25, 0, 0, 5.0);
         encoderDrive(SWIVEL_SPEED, 0, 0, 0, 0, 0, 45, 0, 5.0);
         encoderDrive(SWIVEL_SPEED, 0, 0, 0, 0, 0, -45, 0, 5.0);
-        encoderDrive(SERVO_SPEED, 0, 0, 0, 0, 0, 0, 50, 5.0);
+        //encoderDrive(SERVO_SPEED, 0, 0, 0, 0, 0, 0, 50, 5.0);
 
         telemetry.addData("Path", "Complete");
         telemetry.update();
