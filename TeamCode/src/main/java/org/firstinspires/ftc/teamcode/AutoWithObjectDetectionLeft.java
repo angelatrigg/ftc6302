@@ -37,7 +37,7 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 
 import java.util.ArrayList;
 
-@Autonomous(name = "Autonomous With Object Detetection Left")
+@Autonomous(name = "Autonomous With Object Detection Left")
 public class AutoWithObjectDetectionLeft extends LinearOpMode
 {
     private DcMotor motor_drive_lf;
@@ -48,7 +48,7 @@ public class AutoWithObjectDetectionLeft extends LinearOpMode
     private DcMotor motor_swivel;
     private Servo claw_servo;
     static final double SERVO_CLOSED = 1.55;
-    static final double SERVO_OPEN = 0.85;
+    static final double SERVO_OPEN = 0.75;
 
     private ElapsedTime runtime = new ElapsedTime();
 
@@ -104,7 +104,7 @@ public class AutoWithObjectDetectionLeft extends LinearOpMode
     static final double     TURN_SPEED              = 0.5;
     static final double     SERVO_SPEED             = 0.3;
     //Tolerance of encoders to reduce hangs trying to get the perfect position
-    static final double     ENCODER_TOLERANCE       = 3;
+    static final double     ENCODER_TOLERANCE       = 7;
 
 
     @Override
@@ -266,96 +266,206 @@ public class AutoWithObjectDetectionLeft extends LinearOpMode
             //default trajectory here if preferred
             //Initial lift to be able to grab cone
             encoderDrive(1, 0, 0, 0, 0, 50, 0, SERVO_CLOSED, 5.0);
-            //Grab cone
-            //encoderDrive(0, 0, 0, 0, 0, 0, 0, SERVO_CLOSED, 1.0);
-            //Lift up to avoid hitting signal
-            //encoderDrive(1, 0, 0, 0, 0, 300, 0, SERVO_CLOSED, 1.5);
-            //encoderDrive(0.5, 0, 0, 0, 0, 0, 45, SERVO_CLOSED, 5.0);
-            //encoderDrive(0.5, 0, 0, 0, 0, 0, -45, SERVO_CLOSED, 5.0);
-            //motor_swivel.setPower(Math.abs(0.5));
-            //sleep(5000);
-            //Drive forward for initial score
+            //Drive forward to move signal
             encoderDrive(0.55, 1500, 1500, 1500, 1500, 300, 0, SERVO_CLOSED, 5.0);
-            sleep(250);
             //Back up to free signal
-            encoderDrive(0.5, -200, -200, -200, -200, 0, 0, SERVO_CLOSED, 5.0);
-
-            //Strafe to the right for initial score
+            encoderDrive(0.5, -250, -250, -250, -250, 0, 0, SERVO_CLOSED, 5.0);
+            //Strafe to the right and lift for initial score
             encoderDrive(0.5, 350, -350, -350, 350, 800, 0, SERVO_CLOSED, 3.5);
-            //Lift up for initial score
-            //encoderDrive(1, 0, 0, 0, 0, 730, 0, SERVO_CLOSED, 5.0);
             //Forward for initial score
-            encoderDrive(0.4, 150, 150, 150, 150, 0, 0, SERVO_CLOSED, 2.0);
-            encoderDrive(0.6, 0, 0, 0, 0, -100, 0, SERVO_CLOSED, 2.0);
-            //Drop cone
-            //sleep(100);
-            claw_servo.setPosition(SERVO_OPEN);
-            //encoderDrive(0, 0, 0, 0, 0, 0, 0, SERVO_OPEN, 1.0);
-            //Back up after initial score
-            encoderDrive(0.4, -160, -160, -160, -160, 0, 0, SERVO_OPEN, 2.0);
-            //Turn towards cones and drop lift
-            encoderDrive(0.5, -460, 460, -460, 460, -440, 0, SERVO_CLOSED, 5.0);
+            encoderDrive(0.4, 200, 200, 200, 200, 0, 0, SERVO_CLOSED, 2.0);
+            //Reset swivel position
             motor_swivel.setPower(-1);
             sleep(100);
             motor_swivel.setPower(0);
-            //Drive to cones and lift claw
-            encoderDrive(0.6, 970, 970, 970, 970, -350, 0, SERVO_OPEN, 5.0);
-            //Close claw
-            claw_servo.setPosition(SERVO_CLOSED);
-            //encoderDrive(0, 0, 0, 0, 0, 0, 0, SERVO_CLOSED, 1.0);
-            //sleep(100);
-            //Lift cone
-            encoderDrive(1, 0, 0, 0, 0, 300, 0, SERVO_CLOSED, 2.0);
-            //Back up loop
-            encoderDrive(0.5, -980, -980, -980, -980, 0, 0, SERVO_CLOSED, 5.0);
-            //Turn towards junction and raise lift
-            encoderDrive(0.5, 460, -460, 460, -460, 950, 0, SERVO_CLOSED, 2.5);
-            //Forward to score
-            encoderDrive(0.4, 150, 150, 150, 150, 0, 0, SERVO_CLOSED, 2.5);
+            //Slightly lower lift for more accurate scoring
             encoderDrive(0.6, 0, 0, 0, 0, -100, 0, SERVO_CLOSED, 2.0);
             //Drop cone
             claw_servo.setPosition(SERVO_OPEN);
-            //encoderDrive(0, 0, 0, 0, 0, 0, 0, SERVO_OPEN, 1.0);
-            //Back up from score
-            encoderDrive(0.4, -150, -150, -150, -150, 0, 0, SERVO_OPEN, 5.0);
+            //Back up after initial score
+            encoderDrive(0.4, -170, -170, -170, -170, 0, 0, SERVO_OPEN, 2.0);
+            //Turn towards cones and drop lift part of the way (2)
+            encoderDrive(0.5, -460, 460, -460, 460, -440, 0, SERVO_CLOSED, 5.0);
+            //Reset swivel position
+            motor_swivel.setPower(-1);
+            sleep(100);
+            motor_swivel.setPower(0);
+            //Drive to cones and finish lowering arm (2)
+            encoderDrive(0.6, 1000, 1000, 1000, 1000, -300, 0, SERVO_OPEN, 5.0);
+            //Close claw (2)
+            claw_servo.setPosition(SERVO_CLOSED);
+            sleep(100);
+            //Lift cone (2)
+            encoderDrive(1, 0, 0, 0, 0, 300, 0, SERVO_CLOSED, 2.0);
+            //Back up to score (2)
+            encoderDrive(0.5, -980, -980, -980, -980, 0, 0, SERVO_CLOSED, 5.0);
+            //Turn towards junction and raise lift (2)
+            encoderDrive(0.5, 470, -470, 470, -470, 950, 0, SERVO_CLOSED, 2.5);
+            //Forward to score (2)
+            encoderDrive(0.4, 160, 160, 160, 160, 0, 0, SERVO_CLOSED, 2.5);
+            motor_swivel.setPower(-1);
+            sleep(100);
+            motor_swivel.setPower(0);
+            encoderDrive(0.6, 0, 0, 0, 0, -100, 0, SERVO_CLOSED, 2.0);
+            //Drop cone (2)
+            claw_servo.setPosition(SERVO_OPEN);
+            //Back up from score (2)
+            encoderDrive(0.4, -160, -160, -160, -160, 0, 0, SERVO_OPEN, 5.0);
             //Park
             encoderDrive(0.5, -360, 360, 360, -360, 0, 0, SERVO_CLOSED, 5.0);
         }else if(tagOfInterest.id == ONE){
             //Trajectory if tag one is detected
-            encoderDrive(UP_LIFT_SPEED, 0, 0, 0, 0, 50, 0, SERVO_OPEN, 5.0);
-            encoderDrive(0, 0, 0, 0, 0, 0, 0, SERVO_CLOSED, 5.0);
-            encoderDrive(UP_LIFT_SPEED, 0, 0, 0, 0, 300, 0, SERVO_CLOSED, 5.0);
-            encoderDrive(DRIVE_SPEED, 670, 670, 670, 670, 0, 0, SERVO_CLOSED, 5.0);
-            encoderDrive(STRAFE_SPEED, 380, -380, -380, 380, 0, 0, SERVO_CLOSED, 5.0);
-            encoderDrive(UP_LIFT_SPEED, 0, 0, 0, 0, 430, 0, SERVO_CLOSED, 5.0);
-            encoderDrive(DRIVE_SPEED, 170, 170, 170, 170, 0, 0, SERVO_CLOSED, 5.0);
-            encoderDrive(0, 0, 0, 0, 0, 0, 0, SERVO_OPEN, 1.5);
-            encoderDrive(DRIVE_SPEED, -170, -170, -170, -170, 0, 0, SERVO_OPEN, 5.0);
-            encoderDrive(STRAFE_SPEED, -950, 950, 950, -950, 0, 0, SERVO_OPEN, 5.0);
+            //Initial lift to be able to grab cone
+            encoderDrive(1, 0, 0, 0, 0, 50, 0, SERVO_CLOSED, 5.0);
+            //Drive forward to move signal
+            encoderDrive(0.55, 1500, 1500, 1500, 1500, 300, 0, SERVO_CLOSED, 5.0);
+            //Back up to free signal
+            encoderDrive(0.5, -250, -250, -250, -250, 0, 0, SERVO_CLOSED, 5.0);
+            //Strafe to the right and lift for initial score
+            encoderDrive(0.5, 350, -350, -350, 350, 800, 0, SERVO_CLOSED, 3.5);
+            //Forward for initial score
+            encoderDrive(0.4, 200, 200, 200, 200, 0, 0, SERVO_CLOSED, 2.0);
+            //Reset swivel position
+            motor_swivel.setPower(-1);
+            sleep(100);
+            motor_swivel.setPower(0);
+            //Slightly lower lift for more accurate scoring
+            encoderDrive(0.6, 0, 0, 0, 0, -100, 0, SERVO_CLOSED, 2.0);
+            //Drop cone
+            claw_servo.setPosition(SERVO_OPEN);
+            //Back up after initial score
+            encoderDrive(0.4, -170, -170, -170, -170, 0, 0, SERVO_OPEN, 2.0);
+            //Turn towards cones and drop lift part of the way (2)
+            encoderDrive(0.5, -460, 460, -460, 460, -440, 0, SERVO_CLOSED, 5.0);
+            //Reset swivel position
+            motor_swivel.setPower(-1);
+            sleep(100);
+            motor_swivel.setPower(0);
+            //Drive to cones and finish lowering arm (2)
+            encoderDrive(0.6, 1000, 1000, 1000, 1000, -300, 0, SERVO_OPEN, 5.0);
+            //Close claw (2)
+            claw_servo.setPosition(SERVO_CLOSED);
+            sleep(100);
+            //Lift cone (2)
+            encoderDrive(1, 0, 0, 0, 0, 300, 0, SERVO_CLOSED, 2.0);
+            //Back up to score (2)
+            encoderDrive(0.5, -980, -980, -980, -980, 0, 0, SERVO_CLOSED, 5.0);
+            //Turn towards junction and raise lift (2)
+            encoderDrive(0.5, 470, -470, 470, -470, 950, 0, SERVO_CLOSED, 2.5);
+            //Forward to score (2)
+            encoderDrive(0.4, 160, 160, 160, 160, 0, 0, SERVO_CLOSED, 2.5);
+            motor_swivel.setPower(-1);
+            sleep(100);
+            motor_swivel.setPower(0);
+            encoderDrive(0.6, 0, 0, 0, 0, -100, 0, SERVO_CLOSED, 2.0);
+            //Drop cone (2)
+            claw_servo.setPosition(SERVO_OPEN);
+            //Back up from score (2)
+            encoderDrive(0.4, -160, -160, -160, -160, 0, 0, SERVO_OPEN, 5.0);
+            //Park
+            encoderDrive(0.5, -1060, 1060, 1060, -1060, 0, 0, SERVO_CLOSED, 5.0);
         }else if(tagOfInterest.id == TWO){
             //Trajectory if tag two is detected
-            encoderDrive(UP_LIFT_SPEED, 0, 0, 0, 0, 50, 0, SERVO_OPEN, 5.0);
-            encoderDrive(0, 0, 0, 0, 0, 0, 0, SERVO_CLOSED, 5.0);
-            encoderDrive(UP_LIFT_SPEED, 0, 0, 0, 0, 300, 0, SERVO_CLOSED, 5.0);
-            encoderDrive(DRIVE_SPEED, 670, 670, 670, 670, 0, 0, SERVO_CLOSED, 5.0);
-            encoderDrive(STRAFE_SPEED, 380, -380, -380, 380, 0, 0, SERVO_CLOSED, 5.0);
-            encoderDrive(UP_LIFT_SPEED, 0, 0, 0, 0, 430, 0, SERVO_CLOSED, 5.0);
-            encoderDrive(DRIVE_SPEED, 170, 170, 170, 170, 0, 0, SERVO_CLOSED, 5.0);
-            encoderDrive(0, 0, 0, 0, 0, 0, 0, SERVO_OPEN, 1.5);
-            encoderDrive(DRIVE_SPEED, -170, -170, -170, -170, 0, 0, SERVO_OPEN, 5.0);
-            encoderDrive(STRAFE_SPEED, -320, 320, 320, -320, 0, 0, SERVO_OPEN, 5.0);
+            //Initial lift to be able to grab cone
+            encoderDrive(1, 0, 0, 0, 0, 50, 0, SERVO_CLOSED, 5.0);
+            //Drive forward to move signal
+            encoderDrive(0.55, 1500, 1500, 1500, 1500, 300, 0, SERVO_CLOSED, 5.0);
+            //Back up to free signal
+            encoderDrive(0.5, -250, -250, -250, -250, 0, 0, SERVO_CLOSED, 5.0);
+            //Strafe to the right and lift for initial score
+            encoderDrive(0.5, 350, -350, -350, 350, 800, 0, SERVO_CLOSED, 3.5);
+            //Forward for initial score
+            encoderDrive(0.4, 200, 200, 200, 200, 0, 0, SERVO_CLOSED, 2.0);
+            //Reset swivel position
+            motor_swivel.setPower(-1);
+            sleep(100);
+            motor_swivel.setPower(0);
+            //Slightly lower lift for more accurate scoring
+            encoderDrive(0.6, 0, 0, 0, 0, -100, 0, SERVO_CLOSED, 2.0);
+            //Drop cone
+            claw_servo.setPosition(SERVO_OPEN);
+            //Back up after initial score
+            encoderDrive(0.4, -170, -170, -170, -170, 0, 0, SERVO_OPEN, 2.0);
+            //Turn towards cones and drop lift part of the way (2)
+            encoderDrive(0.5, -460, 460, -460, 460, -440, 0, SERVO_CLOSED, 5.0);
+            //Reset swivel position
+            motor_swivel.setPower(-1);
+            sleep(100);
+            motor_swivel.setPower(0);
+            //Drive to cones and finish lowering arm (2)
+            encoderDrive(0.6, 1000, 1000, 1000, 1000, -300, 0, SERVO_OPEN, 5.0);
+            //Close claw (2)
+            claw_servo.setPosition(SERVO_CLOSED);
+            sleep(100);
+            //Lift cone (2)
+            encoderDrive(1, 0, 0, 0, 0, 300, 0, SERVO_CLOSED, 2.0);
+            //Back up to score (2)
+            encoderDrive(0.5, -980, -980, -980, -980, 0, 0, SERVO_CLOSED, 5.0);
+            //Turn towards junction and raise lift (2)
+            encoderDrive(0.5, 470, -470, 470, -470, 950, 0, SERVO_CLOSED, 2.5);
+            //Forward to score (2)
+            encoderDrive(0.4, 160, 160, 160, 160, 0, 0, SERVO_CLOSED, 2.5);
+            motor_swivel.setPower(-1);
+            sleep(100);
+            motor_swivel.setPower(0);
+            encoderDrive(0.6, 0, 0, 0, 0, -100, 0, SERVO_CLOSED, 2.0);
+            //Drop cone (2)
+            claw_servo.setPosition(SERVO_OPEN);
+            //Back up from score (2)
+            encoderDrive(0.4, -160, -160, -160, -160, 0, 0, SERVO_OPEN, 5.0);
+            //Park
+            encoderDrive(0.5, -360, 360, 360, -360, 0, 0, SERVO_CLOSED, 5.0);
         }else{
             //Trajectory if tag three is detected
-            encoderDrive(UP_LIFT_SPEED, 0, 0, 0, 0, 50, 0, SERVO_OPEN, 5.0);
-            encoderDrive(0, 0, 0, 0, 0, 0, 0, SERVO_CLOSED, 5.0);
-            encoderDrive(UP_LIFT_SPEED, 0, 0, 0, 0, 300, 0, SERVO_CLOSED, 5.0);
-            encoderDrive(DRIVE_SPEED, 670, 670, 670, 670, 0, 0, SERVO_CLOSED, 5.0);
-            encoderDrive(STRAFE_SPEED, 380, -380, -380, 380, 0, 0, SERVO_CLOSED, 5.0);
-            encoderDrive(UP_LIFT_SPEED, 0, 0, 0, 0, 430, 0, SERVO_CLOSED, 5.0);
-            encoderDrive(DRIVE_SPEED, 170, 170, 170, 170, 0, 0, SERVO_CLOSED, 5.0);
-            encoderDrive(0, 0, 0, 0, 0, 0, 0, SERVO_OPEN, 1.5);
-            encoderDrive(DRIVE_SPEED, -170, -170, -170, -170, 0, 0, SERVO_OPEN, 5.0);
-            encoderDrive(STRAFE_SPEED, 320, -320, -320, 320, 0, 0, SERVO_OPEN, 5.0);
+            //Initial lift to be able to grab cone
+            encoderDrive(1, 0, 0, 0, 0, 50, 0, SERVO_CLOSED, 5.0);
+            //Drive forward to move signal
+            encoderDrive(0.55, 1500, 1500, 1500, 1500, 300, 0, SERVO_CLOSED, 5.0);
+            //Back up to free signal
+            encoderDrive(0.5, -250, -250, -250, -250, 0, 0, SERVO_CLOSED, 5.0);
+            //Strafe to the right and lift for initial score
+            encoderDrive(0.5, 350, -350, -350, 350, 800, 0, SERVO_CLOSED, 3.5);
+            //Forward for initial score
+            encoderDrive(0.4, 200, 200, 200, 200, 0, 0, SERVO_CLOSED, 2.0);
+            //Reset swivel position
+            motor_swivel.setPower(-1);
+            sleep(100);
+            motor_swivel.setPower(0);
+            //Slightly lower lift for more accurate scoring
+            encoderDrive(0.6, 0, 0, 0, 0, -100, 0, SERVO_CLOSED, 2.0);
+            //Drop cone
+            claw_servo.setPosition(SERVO_OPEN);
+            //Back up after initial score
+            encoderDrive(0.4, -170, -170, -170, -170, 0, 0, SERVO_OPEN, 2.0);
+            //Turn towards cones and drop lift part of the way (2)
+            encoderDrive(0.5, -460, 460, -460, 460, -440, 0, SERVO_CLOSED, 5.0);
+            //Reset swivel position
+            motor_swivel.setPower(-1);
+            sleep(100);
+            motor_swivel.setPower(0);
+            //Drive to cones and finish lowering arm (2)
+            encoderDrive(0.6, 1000, 1000, 1000, 1000, -300, 0, SERVO_OPEN, 5.0);
+            //Close claw (2)
+            claw_servo.setPosition(SERVO_CLOSED);
+            sleep(100);
+            //Lift cone (2)
+            encoderDrive(1, 0, 0, 0, 0, 300, 0, SERVO_CLOSED, 2.0);
+            //Back up to score (2)
+            encoderDrive(0.5, -980, -980, -980, -980, 0, 0, SERVO_CLOSED, 5.0);
+            //Turn towards junction and raise lift (2)
+            encoderDrive(0.5, 470, -470, 470, -470, 950, 0, SERVO_CLOSED, 2.5);
+            //Forward to score (2)
+            encoderDrive(0.4, 160, 160, 160, 160, 0, 0, SERVO_CLOSED, 2.5);
+            motor_swivel.setPower(-1);
+            sleep(100);
+            motor_swivel.setPower(0);
+            encoderDrive(0.6, 0, 0, 0, 0, -100, 0, SERVO_CLOSED, 2.0);
+            //Drop cone (2)
+            claw_servo.setPosition(SERVO_OPEN);
+            //Back up from score (2)
+            encoderDrive(0.4, -160, -160, -160, -160, 0, 0, SERVO_OPEN, 5.0);
+            //Park
+            encoderDrive(0.5, 360, -360, -360, 360, 0, 0, SERVO_CLOSED, 5.0);
         }
         /* You wouldn't have this in your autonomous, this is just to prevent the sample from ending */
         //while (opModeIsActive()) {sleep(20);}
@@ -440,7 +550,7 @@ public class AutoWithObjectDetectionLeft extends LinearOpMode
             motor_lift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             motor_swivel.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-            //sleep(50);   // optional pause after each move.
+            sleep(50);   // optional pause after each move.
         }
     }
 
