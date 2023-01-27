@@ -273,7 +273,7 @@ public class AutoWithObjectDetectionRight extends LinearOpMode
             //Strafe to the left and lift for initial score
             encoderDrive(0.5, -350, 350, 350, -350, 800, 0, SERVO_CLOSED, 3.5);
             //Forward for initial score
-            encoderDrive(0.4, 200, 200, 200, 200, 0, 0, SERVO_CLOSED, 2.0);
+            encoderDrive(0.4, 180, 180, 180, 180, 0, 0, SERVO_CLOSED, 2.0);
             //Reset swivel position
             motor_swivel.setPower(-1);
             sleep(100);
@@ -283,7 +283,7 @@ public class AutoWithObjectDetectionRight extends LinearOpMode
             //Drop cone
             claw_servo.setPosition(SERVO_OPEN);
             //Back up after initial score
-            encoderDrive(0.4, -170, -170, -170, -170, 0, 0, SERVO_OPEN, 2.0);
+            encoderDrive(0.4, -180, -180, -180, -180, 0, 0, SERVO_OPEN, 2.0);
             //Turn towards cones and drop lift part of the way (2)
             encoderDrive(0.5, 460, -460, 460, -460, -440, 0, SERVO_CLOSED, 5.0);
             //Reset swivel position
@@ -302,7 +302,7 @@ public class AutoWithObjectDetectionRight extends LinearOpMode
             //Turn towards junction and raise lift (2)
             encoderDrive(0.5, -470, 470, -470, 470, 950, 0, SERVO_CLOSED, 2.5);
             //Forward to score (2)
-            encoderDrive(0.4, 160, 160, 160, 160, 0, 0, SERVO_CLOSED, 2.5);
+            encoderDrive(0.4, 140, 140, 140, 140, 0, 0, SERVO_CLOSED, 2.5);
             motor_swivel.setPower(-1);
             sleep(100);
             motor_swivel.setPower(0);
@@ -310,7 +310,7 @@ public class AutoWithObjectDetectionRight extends LinearOpMode
             //Drop cone (2)
             claw_servo.setPosition(SERVO_OPEN);
             //Back up from score (2)
-            encoderDrive(0.4, -160, -160, -160, -160, 0, 0, SERVO_OPEN, 5.0);
+            encoderDrive(0.4, -180, -180, -180, -180, 0, 0, SERVO_OPEN, 5.0);
             //Park
             encoderDrive(0.5, 360, -360, -360, 360, 0, 0, SERVO_CLOSED, 5.0);
         }else if(tagOfInterest.id == ONE){
@@ -324,7 +324,7 @@ public class AutoWithObjectDetectionRight extends LinearOpMode
             //Strafe to the left and lift for initial score
             encoderDrive(0.5, -350, 350, 350, -350, 800, 0, SERVO_CLOSED, 3.5);
             //Forward for initial score
-            encoderDrive(0.4, 200, 200, 200, 200, 0, 0, SERVO_CLOSED, 2.0);
+            encoderDrive(0.4, 180, 180, 180, 180, 0, 0, SERVO_CLOSED, 2.0);
             //Reset swivel position
             motor_swivel.setPower(-1);
             sleep(100);
@@ -334,7 +334,7 @@ public class AutoWithObjectDetectionRight extends LinearOpMode
             //Drop cone
             claw_servo.setPosition(SERVO_OPEN);
             //Back up after initial score
-            encoderDrive(0.4, -170, -170, -170, -170, 0, 0, SERVO_OPEN, 2.0);
+            encoderDrive(0.4, -180, -180, -180, -180, 0, 0, SERVO_OPEN, 2.0);
             //Turn towards cones and drop lift part of the way (2)
             encoderDrive(0.5, 460, -460, 460, -460, -440, 0, SERVO_CLOSED, 5.0);
             //Reset swivel position
@@ -353,7 +353,7 @@ public class AutoWithObjectDetectionRight extends LinearOpMode
             //Turn towards junction and raise lift (2)
             encoderDrive(0.5, -470, 470, -470, 470, 950, 0, SERVO_CLOSED, 2.5);
             //Forward to score (2)
-            encoderDrive(0.4, 160, 160, 160, 160, 0, 0, SERVO_CLOSED, 2.5);
+            encoderDrive(0.4, 140, 140, 140, 140, 0, 0, SERVO_CLOSED, 2.5);
             motor_swivel.setPower(-1);
             sleep(100);
             motor_swivel.setPower(0);
@@ -361,7 +361,7 @@ public class AutoWithObjectDetectionRight extends LinearOpMode
             //Drop cone (2)
             claw_servo.setPosition(SERVO_OPEN);
             //Back up from score (2)
-            encoderDrive(0.4, -160, -160, -160, -160, 0, 0, SERVO_OPEN, 5.0);
+            encoderDrive(0.4, -180, -180, -180, -180, 0, 0, SERVO_OPEN, 5.0);
             //Park
             encoderDrive(0.5, -360, 360, 360, -360, 0, 0, SERVO_CLOSED, 5.0);
         }else if(tagOfInterest.id == TWO){
@@ -375,7 +375,7 @@ public class AutoWithObjectDetectionRight extends LinearOpMode
             //Strafe to the left and lift for initial score
             encoderDrive(0.5, -350, 350, 350, -350, 800, 0, SERVO_CLOSED, 3.5);
             //Forward for initial score
-            encoderDrive(0.4, 200, 200, 200, 200, 0, 0, SERVO_CLOSED, 2.0);
+            encoderDrive(0.4, 180, 180, 180, 180, 0, 0, SERVO_CLOSED, 2.0);
             //Reset swivel position
             motor_swivel.setPower(-1);
             sleep(100);
@@ -385,7 +385,7 @@ public class AutoWithObjectDetectionRight extends LinearOpMode
             //Drop cone
             claw_servo.setPosition(SERVO_OPEN);
             //Back up after initial score
-            encoderDrive(0.4, -170, -170, -170, -170, 0, 0, SERVO_OPEN, 2.0);
+            encoderDrive(0.4, -180, -180, -180, -180, 0, 0, SERVO_OPEN, 2.0);
             //Turn towards cones and drop lift part of the way (2)
             encoderDrive(0.5, 460, -460, 460, -460, -440, 0, SERVO_CLOSED, 5.0);
             //Reset swivel position
@@ -404,7 +404,7 @@ public class AutoWithObjectDetectionRight extends LinearOpMode
             //Turn towards junction and raise lift (2)
             encoderDrive(0.5, -470, 470, -470, 470, 950, 0, SERVO_CLOSED, 2.5);
             //Forward to score (2)
-            encoderDrive(0.4, 160, 160, 160, 160, 0, 0, SERVO_CLOSED, 2.5);
+            encoderDrive(0.4, 140, 140, 140, 140, 0, 0, SERVO_CLOSED, 2.5);
             motor_swivel.setPower(-1);
             sleep(100);
             motor_swivel.setPower(0);
@@ -412,7 +412,7 @@ public class AutoWithObjectDetectionRight extends LinearOpMode
             //Drop cone (2)
             claw_servo.setPosition(SERVO_OPEN);
             //Back up from score (2)
-            encoderDrive(0.4, -160, -160, -160, -160, 0, 0, SERVO_OPEN, 5.0);
+            encoderDrive(0.4, -180, -180, -180, -180, 0, 0, SERVO_OPEN, 5.0);
             //Park
             encoderDrive(0.5, 360, -360, -360, 360, 0, 0, SERVO_CLOSED, 5.0);
         }else{
@@ -426,7 +426,7 @@ public class AutoWithObjectDetectionRight extends LinearOpMode
             //Strafe to the left and lift for initial score
             encoderDrive(0.5, -350, 350, 350, -350, 800, 0, SERVO_CLOSED, 3.5);
             //Forward for initial score
-            encoderDrive(0.4, 200, 200, 200, 200, 0, 0, SERVO_CLOSED, 2.0);
+            encoderDrive(0.4, 180, 180, 180, 180, 0, 0, SERVO_CLOSED, 2.0);
             //Reset swivel position
             motor_swivel.setPower(-1);
             sleep(100);
@@ -436,7 +436,7 @@ public class AutoWithObjectDetectionRight extends LinearOpMode
             //Drop cone
             claw_servo.setPosition(SERVO_OPEN);
             //Back up after initial score
-            encoderDrive(0.4, -170, -170, -170, -170, 0, 0, SERVO_OPEN, 2.0);
+            encoderDrive(0.4, -180, -180, -180, -180, 0, 0, SERVO_OPEN, 2.0);
             //Turn towards cones and drop lift part of the way (2)
             encoderDrive(0.5, 460, -460, 460, -460, -440, 0, SERVO_CLOSED, 5.0);
             //Reset swivel position
@@ -455,7 +455,7 @@ public class AutoWithObjectDetectionRight extends LinearOpMode
             //Turn towards junction and raise lift (2)
             encoderDrive(0.5, -470, 470, -470, 470, 950, 0, SERVO_CLOSED, 2.5);
             //Forward to score (2)
-            encoderDrive(0.4, 160, 160, 160, 160, 0, 0, SERVO_CLOSED, 2.5);
+            encoderDrive(0.4, 140, 140, 140, 140, 0, 0, SERVO_CLOSED, 2.5);
             motor_swivel.setPower(-1);
             sleep(100);
             motor_swivel.setPower(0);
@@ -463,7 +463,7 @@ public class AutoWithObjectDetectionRight extends LinearOpMode
             //Drop cone (2)
             claw_servo.setPosition(SERVO_OPEN);
             //Back up from score (2)
-            encoderDrive(0.4, -160, -160, -160, -160, 0, 0, SERVO_OPEN, 5.0);
+            encoderDrive(0.4, -180, -180, -180, -180, 0, 0, SERVO_OPEN, 5.0);
             //Park
             encoderDrive(0.5, 1060, -1060, -1060, 1060, 0, 0, SERVO_CLOSED, 5.0);
         }
