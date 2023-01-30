@@ -16,9 +16,10 @@ public class DriveOp extends LinearOpMode {
     private DcMotor motor_lift;
     private DcMotor motor_swivel;
     private Servo claw_servo;
+    double JOY_SPEED = 0.8;
     static final double SERVO_SPEED = 0.1;
-    static final double SERVO_MAX = 1.5;
-    static final double SERVO_MIN = 0.75;
+    static final double SERVO_MAX = 1.55;
+    static final double SERVO_MIN = 0.85;
     double SERVO_POS = SERVO_MAX;
 
     /**
@@ -43,6 +44,7 @@ public class DriveOp extends LinearOpMode {
         // In this example, the right motor was reversed so that positive
         // applied power makes it move the robot in the forward direction.
         motor_drive_lr.setDirection(DcMotorSimple.Direction.REVERSE);
+        motor_drive_lf.setDirection(DcMotorSimple.Direction.REVERSE);
         motor_lift.setDirection(DcMotorSimple.Direction.REVERSE);
         //Below breaks drive
         //motor_drive_lf.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -59,78 +61,104 @@ public class DriveOp extends LinearOpMode {
                 // The Y axis of a joystick ranges from -1 in its topmost position
                 // to +1 in its bottommost position. We negate this value so that
                 // the topmost position corresponds to maximum forward power.
-                motor_drive_lf.setPower(-gamepad1.left_stick_y);
-                motor_drive_rf.setPower(-gamepad1.right_stick_y);
-                // The Y axis of a joystick ranges from -1 in its topmost position
-                // to +1 in its bottommost position. We negate this value so that
-                // the topmost position corresponds to maximum forward power.
-                motor_drive_lr.setPower(-gamepad1.left_stick_y);
-                motor_drive_rr.setPower(-gamepad1.right_stick_y);
-                if (gamepad1.left_bumper || gamepad1.dpad_left) {
-                    // The Y axis of a joystick ranges from -1 in its topmost position
-                    // to +1 in its bottommost position. We negate this value so that
-                    // the topmost position corresponds to maximum forward power.
-                    motor_drive_rf.setPower(1);
-                    motor_drive_lr.setPower(1);
-                    // The Y axis of a joystick ranges from -1 in its topmost position
-                    // to +1 in its bottommost position. We negate this value so that
-                    // the topmost position corresponds to maximum forward power.
-                    motor_drive_lf.setPower(-1);
-                    motor_drive_rr.setPower(-1);
-                } else if (gamepad1.right_bumper || gamepad1.dpad_right) {
-                    // The Y axis of a joystick ranges from -1 in its topmost position
-                    // to +1 in its bottommost position. We negate this value so that
-                    // the topmost position corresponds to maximum forward power.
-                    motor_drive_rf.setPower(-1);
-                    motor_drive_lr.setPower(-1);
-                    // The Y axis of a joystick ranges from -1 in its topmost position
-                    // to +1 in its bottommost position. We negate this value so that
-                    // the topmost position corresponds to maximum forward power.
-                    motor_drive_lf.setPower(1);
-                    motor_drive_rr.setPower(1);
-                } else if (gamepad1.dpad_up) {
-                    motor_drive_lf.setPower(1);
-                    motor_drive_lr.setPower(1);
-                    motor_drive_rf.setPower(1);
-                    motor_drive_rr.setPower(1);
-                } else if (gamepad1.dpad_down) {
-                    motor_drive_lf.setPower(-1);
-                    motor_drive_lr.setPower(-1);
-                    motor_drive_rf.setPower(-1);
-                    motor_drive_rr.setPower(-1);
-                } else if (gamepad2.a) {
-                    motor_lift.setPower(0.5);
-                } else if (gamepad2.b) {
-                    motor_lift.setPower(-0.1);
-                } else if (gamepad2.left_bumper) {
-                    motor_swivel.setPower(0.1);
-                } else if (gamepad2.right_bumper) {
-                    motor_swivel.setPower(-0.1);
-                } else if (gamepad2.x) {
-                    while (SERVO_POS < SERVO_MAX) {
-                        SERVO_POS += SERVO_SPEED;
-                    }
-                } else if (gamepad2.y) {
-                    while (SERVO_POS > SERVO_MIN) {
-                        SERVO_POS -= SERVO_SPEED;
-                    }
-                } else {
-                    // The Y axis of a joystick ranges from -1 in its topmost position
-                    // to +1 in its bottommost position. We negate this value so that
-                    // the topmost position corresponds to maximum forward power.
-                    motor_drive_rf.setPower(0);
-                    motor_drive_lr.setPower(0);
-                    // The Y axis of a joystick ranges from -1 in its topmost position
-                    // to +1 in its bottommost position. We negate this value so that
-                    // the topmost position corresponds to maximum forward power.
-                    motor_drive_lf.setPower(0);
-                    motor_drive_rr.setPower(0);
+                if (-gamepad1.left_stick_y <= JOY_SPEED && -gamepad1.left_stick_y >= -JOY_SPEED && !gamepad1.left_bumper && !gamepad1.right_bumper && !gamepad1.dpad_right && !gamepad1.dpad_left && !gamepad1.dpad_up && !gamepad1.dpad_down) {
+                    motor_drive_lf.setPower(-gamepad1.left_stick_y);
+                    motor_drive_lr.setPower(-gamepad1.left_stick_y);
+                } else if (-gamepad1.left_stick_y > JOY_SPEED && !gamepad1.left_bumper && !gamepad1.right_bumper && !gamepad1.dpad_right && !gamepad1.dpad_left && !gamepad1.dpad_up && !gamepad1.dpad_down) {
+                    motor_drive_lf.setPower(JOY_SPEED);
+                    motor_drive_lr.setPower(JOY_SPEED);
+                } else if (-gamepad1.left_stick_y < -JOY_SPEED && !gamepad1.left_bumper && !gamepad1.right_bumper && !gamepad1.dpad_right && !gamepad1.dpad_left && !gamepad1.dpad_up && !gamepad1.dpad_down) {
+                    motor_drive_lf.setPower(-JOY_SPEED);
+                    motor_drive_lr.setPower(-JOY_SPEED);
+                }
+                if (-gamepad1.right_stick_y <= JOY_SPEED && -gamepad1.right_stick_y >= -JOY_SPEED && !gamepad1.left_bumper && !gamepad1.right_bumper && !gamepad1.dpad_right && !gamepad1.dpad_left && !gamepad1.dpad_up && !gamepad1.dpad_down) {
+                    motor_drive_rf.setPower(-gamepad1.right_stick_y);
+                    motor_drive_rr.setPower(-gamepad1.right_stick_y);
+                } else if (-gamepad1.right_stick_y > JOY_SPEED && !gamepad1.left_bumper && !gamepad1.right_bumper && !gamepad1.dpad_right && !gamepad1.dpad_left && !gamepad1.dpad_up && !gamepad1.dpad_down) {
+                    motor_drive_rf.setPower(JOY_SPEED);
+                    motor_drive_rr.setPower(JOY_SPEED);
+                } else if (-gamepad1.right_stick_y < -.80 && !gamepad1.left_bumper && !gamepad1.right_bumper && !gamepad1.dpad_right && !gamepad1.dpad_left && !gamepad1.dpad_up && !gamepad1.dpad_down) {
+                    motor_drive_rf.setPower(-JOY_SPEED);
+                    motor_drive_rr.setPower(-JOY_SPEED);
+                }
+                if (gamepad1.left_bumper) {
+                    motor_drive_rf.setPower(JOY_SPEED);
+                    motor_drive_lr.setPower(JOY_SPEED);
+                    motor_drive_lf.setPower(-JOY_SPEED);
+                    motor_drive_rr.setPower(-JOY_SPEED);
+                }
+                if (gamepad1.right_bumper) {
+                    motor_drive_rf.setPower(-JOY_SPEED);
+                    motor_drive_lr.setPower(-JOY_SPEED);
+                    motor_drive_lf.setPower(JOY_SPEED);
+                    motor_drive_rr.setPower(JOY_SPEED);
+                }
+                if (gamepad1.dpad_right) {
+                    motor_drive_rf.setPower(-0.5);
+                    motor_drive_lr.setPower(-0.5);
+                    motor_drive_lf.setPower(0.5);
+                    motor_drive_rr.setPower(0.5);
+                }
+                if (gamepad1.dpad_left) {
+                    motor_drive_rf.setPower(0.5);
+                    motor_drive_lr.setPower(0.5);
+                    motor_drive_lf.setPower(-0.5);
+                    motor_drive_rr.setPower(-0.5);
+                }
+                if (gamepad1.dpad_up) {
+                    motor_drive_lf.setPower(0.5);
+                    motor_drive_lr.setPower(0.5);
+                    motor_drive_rf.setPower(0.5);
+                    motor_drive_rr.setPower(0.5);
+                }
+                if (gamepad1.dpad_down) {
+                    motor_drive_lf.setPower(-0.5);
+                    motor_drive_lr.setPower(-0.5);
+                    motor_drive_rf.setPower(-0.5);
+                    motor_drive_rr.setPower(-0.5);
+                }
+                if (gamepad1.a) {
+                    JOY_SPEED = 0.8;
+                }
+                if (gamepad1.b) {
+                    JOY_SPEED = 0.5;
+                }
+                if (gamepad1.x) {
+                    JOY_SPEED = 0.3;
+                }
+                if (gamepad1.y) {
+                    JOY_SPEED = 1;
+                }
+                if (gamepad2.a) {
+                    motor_lift.setPower(1);
+                }
+                if (gamepad2.b) {
+                    motor_lift.setPower(-0.8);
+                }
+                if (gamepad2.left_bumper) {
+                    motor_swivel.setPower(0.5);
+                }
+                if (gamepad2.right_bumper) {
+                    motor_swivel.setPower(-0.5);
+                }
+                if (gamepad2.x) {
+                        SERVO_POS = SERVO_MAX;
+                }
+                if (gamepad2.y) {
+                        SERVO_POS = SERVO_MIN;
+                }
+                if (!gamepad2.b && !gamepad2.a && !gamepad2.x && !gamepad2.y && !gamepad2.right_bumper && !gamepad2.left_bumper) {
                     motor_lift.setPower(0);
                     motor_swivel.setPower(0);
                 }
                 claw_servo.setPosition(SERVO_POS);
-                telemetry.addData("Left Pow", motor_drive_lr.getPower());
-                telemetry.addData("Right Pow", motor_drive_lf.getPower());
+                telemetry.addData("Left Rear Pow", motor_drive_lr.getPower());
+                telemetry.addData("Left Front Pow", motor_drive_lf.getPower());
+                telemetry.addData("Right Rear Pow", motor_drive_rr.getPower());
+                telemetry.addData("Right Front Pow", motor_drive_rf.getPower());
+                telemetry.addData("Left Joystick Y", gamepad1.left_stick_y);
+                telemetry.addData("Right Joystick Y", gamepad1.right_stick_y);
+                telemetry.addData("Joystick Max Speed", JOY_SPEED);
                 telemetry.update();
             }
         }

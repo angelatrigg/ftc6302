@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@Autonomous(name = "Auto")
+@Autonomous(name = "Autonomous")
 public class Auto extends LinearOpMode {
 
     private DcMotor motor_drive_lf;
@@ -17,8 +17,8 @@ public class Auto extends LinearOpMode {
     private DcMotor motor_lift;
     private DcMotor motor_swivel;
     private Servo claw_servo;
-    static final double SERVO_MAX = 1.0;
-    static final double SERVO_MIN = 0.0;
+    static final double SERVO_MAX = 1.55;
+    static final double SERVO_MIN = 0.9;
     double SERVO_POS = (SERVO_MAX - SERVO_MIN) / 2;
 
     private ElapsedTime runtime = new ElapsedTime();
@@ -71,6 +71,7 @@ public class Auto extends LinearOpMode {
         //motor_drive_rf.setDirection(DcMotorSimple.Direction.REVERSE);
         //motor_drive_rr.setDirection(DcMotorSimple.Direction.REVERSE);
         motor_drive_lr.setDirection(DcMotorSimple.Direction.REVERSE);
+        motor_drive_lf.setDirection(DcMotorSimple.Direction.REVERSE);
         motor_lift.setDirection(DcMotorSimple.Direction.REVERSE);
 
         motor_lift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -111,12 +112,12 @@ public class Auto extends LinearOpMode {
 
         // Step through each leg of the path,
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
-        encoderDrive(DRIVE_SPEED,  500,  500, 500, 500, 0, 0, 0, 5.0);
-        encoderDrive(UP_LIFT_SPEED, 0, 0, 0, 0, 50, 0, 0, 5.0);
-        encoderDrive(DOWN_LIFT_SPEED, 0, 0, 0, 0, -25, 0, 0, 5.0);
+        //encoderDrive(DRIVE_SPEED,  500,  500, 500, 500, 0, 0, 0, 5.0);
+        //encoderDrive(UP_LIFT_SPEED, 0, 0, 0, 0, 50, 0, 0, 5.0);
+        //encoderDrive(DOWN_LIFT_SPEED, 0, 0, 0, 0, -25, 0, 0, 5.0);
         encoderDrive(SWIVEL_SPEED, 0, 0, 0, 0, 0, 45, 0, 5.0);
         encoderDrive(SWIVEL_SPEED, 0, 0, 0, 0, 0, -45, 0, 5.0);
-        encoderDrive(SERVO_SPEED, 0, 0, 0, 0, 0, 0, 50, 5.0);
+        //encoderDrive(SERVO_SPEED, 0, 0, 0, 0, 0, 0, 50, 5.0);
 
         telemetry.addData("Path", "Complete");
         telemetry.update();
@@ -192,8 +193,8 @@ public class Auto extends LinearOpMode {
 
                     claw_servo.setPosition(SERVO_POS);
                     // Display it for the driver.
-                    telemetry.addData("Running to",  " %7d :%7d", newlfTarget,  newrfTarget, newlrTarget, newrrTarget);
-                    telemetry.addData("Currently at",  " at %7d :%7d",
+                    telemetry.addData("Running to",  " %7d :%7d :%7d :%7d :%7d", newlfTarget,  newrfTarget, newlrTarget, newrrTarget, newlftTarget);
+                    telemetry.addData("Currently at",  " at %7d :%7d :%7d :%7d :%7d",
                             motor_drive_lf.getCurrentPosition(), motor_drive_rf.getCurrentPosition(), motor_drive_lr.getCurrentPosition(), motor_drive_rr.getCurrentPosition(),
                     motor_lift.getCurrentPosition(), motor_swivel.getCurrentPosition(), telemetry.update());
                 }
