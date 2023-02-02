@@ -26,7 +26,7 @@ public class InitSetup {
 
     //Import classes for use in the rest of the program
     private LinearOpMode opMode;
-    private ElapsedTime runtime= new ElapsedTime();
+    private ElapsedTime runtime = new ElapsedTime();
     //private HardwareMap hardwareMap;
 
     //Servo variables
