@@ -27,7 +27,7 @@ public class InitSetup {
     //Import classes for use in the rest of the program
     private LinearOpMode opMode;
     private ElapsedTime runtime= new ElapsedTime();
-    private HardwareMap hardwareMap;
+    //private HardwareMap hardwareMap;
 
     //Servo variables
     public static final double SERVO_CLOSED_AUTO = 1.55;
@@ -60,7 +60,7 @@ public class InitSetup {
     //Tolerance of encoders to reduce hangs trying to get the perfect position
     public static final double     ENCODER_TOLERANCE       = 7;
 
-    public void standardSetup(LinearOpMode opMode) {
+    public void standardSetup(HardwareMap hardwareMap, LinearOpMode opMode) {
 
         //Set initial joystick speed limit
         JOY_SPEED = 0.8;
@@ -86,7 +86,7 @@ public class InitSetup {
         motor_lift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         motor_swivel.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
-    public void autoSetup(LinearOpMode opMode) {
+    public void autoSetup(HardwareMap hardwareMap, LinearOpMode opMode) {
 
         //Set initial joystick speed limit
         JOY_SPEED = 0.8;

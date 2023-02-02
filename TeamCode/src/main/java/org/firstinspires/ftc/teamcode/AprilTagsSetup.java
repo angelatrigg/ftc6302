@@ -16,7 +16,6 @@ public class AprilTagsSetup {
 
     //Import classes for use in the rest of the program
     private LinearOpMode opMode;
-    private HardwareMap hardwareMap;
 
     OpenCvCamera camera;
     AprilTagDetectionPipeline aprilTagDetectionPipeline;
@@ -42,7 +41,9 @@ public class AprilTagsSetup {
 
     AprilTagDetection tagOfInterest = null;
 
-    public void aprilTagSetup(LinearOpMode opMode) {
+    public void aprilTagSetup(HardwareMap hardwareMap, LinearOpMode mode) {
+
+        opMode = mode;
 
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         camera = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);

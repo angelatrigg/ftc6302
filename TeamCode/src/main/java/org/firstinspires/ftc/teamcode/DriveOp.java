@@ -20,7 +20,7 @@ public class DriveOp extends LinearOpMode {
     public void runOpMode() {
 
         initsetup = new InitSetup();
-        initsetup.standardSetup(this);
+        initsetup.standardSetup(hardwareMap, this);
 
         waitForStart();
         if (opModeIsActive()) {

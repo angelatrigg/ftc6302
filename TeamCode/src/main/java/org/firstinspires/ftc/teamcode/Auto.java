@@ -20,7 +20,7 @@ public class Auto extends LinearOpMode {
     public void runOpMode() {
        initsetup = new InitSetup();
        encoderClass = new EncoderClass();
-       initsetup.autoSetup(this);
+       initsetup.autoSetup(hardwareMap, this);
 
 
         waitForStart();
