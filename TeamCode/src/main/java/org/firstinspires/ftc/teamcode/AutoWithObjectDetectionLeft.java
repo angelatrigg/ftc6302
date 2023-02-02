@@ -12,7 +12,7 @@
  * copies or substantial portions of the Software.
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
@@ -23,35 +23,18 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.hardware.Servo;
-import com.qualcomm.robotcore.util.ElapsedTime;
-
-import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
-import org.firstinspires.ftc.teamcode.apriltags.AprilTagDetectionPipeline;
-import org.openftc.apriltag.AprilTagDetection;
-import org.openftc.easyopencv.OpenCvCamera;
-import org.openftc.easyopencv.OpenCvCameraFactory;
-import org.openftc.easyopencv.OpenCvCameraRotation;
-
-import java.util.ArrayList;
 
 @Autonomous(name = "Autonomous With Object Detection Left")
 public class AutoWithObjectDetectionLeft extends LinearOpMode
 {
 
-    private InitSetup initsetup;
-    private EncoderClass encoderClass;
-    private AprilTagsSetup aprilTagsSetup;
-
     @Override
     public void runOpMode()
     {
 
-        initsetup = new InitSetup();
-        aprilTagsSetup = new AprilTagsSetup();
-        encoderClass = new EncoderClass();
+        InitSetup initsetup = new InitSetup();
+        AprilTagsSetup aprilTagsSetup = new AprilTagsSetup();
+        EncoderClass encoderClass = new EncoderClass();
         initsetup.autoSetup(hardwareMap, this);
         aprilTagsSetup.aprilTagSetup(hardwareMap, this);
 

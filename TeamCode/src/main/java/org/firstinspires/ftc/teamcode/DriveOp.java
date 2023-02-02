@@ -2,16 +2,10 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.hardware.Servo;
 
 @TeleOp(name = "DriveOp")
 public class DriveOp extends LinearOpMode {
 
-
-    private InitSetup initsetup;
 
     /**
      * This function is executed when this Op Mode is selected from the Driver Station.
@@ -19,7 +13,7 @@ public class DriveOp extends LinearOpMode {
     @Override
     public void runOpMode() {
 
-        initsetup = new InitSetup();
+        InitSetup initsetup = new InitSetup();
         initsetup.standardSetup(hardwareMap, this);
 
         waitForStart();
