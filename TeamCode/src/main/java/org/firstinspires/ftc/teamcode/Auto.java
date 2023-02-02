@@ -10,16 +10,13 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 @Autonomous(name = "Autonomous")
 public class Auto extends LinearOpMode {
 
-    private InitSetup initsetup;
-    private EncoderClass encoderClass;
-
     /**
      * This function is executed when this Op Mode is selected from the Driver Station.
      */
     @Override
     public void runOpMode() {
-       initsetup = new InitSetup();
-       encoderClass = new EncoderClass();
+        InitSetup initsetup = new InitSetup();
+        EncoderClass encoderClass = new EncoderClass();
        initsetup.autoSetup(hardwareMap, this);
 
 
@@ -36,8 +33,8 @@ public class Auto extends LinearOpMode {
         //encoderDrive(DRIVE_SPEED,  500,  500, 500, 500, 0, 0, 0, 5.0);
         //encoderDrive(UP_LIFT_SPEED, 0, 0, 0, 0, 50, 0, 0, 5.0);
         //encoderDrive(DOWN_LIFT_SPEED, 0, 0, 0, 0, -25, 0, 0, 5.0);
-        encoderClass.encoderDrive(this, 0.5, 0, 0, 0, 0, 0, 45, 0, 5.0);
-        encoderClass.encoderDrive(this, 0.5, 0, 0, 0, 0, 0, -45, 0, 5.0);
+        encoderClass.encoderDrive(0.5, 0, 0, 0, 0, 0, 45, 0, 5.0, this, initsetup);
+        encoderClass.encoderDrive(0.5, 0, 0, 0, 0, 0, -45, 0, 5.0, this, initsetup);
         //encoderDrive(SERVO_SPEED, 0, 0, 0, 0, 0, 0, 50, 5.0);
 
         telemetry.addData("Path", "Complete");

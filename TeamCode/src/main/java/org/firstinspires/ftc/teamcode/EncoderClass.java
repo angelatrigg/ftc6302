@@ -11,10 +11,11 @@ public class EncoderClass {
     private InitSetup initsetup;
     private ElapsedTime runtime= new ElapsedTime();
 
-    public void encoderDrive(LinearOpMode mode, double speed,
+    public void encoderDrive(double speed,
                              double lfMM, double rfMM, double lrMM, double rrMM, double lftMM, double swvDG, double cwPos,
-                             double timeoutS) {
+                             double timeoutS, LinearOpMode mode, InitSetup initpostsetup) {
         opMode = mode;
+        initsetup = initpostsetup;
         int newlfTarget;
         int newrfTarget;
         int newlrTarget;
