@@ -6,15 +6,11 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 @TeleOp(name = "DriveOp")
 public class DriveOp extends LinearOpMode {
 
-
-    /**
-     * This function is executed when this Op Mode is selected from the Driver Station.
-     */
     @Override
     public void runOpMode() {
 
         InitSetup initsetup = new InitSetup();
-        initsetup.standardSetup(hardwareMap, this);
+        initsetup.standardSetup(hardwareMap);
 
         waitForStart();
         if (opModeIsActive()) {

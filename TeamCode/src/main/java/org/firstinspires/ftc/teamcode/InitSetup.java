@@ -1,11 +1,9 @@
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
-import com.qualcomm.robotcore.util.ElapsedTime;
 
 public class InitSetup {
 
@@ -23,11 +21,6 @@ public class InitSetup {
 
     //Variable for servo position
     public double SERVO_POS;
-
-    //Import classes for use in the rest of the program
-    private LinearOpMode opMode;
-    private ElapsedTime runtime = new ElapsedTime();
-    //private HardwareMap hardwareMap;
 
     //Servo variables
     public static final double SERVO_CLOSED_AUTO = 1.55;
@@ -60,7 +53,7 @@ public class InitSetup {
     //Tolerance of encoders to reduce hangs trying to get the perfect position
     public static final double     ENCODER_TOLERANCE       = 7;
 
-    public void standardSetup(HardwareMap hardwareMap, LinearOpMode opMode) {
+    public void standardSetup(HardwareMap hardwareMap) {
 
         //Set initial joystick speed limit
         JOY_SPEED = 0.8;
@@ -86,7 +79,7 @@ public class InitSetup {
         motor_lift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         motor_swivel.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
-    public void autoSetup(HardwareMap hardwareMap, LinearOpMode opMode) {
+    public void autoSetup(HardwareMap hardwareMap) {
 
         //Set initial joystick speed limit
         JOY_SPEED = 0.8;

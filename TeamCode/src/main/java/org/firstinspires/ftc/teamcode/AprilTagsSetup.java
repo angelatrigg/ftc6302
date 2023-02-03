@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
+import android.annotation.SuppressLint;
+
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
@@ -14,8 +16,6 @@ import java.util.ArrayList;
 
 public class AprilTagsSetup {
 
-    //Import classes for use in the rest of the program
-    private LinearOpMode opMode;
 
     OpenCvCamera camera;
     AprilTagDetectionPipeline aprilTagDetectionPipeline;
@@ -41,9 +41,7 @@ public class AprilTagsSetup {
 
     AprilTagDetection tagOfInterest = null;
 
-    public void aprilTagSetup(HardwareMap hardwareMap, LinearOpMode mode) {
-
-        opMode = mode;
+    public void aprilTagSetup(HardwareMap hardwareMap, LinearOpMode opMode) {
 
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         camera = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
@@ -92,7 +90,7 @@ public class AprilTagsSetup {
                 if(tagFound)
                 {
                     opMode.telemetry.addLine("Tag of interest is in sight!\n\nLocation data:");
-                    tagToTelemetry(tagOfInterest);
+                    tagToTelemetry(tagOfInterest, opMode);
                 }
                 else
                 {
@@ -105,7 +103,7 @@ public class AprilTagsSetup {
                     else
                     {
                         opMode.telemetry.addLine("\nBut we HAVE seen the tag before; last seen at:");
-                        tagToTelemetry(tagOfInterest);
+                        tagToTelemetry(tagOfInterest, opMode);
                     }
                 }
 
@@ -121,7 +119,7 @@ public class AprilTagsSetup {
                 else
                 {
                     opMode.telemetry.addLine("\nBut we HAVE seen the tag before; last seen at:");
-                    tagToTelemetry(tagOfInterest);
+                    tagToTelemetry(tagOfInterest, opMode);
                 }
 
             }
@@ -139,7 +137,7 @@ public class AprilTagsSetup {
         if(tagOfInterest != null)
         {
             opMode.telemetry.addLine("Tag snapshot:\n");
-            tagToTelemetry(tagOfInterest);
+            tagToTelemetry(tagOfInterest, opMode);
             opMode.telemetry.update();
         }
         else
@@ -152,7 +150,7 @@ public class AprilTagsSetup {
         if(tagOfInterest != null)
         {
             opMode.telemetry.addLine("Tag snapshot:\n");
-            tagToTelemetry(tagOfInterest);
+            tagToTelemetry(tagOfInterest, opMode);
             opMode.telemetry.update();
         }
         else
@@ -162,7 +160,11 @@ public class AprilTagsSetup {
         }
 
     }
-    void tagToTelemetry(AprilTagDetection detection)
+
+    //It suppresses some warning or something don't ask me why
+    @SuppressLint("DefaultLocale")
+
+    void tagToTelemetry(AprilTagDetection detection, LinearOpMode opMode)
     {
         opMode.telemetry.addLine(String.format("\nDetected tag ID=%d", detection.id));
         opMode.telemetry.addLine(String.format("Translation X: %.2f feet", detection.pose.x*FEET_PER_METER));
