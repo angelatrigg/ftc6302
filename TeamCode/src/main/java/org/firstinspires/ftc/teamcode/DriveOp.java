@@ -6,15 +6,11 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 @TeleOp(name = "DriveOp")
 public class DriveOp extends LinearOpMode {
 
-
-    /**
-     * This function is executed when this Op Mode is selected from the Driver Station.
-     */
     @Override
     public void runOpMode() {
 
         InitSetup initsetup = new InitSetup();
-        initsetup.standardSetup(hardwareMap, this);
+        initsetup.standardSetup(hardwareMap);
 
         waitForStart();
         if (opModeIsActive()) {
@@ -40,7 +36,7 @@ public class DriveOp extends LinearOpMode {
                 } else if (-gamepad1.right_stick_y > initsetup.JOY_SPEED && !gamepad1.left_bumper && !gamepad1.right_bumper && !gamepad1.dpad_right && !gamepad1.dpad_left && !gamepad1.dpad_up && !gamepad1.dpad_down) {
                     initsetup.motor_drive_rf.setPower(initsetup.JOY_SPEED);
                     initsetup.motor_drive_rr.setPower(initsetup.JOY_SPEED);
-                } else if (-gamepad1.right_stick_y < -.80 && !gamepad1.left_bumper && !gamepad1.right_bumper && !gamepad1.dpad_right && !gamepad1.dpad_left && !gamepad1.dpad_up && !gamepad1.dpad_down) {
+                } else if (-gamepad1.right_stick_y < -initsetup.JOY_SPEED && !gamepad1.left_bumper && !gamepad1.right_bumper && !gamepad1.dpad_right && !gamepad1.dpad_left && !gamepad1.dpad_up && !gamepad1.dpad_down) {
                     initsetup.motor_drive_rf.setPower(-initsetup.JOY_SPEED);
                     initsetup.motor_drive_rr.setPower(-initsetup.JOY_SPEED);
                 }

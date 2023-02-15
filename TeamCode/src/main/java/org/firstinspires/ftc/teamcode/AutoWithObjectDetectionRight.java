@@ -35,11 +35,13 @@ public class AutoWithObjectDetectionRight extends LinearOpMode
         InitSetup initsetup = new InitSetup();
         AprilTagsSetup aprilTagsSetup = new AprilTagsSetup();
         EncoderClass encoderClass = new EncoderClass();
-        initsetup.autoSetup(hardwareMap, this);
+        initsetup.autoSetup(hardwareMap);
         aprilTagsSetup.aprilTagSetup(hardwareMap, this);
 
-        /**
-         * Auto Steps Start
+        /*
+                                     |
+        START OF AUTONOMOUS STEPS    |
+                                     V
          */
 
         //Initial lift to be able to grab cone
