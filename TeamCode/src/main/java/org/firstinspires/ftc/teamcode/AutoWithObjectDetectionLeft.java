@@ -43,15 +43,15 @@ public class AutoWithObjectDetectionLeft extends LinearOpMode
         START OF AUTONOMOUS STEPS    |
                                      V
          */
-
+        //shorthand definitions: (TbTW=To be tweaked) (
         //Initial lift to be able to grab cone
         encoderClass.encoderDrive(1, 0, 0, 0, 0, 50, 0, InitSetup.SERVO_CLOSED_AUTO, 5.0, this, initsetup);
         //strafe right
         encoderClass.encoderDrive(0.5, 660, -660, -660, 660, 0, 0, InitSetup.SERVO_CLOSED_AUTO, 5.0, this, initsetup);
         //move forward
         encoderClass.encoderDrive(0.5, 980, 980, 980, 980, 0, 0, InitSetup.SERVO_CLOSED_AUTO, 5.0, this, initsetup);
-        //turn left (TbTW)
-        encoderClass.encoderDrive(0.5, 230, 230, 230, 230, 0, 0, InitSetup.SERVO_CLOSED_AUTO, 5.0, this, initsetup);
+        //turn left and raise arm (TbTW)
+        encoderClass.encoderDrive(0.5, 230, 230, 230, 230, 1100, 0, InitSetup.SERVO_CLOSED_AUTO, 5.0, this, initsetup);
         //move forward
         encoderClass.encoderDrive(0.5, 560, 560, 560, 560, 0, 0, InitSetup.SERVO_CLOSED_AUTO, 5.0, this, initsetup);
         //drop cone (open servo)
