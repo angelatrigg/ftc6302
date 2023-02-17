@@ -24,7 +24,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
-@Autonomous(name = "Autonomous With Object Detection Right")
+@Autonomous(name = "Autonomous With Object Detection Right (Old)")
 public class OldAutoWithObjectDetectionRight extends LinearOpMode
 {
 
