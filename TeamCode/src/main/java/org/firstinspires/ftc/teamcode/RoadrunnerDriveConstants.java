@@ -21,8 +21,8 @@ public class RoadrunnerDriveConstants {
     /*
      * These are motor constants that should be listed online for your motors.
      */
-    public static final double TICKS_PER_REV = 753.2;
-    public static final double MAX_RPM = 223;
+    public static final double TICKS_PER_REV = 537.7;
+    public static final double MAX_RPM = 312;
 
     /*
      * Set RUN_USING_ENCODER to true to enable built-in hub velocity control using drive encoders.
@@ -47,7 +47,7 @@ public class RoadrunnerDriveConstants {
      */
     public static double WHEEL_RADIUS = 1.87; // in
     public static double GEAR_RATIO = 1; // output (wheel) speed / input (motor) speed
-    public static double TRACK_WIDTH = 12.3; // in
+    public static double TRACK_WIDTH = 13.24; // in
 
     /*
      * These are the feedforward parameters used to model the drive motor behavior. If you are using
@@ -66,10 +66,10 @@ public class RoadrunnerDriveConstants {
      * small and gradually increase them later after everything is working. All distance units are
      * inches. 13.05 12.46
      */
-    public static double MAX_VEL = 30;
-    public static double MAX_ACCEL = 30;
-    public static double MAX_ANG_VEL = Math.toRadians(60);
-    public static double MAX_ANG_ACCEL = Math.toRadians(60);
+    public static double MAX_VEL = 32;
+    public static double MAX_ACCEL = 32;
+    public static double MAX_ANG_VEL = Math.toRadians(136.6);
+    public static double MAX_ANG_ACCEL = Math.toRadians(136.6);
 
     /*
      * Adjust the orientations here to match your robot. See the FTC SDK documentation for details.

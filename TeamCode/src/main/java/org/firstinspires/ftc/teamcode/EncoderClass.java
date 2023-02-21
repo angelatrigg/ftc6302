@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 public class EncoderClass {
@@ -86,4 +87,45 @@ public class EncoderClass {
             opMode.sleep(50);   // optional pause after each move.
         }
     }
+    public void encoderLift(double speed, double lftMM, double timeoutS, LinearOpMode opMode, InitSetup initpostsetup) {
+        int newlftTarget;
+
+        // Ensure that the opmode is still active
+        if (opMode.opModeIsActive()) {
+
+            // Determine new target position, and pass to motor controller
+            newlftTarget = initpostsetup.motor_lift.getCurrentPosition() + (int) (lftMM * InitSetup.COUNTS_PER_MM_LIFT);
+
+            initpostsetup.motor_lift.setTargetPosition(newlftTarget);
+
+            // Turn On RUN_TO_POSITION
+            initpostsetup.motor_lift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+            // reset the timeout time and start motion.
+            runtime.reset();
+            initpostsetup.motor_lift.setPower(Math.abs(speed));
+
+            // keep looping while we are still active, and there is time left, and motors are not within the target threshold.
+            while (opMode.opModeIsActive() &&
+                    (runtime.seconds() < timeoutS) &&
+                    (Math.abs(initpostsetup.motor_lift.getCurrentPosition() - initpostsetup.motor_lift.getTargetPosition()) > InitSetup.ENCODER_TOLERANCE)) {
+
+                // Display it for the driver.
+                /*opMode.telemetry.addData("Running to",  " %7d :%7d", newlfTarget,  newrfTarget, newlrTarget, newrrTarget);
+                opMode.telemetry.addData("Currently at",  " at %7d :%7d",
+                        initpostsetup.motor_drive_lf.getCurrentPosition(), initpostsetup.motor_drive_rf.getCurrentPosition(), initpostsetup.motor_drive_lr.getCurrentPosition(), initpostsetup.motor_drive_rr.getCurrentPosition(),
+                        initpostsetup.motor_lift.getCurrentPosition(), initpostsetup.motor_swivel.getCurrentPosition(), opMode.telemetry.update());
+                        */
+            }
+
+            // Stop all motion;
+            initpostsetup.motor_lift.setPower(0);
+
+            // Turn off RUN_TO_POSITION
+            initpostsetup.motor_lift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+            //opMode.sleep(50);   // optional pause after each move.
+        }
+    }
 }
+
