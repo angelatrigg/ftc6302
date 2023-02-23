@@ -2,6 +2,8 @@ package com.example.meepmeeptesting;
 
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.geometry.Vector2d;
+import com.acmerobotics.roadrunner.path.QuinticSpline;
+import com.acmerobotics.roadrunner.path.heading.SplineInterpolator;
 import com.noahbres.meepmeep.MeepMeep;
 import com.noahbres.meepmeep.roadrunner.DefaultBotBuilder;
 import com.noahbres.meepmeep.roadrunner.entity.RoadRunnerBotEntity;
@@ -24,9 +26,9 @@ public class MeepMeepTesting {
                                     .strafeTo(new Vector2d(-20, -58))
                                     //.lineToLinearHeading(new Pose2d(-12, -10, Math.toRadians(0)))
                                     //.splineToSplineHeading(new Pose2d(-23.5, -6, Math.toRadians(0)), Math.toRadians(140))
-                                    .splineToSplineHeading(new Pose2d(-12, -22, Math.toRadians(0)), Math.toRadians(90))
-                                    //.splineToConstantHeading(new Vector2d(-12, -15), Math.toRadians(90))
-                                    //.turn(Math.toRadians(90))
+                                    //.splineToSplineHeading(new Pose2d(-12, -22, Math.toRadians(0)), Math.toRadians(90))
+                                    .splineToConstantHeading(new Vector2d(-12, -15), Math.toRadians(90))
+                                    .turn(Math.toRadians(-90))
                                     .splineToConstantHeading(new Vector2d(-23.5, -6), Math.toRadians(90))
 
                                     //.splineToConstantHeading(new Vector2d(-68, -12), Math.toRadians(-200))
@@ -46,7 +48,7 @@ public class MeepMeepTesting {
                                     })
                                     .waitSeconds(1)
                                     .strafeRight(6)
-                                    //.splineToConstantHeading(new Vector2d(-33.5, -12), Math.toRadians(90))
+                                    //.splineToConstantHeading(new Vector2d(-65, -12), Math.toRadians(270))
                                     .back(40)
                                     .waitSeconds(1)
                                     .UNSTABLE_addTemporalMarkerOffset(-3, () -> {

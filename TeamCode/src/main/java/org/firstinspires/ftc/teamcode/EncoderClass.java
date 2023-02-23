@@ -127,5 +127,47 @@ public class EncoderClass {
             //opMode.sleep(50);   // optional pause after each move.
         }
     }
+    public void encoderSwivel(double speed, double swvDG, double timeoutS, LinearOpMode opMode, InitSetup initpostsetup) {
+        int newswvTarget;
+
+        // Ensure that the opmode is still active
+        if (opMode.opModeIsActive()) {
+
+            // Determine new target position, and pass to motor controller
+            newswvTarget = initpostsetup.motor_swivel.getCurrentPosition() + (int)(swvDG * InitSetup.COUNTS_PER_DG_SWIVEL);
+
+            initpostsetup.motor_swivel.setTargetPosition(newswvTarget);
+
+            // Turn On RUN_TO_POSITION
+            initpostsetup.motor_swivel.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+            // reset the timeout time and start motion.
+            runtime.reset();
+            initpostsetup.motor_swivel.setPower(Math.abs(speed));
+
+            // keep looping while we are still active, and there is time left, and motors are not within the target threshold.
+            while (opMode.opModeIsActive() &&
+                    (runtime.seconds() < timeoutS) &&
+                    (Math.abs(initpostsetup.motor_drive_lf.getCurrentPosition()-initpostsetup.motor_drive_lf.getTargetPosition()) > InitSetup.ENCODER_TOLERANCE || Math.abs(initpostsetup.motor_drive_rf.getCurrentPosition()-initpostsetup.motor_drive_rf.getTargetPosition()) > InitSetup.ENCODER_TOLERANCE || Math.abs(initpostsetup.motor_drive_lr.getCurrentPosition()-initpostsetup.motor_drive_lr.getTargetPosition()) > InitSetup.ENCODER_TOLERANCE || Math.abs(initpostsetup.motor_drive_rr.getCurrentPosition()-initpostsetup.motor_drive_rr.getTargetPosition()) > InitSetup.ENCODER_TOLERANCE || Math.abs(initpostsetup.motor_lift.getCurrentPosition()-initpostsetup.motor_lift.getTargetPosition()) > InitSetup.ENCODER_TOLERANCE || Math.abs(initpostsetup.motor_swivel.getCurrentPosition()-initpostsetup.motor_swivel.getTargetPosition()) > InitSetup.ENCODER_TOLERANCE)) {
+
+                // Display it for the driver.
+               /* opMode.telemetry.addData("Running to",  " %7d :%7d", newlfTarget,  newrfTarget, newlrTarget, newrrTarget);
+                opMode.telemetry.addData("Currently at",  " at %7d :%7d",
+                        initpostsetup.motor_drive_lf.getCurrentPosition(), initpostsetup.motor_drive_rf.getCurrentPosition(), initpostsetup.motor_drive_lr.getCurrentPosition(), initpostsetup.motor_drive_rr.getCurrentPosition(),
+                        initpostsetup.motor_lift.getCurrentPosition(), initpostsetup.motor_swivel.getCurrentPosition(), opMode.telemetry.update());
+                        */
+            }
+
+
+
+            // Stop all motion;
+            initpostsetup.motor_swivel.setPower(0);
+
+            // Turn off RUN_TO_POSITION
+            initpostsetup.motor_swivel.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+            //opMode.sleep(50);   // optional pause after each move.
+        }
+    }
 }
 
