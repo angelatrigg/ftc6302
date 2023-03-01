@@ -21,18 +21,19 @@ public class RoadrunnerAutoODRight extends LinearOpMode {
         rrSetup.setPoseEstimate(new Pose2d(35, -65, Math.toRadians(90)));
 
         TrajectorySequence InitialTrajectory = rrSetup.trajectorySequenceBuilder(new Pose2d(35, -65, Math.toRadians(90)))
-                //Grab cone
+               /* //Grab cone
                 .addTemporalMarker(() -> {
-                    initsetup.claw_servo.setPosition(InitSetup.SERVO_CLOSED_AUTO);
+                    //initsetup.claw_servo.setPosition(InitSetup.SERVO_CLOSED_AUTO);
                 })
                 //Initial strafe to the left
-                .strafeTo(new Vector2d(20, -58))
+                .strafeTo(new Vector2d(22, -63))
                 //Continuous movement to the row with the cones and scoring pole
                 .splineToConstantHeading(new Vector2d(12, -15), Math.toRadians(90))
+                //.splineToConstantHeading(new Vector2d(23.5, -10), Math.toRadians(90))
                 //Turn to the right 90 degrees
                 .turn(Math.toRadians(-90))
                 //Move over to score
-                .lineTo(new Vector2d(23.5, -6))
+                .strafeTo(new Vector2d(23.5, -6))
                 //3 seconds before this point, start raising lift
                 .UNSTABLE_addTemporalMarkerOffset(-3, () -> {
                     initsetup.motor_lift.setPower(1);
@@ -43,84 +44,98 @@ public class RoadrunnerAutoODRight extends LinearOpMode {
                 })
                 //Rotate swivel to place cone above junction and drop cone
                 .addTemporalMarker(() -> {
-                    encoderClass.encoderSwivel(1, 90, 5.0, this, initsetup);
-                    initsetup.claw_servo.setPosition(InitSetup.SERVO_OPEN_AUTO);
+                    //encoderClass.encoderSwivel(1, 90, 5.0, this, initsetup);
+                    //initsetup.claw_servo.setPosition(InitSetup.SERVO_OPEN_AUTO);
                 })
                 //Give a second to drop cone and rotate claw.
-                .waitSeconds(1)
-                //Strafe away from junction
-                .strafeRight(6)
+                .waitSeconds(0.5)
+
+                */
+                .addTemporalMarker(() -> {
+                    initsetup.claw_servo.setPosition(InitSetup.SERVO_CLOSED_AUTO);
+                    initsetup.motor_lift.setPower(1);
+                })
+                .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {
+                    initsetup.motor_lift.setPower(0);
+                })
+                .strafeTo(new Vector2d(22, -63))
+                .splineToConstantHeading(new Vector2d(12, -15), Math.toRadians(90))
+                .turn(Math.toRadians(-36))
+                .forward(7)
+                .UNSTABLE_addTemporalMarkerOffset(-2.7, () -> {
+                    initsetup.motor_lift.setPower(1);
+                })
+                .addTemporalMarker(() -> {
+                    initsetup.motor_lift.setPower(-1);
+                    //initsetup.claw_servo.setPosition(InitSetup.SERVO_CLOSED_AUTO);
+                })
+                .UNSTABLE_addTemporalMarkerOffset(2, () -> {
+                    initsetup.motor_lift.setPower(0);
+                    //encoderClass.encoderLift(.5, 210, 5.0, this, initsetup);
+                })
+                .addTemporalMarker(() -> {
+                    initsetup.claw_servo.setPosition(InitSetup.SERVO_OPEN_AUTO);
+                    //initsetup.motor_lift.setPower(0);
+                })
+                .waitSeconds(0.5)
+                .back(7)
+                .turn(Math.toRadians(-54))
+                .lineTo(new Vector2d(50, -12))
+                .addTemporalMarker(() -> {
+                    initsetup.claw_servo.setPosition(InitSetup.SERVO_CLOSED_AUTO);
+                    initsetup.motor_lift.setPower(1);
+                })
+                .UNSTABLE_addTemporalMarkerOffset(3, () -> {
+                    initsetup.motor_lift.setPower(0);
+                })
+                .UNSTABLE_addTemporalMarkerOffset(1.5, () -> {
+                    initsetup.motor_swivel.setPower(0.75);
+                })
+                .UNSTABLE_addTemporalMarkerOffset(3.5, () -> {
+                    initsetup.motor_swivel.setPower(0);
+                })
+                .waitSeconds(0.5)
+                .setReversed(true)
+                .splineToLinearHeading(new Pose2d(27, -4, Math.toRadians(-45)), Math.toRadians(135))
+                .addTemporalMarker(() -> {
+                    initsetup.claw_servo.setPosition(InitSetup.SERVO_OPEN_AUTO);
+                })
+                .waitSeconds(0.5)
+                .setReversed(false)
+                .build();
+        TrajectorySequence RepeatingTrajectory = rrSetup.trajectorySequenceBuilder(InitialTrajectory.end())
                 //Start lowering lift and rotate swivel to the front for the next cone
                 .addTemporalMarker(() -> {
                     initsetup.motor_lift.setPower(-1);
-                    encoderClass.encoderSwivel(1, -90, 5.0, this, initsetup);
+                    //encoderClass.encoderSwivel(1, -90, 5.0, this, initsetup);
                 })
                 //2 seconds from this point, stop the lift movement
                 .UNSTABLE_addTemporalMarkerOffset(2, () -> {
                     initsetup.motor_lift.setPower(0);
                 })
-                //Move forward to grab a new cone
-                .forward(37)
-                //Close claw around cone and raise lift to free it
+                .setReversed(true)
+                .strafeRight(1)
+                //Move forward to park in one
+                //.forward(37)
+
+                .splineToConstantHeading(new Vector2d(30, -12), Math.toRadians(0))
+                .lineTo(new Vector2d(60, -12))
+                .setReversed(false)
+                .waitSeconds(0.5)
                 .addTemporalMarker(() -> {
-                    initsetup.claw_servo.setPosition(InitSetup.SERVO_CLOSED_AUTO);
+                    //initsetup.claw_servo.setPosition(InitSetup.SERVO_CLOSED_AUTO);
                     initsetup.motor_lift.setPower(1);
                 })
-                //Wait a second to grab cone and lift
-                .waitSeconds(1)
-                //2 seconds from this point, stop lift movement
-                .UNSTABLE_addTemporalMarkerOffset(2, () -> {
+                .UNSTABLE_addTemporalMarkerOffset(3, () -> {
                     initsetup.motor_lift.setPower(0);
                 })
                 //Move backwards in front of scoring junction
-                .back(37)
-                //Strafe to score
-                .strafeLeft(6)
-                //Rotate swivel to score over junction
-                .addTemporalMarker(() -> {
-                    encoderClass.encoderSwivel(1, 90, 5.0, this, initsetup);
-                })
-                //Wait a second to drop cone
-                .waitSeconds(1)
-                .build();
-        TrajectorySequence RepeatingTrajectory = rrSetup.trajectorySequenceBuilder(InitialTrajectory.end())
-                //Strafe away from junction
-                .strafeRight(6)
-                //Start lowering lift and rotate swivel to the back for the next cone
-                .addTemporalMarker(() -> {
-                    initsetup.motor_lift.setPower(-1);
-                    encoderClass.encoderSwivel(1, 90, 5.0, this, initsetup);
-                })
-                //2 seconds from this point, stop the lift movement
-                .UNSTABLE_addTemporalMarkerOffset(2, () -> {
-                    initsetup.motor_lift.setPower(0);
-                })
-                //Move backwards to grab a new cone
-                .back(37)
-                //Close claw around cone and raise lift to free it
-                .addTemporalMarker(() -> {
-                    initsetup.claw_servo.setPosition(InitSetup.SERVO_CLOSED_AUTO);
-                    initsetup.motor_lift.setPower(1);
-                })
-                //Wait a second to grab cone and lift
-                .waitSeconds(1)
-                //2 sconds from this point, stop lift movement
-                .UNSTABLE_addTemporalMarkerOffset(2, () -> {
-                    initsetup.motor_lift.setPower(0);
-                })
-                //Move forward in front of scoring junction
-                .forward(37)
-                //Strafe to score
-                .strafeLeft(6)
-                //Rotate swivel to score over junction
-                .addTemporalMarker(() -> {
-                    encoderClass.encoderSwivel(1, -90, 5.0, this, initsetup);
-                })
-                //Wait a second to drop cone
-                .waitSeconds(1)
+                .back(30)
+                .splineToConstantHeading(new Vector2d(23.5, -6), Math.toRadians(90))
+                .waitSeconds(0.5)
                 .build();
 
-        Trajectory ParkOne = rrSetup.trajectoryBuilder(RepeatingTrajectory.end(), false)
+        /*Trajectory ParkOne = rrSetup.trajectoryBuilder(RepeatingTrajectory.end(), false)
                 //Strafe away from junction
                 .strafeRight(6)
                 //Move forward to park in one
@@ -141,6 +156,8 @@ public class RoadrunnerAutoODRight extends LinearOpMode {
                 .back(37)
                 .build();
 
+         */
+        initsetup.claw_servo.setPosition(InitSetup.SERVO_CLOSED_AUTO);
         AprilTagsSetup aprilTagsSetup = new AprilTagsSetup();
         aprilTagsSetup.aprilTagSetup(hardwareMap, this);
 
@@ -148,10 +165,13 @@ public class RoadrunnerAutoODRight extends LinearOpMode {
          * APRIL TAGS SETUP HAS BUILT IN WAIT FOR START
          */
 
-        rrSetup.followTrajectorySequence(InitialTrajectory);
-        rrSetup.followTrajectorySequence(RepeatingTrajectory);
-        rrSetup.followTrajectorySequence(RepeatingTrajectory);
 
+        rrSetup.followTrajectorySequence(InitialTrajectory);
+        //rrSetup.followTrajectorySequence(RepeatingTrajectory);
+        //rrSetup.followTrajectorySequence(RepeatingTrajectory);
+        //rrSetup.followTrajectorySequence(RepeatingTrajectory);
+        //rrSetup.followTrajectorySequence(RepeatingTrajectory);
+/*
         if(aprilTagsSetup.tagOfInterest.id == aprilTagsSetup.ONE){
             //Trajectory if tag one is detected
             //Park
@@ -169,6 +189,6 @@ public class RoadrunnerAutoODRight extends LinearOpMode {
             //Park
             rrSetup.followTrajectory(ParkTwo);
         }
-
+*/
     }
 }

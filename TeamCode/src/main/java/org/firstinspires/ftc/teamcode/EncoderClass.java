@@ -110,12 +110,6 @@ public class EncoderClass {
                     (runtime.seconds() < timeoutS) &&
                     (Math.abs(initpostsetup.motor_lift.getCurrentPosition() - initpostsetup.motor_lift.getTargetPosition()) > InitSetup.ENCODER_TOLERANCE)) {
 
-                // Display it for the driver.
-                /*opMode.telemetry.addData("Running to",  " %7d :%7d", newlfTarget,  newrfTarget, newlrTarget, newrrTarget);
-                opMode.telemetry.addData("Currently at",  " at %7d :%7d",
-                        initpostsetup.motor_drive_lf.getCurrentPosition(), initpostsetup.motor_drive_rf.getCurrentPosition(), initpostsetup.motor_drive_lr.getCurrentPosition(), initpostsetup.motor_drive_rr.getCurrentPosition(),
-                        initpostsetup.motor_lift.getCurrentPosition(), initpostsetup.motor_swivel.getCurrentPosition(), opMode.telemetry.update());
-                        */
             }
 
             // Stop all motion;
@@ -150,15 +144,7 @@ public class EncoderClass {
                     (runtime.seconds() < timeoutS) &&
                     (Math.abs(initpostsetup.motor_drive_lf.getCurrentPosition()-initpostsetup.motor_drive_lf.getTargetPosition()) > InitSetup.ENCODER_TOLERANCE || Math.abs(initpostsetup.motor_drive_rf.getCurrentPosition()-initpostsetup.motor_drive_rf.getTargetPosition()) > InitSetup.ENCODER_TOLERANCE || Math.abs(initpostsetup.motor_drive_lr.getCurrentPosition()-initpostsetup.motor_drive_lr.getTargetPosition()) > InitSetup.ENCODER_TOLERANCE || Math.abs(initpostsetup.motor_drive_rr.getCurrentPosition()-initpostsetup.motor_drive_rr.getTargetPosition()) > InitSetup.ENCODER_TOLERANCE || Math.abs(initpostsetup.motor_lift.getCurrentPosition()-initpostsetup.motor_lift.getTargetPosition()) > InitSetup.ENCODER_TOLERANCE || Math.abs(initpostsetup.motor_swivel.getCurrentPosition()-initpostsetup.motor_swivel.getTargetPosition()) > InitSetup.ENCODER_TOLERANCE)) {
 
-                // Display it for the driver.
-               /* opMode.telemetry.addData("Running to",  " %7d :%7d", newlfTarget,  newrfTarget, newlrTarget, newrrTarget);
-                opMode.telemetry.addData("Currently at",  " at %7d :%7d",
-                        initpostsetup.motor_drive_lf.getCurrentPosition(), initpostsetup.motor_drive_rf.getCurrentPosition(), initpostsetup.motor_drive_lr.getCurrentPosition(), initpostsetup.motor_drive_rr.getCurrentPosition(),
-                        initpostsetup.motor_lift.getCurrentPosition(), initpostsetup.motor_swivel.getCurrentPosition(), opMode.telemetry.update());
-                        */
             }
-
-
 
             // Stop all motion;
             initpostsetup.motor_swivel.setPower(0);

@@ -23,10 +23,10 @@ public class InitSetup {
     public double SERVO_POS;
 
     //Servo variables
-    public static final double SERVO_CLOSED_AUTO = 1.55;
-    public static final double SERVO_OPEN_AUTO = 0.75;
-    public static final double SERVO_CLOSED = 1.55;
-    public static final double SERVO_OPEN = 0.85;
+    public static final double SERVO_CLOSED_AUTO = 0.85;
+    public static final double SERVO_OPEN_AUTO = 1.65;
+    public static final double SERVO_CLOSED = 0.85;
+    public static final double SERVO_OPEN = 1.55;
 
     //Number of ticks for each motor type
     public static final double     COUNTS_PER_MOTOR_REV_DRIVE    = 537.7 ;
@@ -130,6 +130,7 @@ public class InitSetup {
         //Define motors via hardwareMap
         motor_lift = hardwareMap.get(DcMotor.class, "motor_lift");
         motor_swivel = hardwareMap.get(DcMotor.class, "motor_swivel");
+        claw_servo = hardwareMap.get(Servo.class, "claw_servo");
 
         //Reverse directions of motors
         motor_lift.setDirection(DcMotorSimple.Direction.REVERSE);

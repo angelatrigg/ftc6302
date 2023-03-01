@@ -77,10 +77,10 @@ public class DriveOp extends LinearOpMode {
                     initsetup.motor_drive_rr.setPower(-0.5);
                 }
                 if (gamepad1.a) {
-                    initsetup.JOY_SPEED = 1;
+                    initsetup.JOY_SPEED = 0.5;
                 }
                 if (gamepad1.b) {
-                    initsetup.JOY_SPEED = 1;
+                    initsetup.JOY_SPEED = 0.8;
                 }
                 if (gamepad1.x) {
                     initsetup.JOY_SPEED = 0.3;
