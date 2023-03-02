@@ -69,18 +69,23 @@ public class RoadrunnerAutoODRight extends LinearOpMode {
                     initsetup.motor_lift.setPower(-1);
                     //initsetup.claw_servo.setPosition(InitSetup.SERVO_CLOSED_AUTO);
                 })
-                .UNSTABLE_addTemporalMarkerOffset(2, () -> {
-                    initsetup.motor_lift.setPower(0);
+                .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {
+                    initsetup.motor_lift.setPower(-0.5);
+                    initsetup.motor_swivel.setPower(0);
                     //encoderClass.encoderLift(.5, 210, 5.0, this, initsetup);
                 })
+                .UNSTABLE_addTemporalMarkerOffset(2.5, () -> {
+                    initsetup.motor_lift.setPower(0);
+                })
                 .addTemporalMarker(() -> {
+                    initsetup.motor_swivel.setPower(-0.6);
                     initsetup.claw_servo.setPosition(InitSetup.SERVO_OPEN_AUTO);
                     //initsetup.motor_lift.setPower(0);
                 })
                 .waitSeconds(0.5)
                 .back(7)
                 .turn(Math.toRadians(-54))
-                .lineTo(new Vector2d(50, -12))
+                .lineTo(new Vector2d(56, -12))
                 .addTemporalMarker(() -> {
                     initsetup.claw_servo.setPosition(InitSetup.SERVO_CLOSED_AUTO);
                     initsetup.motor_lift.setPower(1);
@@ -89,14 +94,14 @@ public class RoadrunnerAutoODRight extends LinearOpMode {
                     initsetup.motor_lift.setPower(0);
                 })
                 .UNSTABLE_addTemporalMarkerOffset(1.5, () -> {
-                    initsetup.motor_swivel.setPower(0.75);
+                    initsetup.motor_swivel.setPower(0.6);
                 })
                 .UNSTABLE_addTemporalMarkerOffset(3.5, () -> {
                     initsetup.motor_swivel.setPower(0);
                 })
                 .waitSeconds(0.5)
                 .setReversed(true)
-                .splineToLinearHeading(new Pose2d(27, -4, Math.toRadians(-45)), Math.toRadians(135))
+                .splineToLinearHeading(new Pose2d(30, -7, Math.toRadians(-45)), Math.toRadians(135))
                 .addTemporalMarker(() -> {
                     initsetup.claw_servo.setPosition(InitSetup.SERVO_OPEN_AUTO);
                 })

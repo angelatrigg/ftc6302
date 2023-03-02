@@ -182,8 +182,8 @@ public class MeepMeepTesting {
                                     })
                                     .strafeTo(new Vector2d(22, -63))
                                     .splineToConstantHeading(new Vector2d(12, -15), Math.toRadians(90))
-                                    .turn(Math.toRadians(-40))
-                                    .forward(14)
+                                    .turn(Math.toRadians(-36))
+                                    .forward(7)
                                     .UNSTABLE_addTemporalMarkerOffset(-3, () -> {
                                         //initsetup.motor_lift.setPower(1);
                                     })
@@ -199,9 +199,9 @@ public class MeepMeepTesting {
                                     .UNSTABLE_addTemporalMarkerOffset(2, () -> {
                                         //initsetup.motor_lift.setPower(0);
                                     })
-                                    .back(14)
-                                    .turn(Math.toRadians(-50))
-                                    .lineTo(new Vector2d(60, -12))
+                                    .back(7)
+                                    .turn(Math.toRadians(-54))
+                                    .lineTo(new Vector2d(56, -12))
                                     .addTemporalMarker(() -> {
                                         //initsetup.claw_servo.setPosition(InitSetup.SERVO_CLOSED_AUTO);
                                         //initsetup.motor_lift.setPower(1);
@@ -217,7 +217,7 @@ public class MeepMeepTesting {
                                     })
                                     .waitSeconds(0.5)
                                     .setReversed(true)
-                                    .splineToLinearHeading(new Pose2d(27, -4, Math.toRadians(-45)), Math.toRadians(135))
+                                    .splineToLinearHeading(new Pose2d(30, -7, Math.toRadians(-45)), Math.toRadians(135))
                                     .addTemporalMarker(() -> {
                                         //initsetup.claw_servo.setPosition(InitSetup.SERVO_OPEN_AUTO);
                                     })
