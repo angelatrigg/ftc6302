@@ -24,7 +24,7 @@ public class InitSetup {
 
     //Servo variables
     public static final double SERVO_CLOSED_AUTO = 0.85;
-    public static final double SERVO_OPEN_AUTO = 1.65;
+    public static final double SERVO_OPEN_AUTO = 1.85;
     public static final double SERVO_CLOSED = 0.85;
     public static final double SERVO_OPEN = 1.55;
 
@@ -136,7 +136,7 @@ public class InitSetup {
         motor_lift.setDirection(DcMotorSimple.Direction.REVERSE);
 
         //Set brake behavior on motors
-        motor_lift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        //motor_lift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         motor_swivel.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         //Reset encoder values

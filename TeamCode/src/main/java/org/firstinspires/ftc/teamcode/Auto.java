@@ -33,8 +33,8 @@ public class Auto extends LinearOpMode {
         //encoderDrive(DRIVE_SPEED,  500,  500, 500, 500, 0, 0, 0, 5.0);
         //encoderDrive(UP_LIFT_SPEED, 0, 0, 0, 0, 50, 0, 0, 5.0);
         //encoderDrive(DOWN_LIFT_SPEED, 0, 0, 0, 0, -25, 0, 0, 5.0);
-        encoderClass.encoderDrive(0.5, 0, 0, 0, 0, 0, 45, 0, 5.0, this, initsetup);
-        encoderClass.encoderDrive(0.5, 0, 0, 0, 0, 0, -45, 0, 5.0, this, initsetup);
+        encoderClass.encoderDrive(0.5, 0, 0, 0, 0, 0, 45, InitSetup.SERVO_CLOSED_AUTO, 5.0, this, initsetup);
+        encoderClass.encoderDrive(0.5, 0, 0, 0, 0, 0, -45, InitSetup.SERVO_CLOSED_AUTO, 5.0, this, initsetup);
         //encoderDrive(SERVO_SPEED, 0, 0, 0, 0, 0, 0, 50, 5.0);
 
         telemetry.addData("Path", "Complete");
