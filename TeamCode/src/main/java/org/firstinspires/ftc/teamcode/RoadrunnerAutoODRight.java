@@ -20,7 +20,7 @@ public class RoadrunnerAutoODRight extends LinearOpMode {
 
         rrSetup.setPoseEstimate(new Pose2d(35, -65, Math.toRadians(90)));
 
-        TrajectorySequence InitialTrajectory = rrSetup.trajectorySequenceBuilder(new Pose2d(35, -65, Math.toRadians(90)))
+        TrajectorySequence MainTrajectory = rrSetup.trajectorySequenceBuilder(new Pose2d(35, -65, Math.toRadians(90)))
                 //Start lifting
                 .addTemporalMarker(() -> {
                     initsetup.motor_lift.setPower(1);
@@ -210,63 +210,24 @@ public class RoadrunnerAutoODRight extends LinearOpMode {
                 .waitSeconds(0.5)
                 //Disable reversed direction
                 .setReversed(false)
-                //Curve back to stack of cones
+                .build();
+
+        Trajectory ParkOne = rrSetup.trajectoryBuilder(MainTrajectory.end(), false)
+                //Curve to park in spot 1
+                .splineToLinearHeading(new Pose2d(12, -12, Math.toRadians(180)), Math.toRadians(180))
+                .build();
+
+        Trajectory ParkTwo = rrSetup.trajectoryBuilder(MainTrajectory.end(), false)
+                //Curve to park in spot 2
+                .splineToLinearHeading(new Pose2d(37, -12, Math.toRadians(0)), Math.toRadians(0))
+                .build();
+
+        Trajectory ParkThree = rrSetup.trajectoryBuilder(MainTrajectory.end(), false)
+                //Curve to park in spot 3
                 .splineToLinearHeading(new Pose2d(56, -12, Math.toRadians(0)), Math.toRadians(0))
                 .build();
-        TrajectorySequence RepeatingTrajectory = rrSetup.trajectorySequenceBuilder(InitialTrajectory.end())
-                //Start lowering lift and rotate swivel to the front for the next cone
-                .addTemporalMarker(() -> {
-                    initsetup.motor_lift.setPower(-1);
-                    //encoderClass.encoderSwivel(1, -90, 5.0, this, initsetup);
-                })
-                //2 seconds from this point, stop the lift movement
-                .UNSTABLE_addTemporalMarkerOffset(2, () -> {
-                    initsetup.motor_lift.setPower(0);
-                })
-                .setReversed(true)
-                .strafeRight(1)
-                //Move forward to park in one
-                //.forward(37)
 
-                .splineToConstantHeading(new Vector2d(30, -12), Math.toRadians(0))
-                .lineTo(new Vector2d(60, -12))
-                .setReversed(false)
-                .waitSeconds(0.5)
-                .addTemporalMarker(() -> {
-                    //initsetup.claw_servo.setPosition(InitSetup.SERVO_CLOSED_AUTO);
-                    initsetup.motor_lift.setPower(1);
-                })
-                .UNSTABLE_addTemporalMarkerOffset(3, () -> {
-                    initsetup.motor_lift.setPower(0);
-                })
-                //Move backwards in front of scoring junction
-                .back(30)
-                .splineToConstantHeading(new Vector2d(23.5, -6), Math.toRadians(90))
-                .waitSeconds(0.5)
-                .build();
 
-        /*Trajectory ParkOne = rrSetup.trajectoryBuilder(RepeatingTrajectory.end(), false)
-                //Strafe away from junction
-                .strafeRight(6)
-                //Move forward to park in one
-                .forward(10)
-                .build();
-
-        Trajectory ParkTwo = rrSetup.trajectoryBuilder(RepeatingTrajectory.end(), false)
-                //Strafe away from junction
-                .strafeRight(6)
-                //Move backwards to park in two
-                .back(10)
-                .build();
-
-        Trajectory ParkThree = rrSetup.trajectoryBuilder(RepeatingTrajectory.end(), false)
-                //Strafe away from junction
-                .strafeRight(6)
-                //Move backwards to park in three
-                .back(37)
-                .build();
-
-         */
         initsetup.claw_servo.setPosition(InitSetup.SERVO_CLOSED_AUTO);
         AprilTagsSetup aprilTagsSetup = new AprilTagsSetup();
         aprilTagsSetup.aprilTagSetup(hardwareMap, this);
@@ -276,12 +237,8 @@ public class RoadrunnerAutoODRight extends LinearOpMode {
          */
 
 
-        rrSetup.followTrajectorySequence(InitialTrajectory);
-        //rrSetup.followTrajectorySequence(RepeatingTrajectory);
-        //rrSetup.followTrajectorySequence(RepeatingTrajectory);
-        //rrSetup.followTrajectorySequence(RepeatingTrajectory);
-        //rrSetup.followTrajectorySequence(RepeatingTrajectory);
-/*
+        rrSetup.followTrajectorySequence(MainTrajectory);
+
         if(aprilTagsSetup.tagOfInterest.id == aprilTagsSetup.ONE){
             //Trajectory if tag one is detected
             //Park
@@ -299,6 +256,5 @@ public class RoadrunnerAutoODRight extends LinearOpMode {
             //Park
             rrSetup.followTrajectory(ParkTwo);
         }
-*/
     }
 }

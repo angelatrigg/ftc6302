@@ -364,7 +364,7 @@ public class MeepMeepTesting {
                                     //Disable reversed direction
                                     .setReversed(false)
                                     //Curve back to stack of cones
-                                    .splineToLinearHeading(new Pose2d(56, -12, Math.toRadians(0)), Math.toRadians(0))
+                                    .splineToLinearHeading(new Pose2d(37, -12, Math.toRadians(0)), Math.toRadians(0))
                                     .build()
                     );
 
