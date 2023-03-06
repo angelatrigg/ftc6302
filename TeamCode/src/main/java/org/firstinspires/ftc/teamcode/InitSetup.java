@@ -24,7 +24,7 @@ public class InitSetup {
 
     //Servo variables
     public static final double SERVO_CLOSED_AUTO = 0.85;
-    public static final double SERVO_OPEN_AUTO = 1.85;
+    public static final double SERVO_OPEN_AUTO = 2;
     public static final double SERVO_CLOSED = 0.85;
     public static final double SERVO_OPEN = 1.55;
 
@@ -78,6 +78,16 @@ public class InitSetup {
         //Set brake behavior on motors
         motor_lift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         motor_swivel.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        /**
+         * REMEMBER TO REMOVE THIS
+         */
+        //Reset encoder values
+        //motor_lift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        //motor_swivel.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        //Enable encoders
+        //motor_lift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        //motor_swivel.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
     public void autoSetup(HardwareMap hardwareMap) {
 
@@ -136,15 +146,15 @@ public class InitSetup {
         motor_lift.setDirection(DcMotorSimple.Direction.REVERSE);
 
         //Set brake behavior on motors
-        //motor_lift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        motor_lift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         motor_swivel.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         //Reset encoder values
         motor_lift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        motor_swivel.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        //motor_swivel.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         //Enable encoders
         motor_lift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        motor_swivel.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        //motor_swivel.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
 }

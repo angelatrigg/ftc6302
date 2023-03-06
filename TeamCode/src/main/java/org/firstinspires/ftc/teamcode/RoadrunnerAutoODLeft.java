@@ -45,7 +45,7 @@ public class RoadrunnerAutoODLeft extends LinearOpMode {
                 })
                 //Rotate swivel to place cone above junction and drop cone
                 .addTemporalMarker(() -> {
-                    encoderClass.encoderSwivel(1, 90, 5.0, this, initsetup);
+                    //encoderClass.encoderSwivel(1, 90, 5.0, this, initsetup);
                     initsetup.claw_servo.setPosition(InitSetup.SERVO_OPEN_AUTO);
                 })
                 //Give a second to drop cone and rotate claw.
@@ -55,7 +55,7 @@ public class RoadrunnerAutoODLeft extends LinearOpMode {
                 //Start lowering lift and rotate swivel to the back for the next cone
                 .addTemporalMarker(() -> {
                     initsetup.motor_lift.setPower(-1);
-                    encoderClass.encoderSwivel(1, 90, 5.0, this, initsetup);
+                    //encoderClass.encoderSwivel(1, 90, 5.0, this, initsetup);
                 })
                 //2 seconds from this point, stop the lift movement
                 .UNSTABLE_addTemporalMarkerOffset(2, () -> {
@@ -80,7 +80,7 @@ public class RoadrunnerAutoODLeft extends LinearOpMode {
                 .strafeLeft(6)
                 //Rotate swivel to score over junction
                 .addTemporalMarker(() -> {
-                    encoderClass.encoderSwivel(1, -90, 5.0, this, initsetup);
+                    //encoderClass.encoderSwivel(1, -90, 5.0, this, initsetup);
                 })
                 //Wait a second to drop cone
                 .waitSeconds(1)
@@ -91,7 +91,7 @@ public class RoadrunnerAutoODLeft extends LinearOpMode {
                 //Start lowering lift and rotate swivel to the back for the next cone
                 .addTemporalMarker(() -> {
                     initsetup.motor_lift.setPower(-1);
-                    encoderClass.encoderSwivel(1, 90, 5.0, this, initsetup);
+                    //encoderClass.encoderSwivel(1, 90, 5.0, this, initsetup);
                 })
                 //2 seconds from this point, stop the lift movement
                 .UNSTABLE_addTemporalMarkerOffset(2, () -> {
@@ -116,7 +116,7 @@ public class RoadrunnerAutoODLeft extends LinearOpMode {
                 .strafeLeft(6)
                 //Rotate swivel to score over junction
                 .addTemporalMarker(() -> {
-                    encoderClass.encoderSwivel(1, -90, 5.0, this, initsetup);
+                    //encoderClass.encoderSwivel(1, -90, 5.0, this, initsetup);
                 })
                 //Wait a second to drop cone
                 .waitSeconds(1)

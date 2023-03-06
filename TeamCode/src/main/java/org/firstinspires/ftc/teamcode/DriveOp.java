@@ -111,6 +111,7 @@ public class DriveOp extends LinearOpMode {
                     initsetup.motor_swivel.setPower(0);
                 }
                 initsetup.claw_servo.setPosition(initsetup.SERVO_POS);
+                telemetry.addData("Swivel Position", initsetup.motor_swivel.getCurrentPosition());
                 telemetry.addData("Left Rear Pow", initsetup.motor_drive_lr.getPower());
                 telemetry.addData("Left Front Pow", initsetup.motor_drive_lf.getPower());
                 telemetry.addData("Right Rear Pow", initsetup.motor_drive_rr.getPower());
