@@ -24,6 +24,10 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
+import org.firstinspires.ftc.teamcode.apriltags.AprilTagsSetup;
+import org.firstinspires.ftc.teamcode.functions.EncoderClass;
+import org.firstinspires.ftc.teamcode.functions.InitSetup;
+
 @Autonomous(name = "Autonomous With Object Detection Right")
 public class AutoWithObjectDetectionRight extends LinearOpMode
 {

@@ -5,9 +5,11 @@ import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.acmerobotics.roadrunner.trajectory.Trajectory;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.acmerobotics.roadrunner.geometry.Pose2d;
-import com.acmerobotics.roadrunner.geometry.Vector2d;
 
+import org.firstinspires.ftc.teamcode.apriltags.AprilTagsSetup;
+import org.firstinspires.ftc.teamcode.functions.EncoderClass;
+import org.firstinspires.ftc.teamcode.functions.InitSetup;
+import org.firstinspires.ftc.teamcode.roadrunner.RoadrunnerSetup;
 import org.firstinspires.ftc.teamcode.roadrunner.trajectorysequence.TrajectorySequence;
 
 @Autonomous(name = "RR Autonomous With Object Detection Left")

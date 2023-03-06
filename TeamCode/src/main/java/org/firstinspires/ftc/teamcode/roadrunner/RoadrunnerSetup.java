@@ -1,4 +1,16 @@
-package org.firstinspires.ftc.teamcode.roadrunner.drive;
+package org.firstinspires.ftc.teamcode.roadrunner;
+
+import static org.firstinspires.ftc.teamcode.roadrunner.RoadrunnerDriveConstants.MAX_ACCEL;
+import static org.firstinspires.ftc.teamcode.roadrunner.RoadrunnerDriveConstants.MAX_ANG_ACCEL;
+import static org.firstinspires.ftc.teamcode.roadrunner.RoadrunnerDriveConstants.MAX_ANG_VEL;
+import static org.firstinspires.ftc.teamcode.roadrunner.RoadrunnerDriveConstants.MAX_VEL;
+import static org.firstinspires.ftc.teamcode.roadrunner.RoadrunnerDriveConstants.MOTOR_VELO_PID;
+import static org.firstinspires.ftc.teamcode.roadrunner.RoadrunnerDriveConstants.RUN_USING_ENCODER;
+import static org.firstinspires.ftc.teamcode.roadrunner.RoadrunnerDriveConstants.TRACK_WIDTH;
+import static org.firstinspires.ftc.teamcode.roadrunner.RoadrunnerDriveConstants.encoderTicksToInches;
+import static org.firstinspires.ftc.teamcode.roadrunner.RoadrunnerDriveConstants.kA;
+import static org.firstinspires.ftc.teamcode.roadrunner.RoadrunnerDriveConstants.kStatic;
+import static org.firstinspires.ftc.teamcode.roadrunner.RoadrunnerDriveConstants.kV;
 
 import androidx.annotation.NonNull;
 
@@ -29,7 +41,6 @@ import com.qualcomm.robotcore.hardware.VoltageSensor;
 import com.qualcomm.robotcore.hardware.configuration.typecontainers.MotorConfigurationType;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
-import org.firstinspires.ftc.teamcode.RoadrunnerDriveConstants;
 import org.firstinspires.ftc.teamcode.roadrunner.trajectorysequence.TrajectorySequence;
 import org.firstinspires.ftc.teamcode.roadrunner.trajectorysequence.TrajectorySequenceBuilder;
 import org.firstinspires.ftc.teamcode.roadrunner.trajectorysequence.TrajectorySequenceRunner;
@@ -39,23 +50,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.firstinspires.ftc.teamcode.RoadrunnerDriveConstants.MAX_ACCEL;
-import static org.firstinspires.ftc.teamcode.RoadrunnerDriveConstants.MAX_ANG_ACCEL;
-import static org.firstinspires.ftc.teamcode.RoadrunnerDriveConstants.MAX_ANG_VEL;
-import static org.firstinspires.ftc.teamcode.RoadrunnerDriveConstants.MAX_VEL;
-import static org.firstinspires.ftc.teamcode.RoadrunnerDriveConstants.MOTOR_VELO_PID;
-import static org.firstinspires.ftc.teamcode.RoadrunnerDriveConstants.RUN_USING_ENCODER;
-import static org.firstinspires.ftc.teamcode.RoadrunnerDriveConstants.TRACK_WIDTH;
-import static org.firstinspires.ftc.teamcode.RoadrunnerDriveConstants.encoderTicksToInches;
-import static org.firstinspires.ftc.teamcode.RoadrunnerDriveConstants.kA;
-import static org.firstinspires.ftc.teamcode.RoadrunnerDriveConstants.kStatic;
-import static org.firstinspires.ftc.teamcode.RoadrunnerDriveConstants.kV;
-
 /*
  * Simple mecanum drive hardware implementation for REV hardware.
  */
 @Config
-public class SampleMecanumDrive extends MecanumDrive {
+public class RoadrunnerSetup extends MecanumDrive {
     public static PIDCoefficients TRANSLATIONAL_PID = new PIDCoefficients(6, 0, 0);
     public static PIDCoefficients HEADING_PID = new PIDCoefficients(5, 0, 0);
 
@@ -72,7 +71,7 @@ public class SampleMecanumDrive extends MecanumDrive {
 
     private TrajectoryFollower follower;
 
-    private DcMotorEx leftFront, leftRear, rightRear, rightFront;
+    private DcMotorEx motor_drive_lf, motor_drive_lr, motor_drive_rr, motor_drive_rf;
     private List<DcMotorEx> motors;
 
     private IMU imu;
@@ -81,7 +80,7 @@ public class SampleMecanumDrive extends MecanumDrive {
     private List<Integer> lastEncPositions = new ArrayList<>();
     private List<Integer> lastEncVels = new ArrayList<>();
 
-    public SampleMecanumDrive(HardwareMap hardwareMap) {
+    public RoadrunnerSetup(HardwareMap hardwareMap) {
         super(kV, kA, kStatic, TRACK_WIDTH, TRACK_WIDTH, LATERAL_MULTIPLIER);
 
         follower = new HolonomicPIDVAFollower(TRANSLATIONAL_PID, TRANSLATIONAL_PID, HEADING_PID,
@@ -101,12 +100,12 @@ public class SampleMecanumDrive extends MecanumDrive {
                 RoadrunnerDriveConstants.LOGO_FACING_DIR, RoadrunnerDriveConstants.USB_FACING_DIR));
         imu.initialize(parameters);
 
-        leftFront = hardwareMap.get(DcMotorEx.class, "motor_drive_lf");
-        leftRear = hardwareMap.get(DcMotorEx.class, "motor_drive_lr");
-        rightRear = hardwareMap.get(DcMotorEx.class, "motor_drive_rr");
-        rightFront = hardwareMap.get(DcMotorEx.class, "motor_drive_rf");
+        motor_drive_lf = hardwareMap.get(DcMotorEx.class, "motor_drive_lf");
+        motor_drive_lr = hardwareMap.get(DcMotorEx.class, "motor_drive_lr");
+        motor_drive_rr = hardwareMap.get(DcMotorEx.class, "motor_drive_rr");
+        motor_drive_rf = hardwareMap.get(DcMotorEx.class, "motor_drive_rf");
 
-        motors = Arrays.asList(leftFront, leftRear, rightRear, rightFront);
+        motors = Arrays.asList(motor_drive_lf, motor_drive_lr, motor_drive_rr, motor_drive_rf);
 
         for (DcMotorEx motor : motors) {
             MotorConfigurationType motorConfigurationType = motor.getMotorType().clone();
@@ -125,8 +124,8 @@ public class SampleMecanumDrive extends MecanumDrive {
         }
 
         // TODO: reverse any motors using DcMotor.setDirection()
-        leftRear.setDirection(DcMotorSimple.Direction.REVERSE);
-        leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
+        motor_drive_lr.setDirection(DcMotorSimple.Direction.REVERSE);
+        motor_drive_lf.setDirection(DcMotorSimple.Direction.REVERSE);
 
         List<Integer> lastTrackingEncPositions = new ArrayList<>();
         List<Integer> lastTrackingEncVels = new ArrayList<>();
@@ -286,10 +285,10 @@ public class SampleMecanumDrive extends MecanumDrive {
 
     @Override
     public void setMotorPowers(double v, double v1, double v2, double v3) {
-        leftFront.setPower(v);
-        leftRear.setPower(v1);
-        rightRear.setPower(v2);
-        rightFront.setPower(v3);
+        motor_drive_lf.setPower(v);
+        motor_drive_lr.setPower(v1);
+        motor_drive_rr.setPower(v2);
+        motor_drive_rf.setPower(v3);
     }
 
     @Override
