@@ -77,10 +77,10 @@ public class DriveOp extends LinearOpMode {
                     initsetup.motor_drive_rr.setPower(-0.5);
                 }
                 if (gamepad1.a) {
-                    initsetup.JOY_SPEED = 0.8;
+                    initsetup.JOY_SPEED = 0.5;
                 }
                 if (gamepad1.b) {
-                    initsetup.JOY_SPEED = 0.5;
+                    initsetup.JOY_SPEED = 0.8;
                 }
                 if (gamepad1.x) {
                     initsetup.JOY_SPEED = 0.3;
@@ -111,6 +111,7 @@ public class DriveOp extends LinearOpMode {
                     initsetup.motor_swivel.setPower(0);
                 }
                 initsetup.claw_servo.setPosition(initsetup.SERVO_POS);
+                telemetry.addData("Swivel Position", initsetup.motor_swivel.getCurrentPosition());
                 telemetry.addData("Left Rear Pow", initsetup.motor_drive_lr.getPower());
                 telemetry.addData("Left Front Pow", initsetup.motor_drive_lf.getPower());
                 telemetry.addData("Right Rear Pow", initsetup.motor_drive_rr.getPower());

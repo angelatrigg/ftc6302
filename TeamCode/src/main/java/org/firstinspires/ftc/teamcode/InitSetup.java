@@ -23,10 +23,10 @@ public class InitSetup {
     public double SERVO_POS;
 
     //Servo variables
-    public static final double SERVO_CLOSED_AUTO = 1.55;
-    public static final double SERVO_OPEN_AUTO = 0.75;
-    public static final double SERVO_CLOSED = 1.55;
-    public static final double SERVO_OPEN = 0.85;
+    public static final double SERVO_CLOSED_AUTO = 0.85;
+    public static final double SERVO_OPEN_AUTO = 2;
+    public static final double SERVO_CLOSED = 0.85;
+    public static final double SERVO_OPEN = 1.55;
 
     //Number of ticks for each motor type
     public static final double     COUNTS_PER_MOTOR_REV_DRIVE    = 537.7 ;
@@ -78,11 +78,18 @@ public class InitSetup {
         //Set brake behavior on motors
         motor_lift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         motor_swivel.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        /**
+         * REMEMBER TO REMOVE THIS
+         */
+        //Reset encoder values
+        //motor_lift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        //motor_swivel.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        //Enable encoders
+        //motor_lift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        //motor_swivel.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
     public void autoSetup(HardwareMap hardwareMap) {
-
-        //Set initial joystick speed limit
-        JOY_SPEED = 0.8;
 
         //Set initial servo position
         SERVO_POS = SERVO_CLOSED;
@@ -124,5 +131,30 @@ public class InitSetup {
         motor_drive_rr.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         motor_lift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         motor_swivel.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+    }
+    public void autoSetupLiftSwivelOnly(HardwareMap hardwareMap) {
+
+        //Set initial servo position
+        SERVO_POS = SERVO_CLOSED;
+
+        //Define motors via hardwareMap
+        motor_lift = hardwareMap.get(DcMotor.class, "motor_lift");
+        motor_swivel = hardwareMap.get(DcMotor.class, "motor_swivel");
+        claw_servo = hardwareMap.get(Servo.class, "claw_servo");
+
+        //Reverse directions of motors
+        motor_lift.setDirection(DcMotorSimple.Direction.REVERSE);
+
+        //Set brake behavior on motors
+        motor_lift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        motor_swivel.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+        //Reset encoder values
+        motor_lift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        //motor_swivel.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        //Enable encoders
+        motor_lift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        //motor_swivel.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
 }
