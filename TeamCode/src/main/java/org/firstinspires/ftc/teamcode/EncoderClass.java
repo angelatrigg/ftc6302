@@ -86,4 +86,57 @@ public class EncoderClass {
             opMode.sleep(50);   // optional pause after each move.
         }
     }
+    public void encoderLift(double lftMM, LinearOpMode opMode, InitSetup initpostsetup) {
+        int newlftTarget;
+
+        // Ensure that the opmode is still active
+        if (opMode.opModeIsActive()) {
+
+            // Determine new target position, and pass to motor controller
+            //newlftTarget = initpostsetup.motor_lift.getCurrentPosition() + (int) (lftMM * InitSetup.COUNTS_PER_MM_LIFT);
+            newlftTarget = (int)(lftMM * InitSetup.COUNTS_PER_MM_LIFT);
+            initpostsetup.motor_lift.setTargetPosition(newlftTarget);
+
+            // Turn On RUN_TO_POSITION
+            initpostsetup.motor_lift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+            // reset the timeout time and start motion.
+            runtime.reset();
+            //initpostsetup.motor_lift.setPower(Math.abs(speed));
+
+            // keep looping while we are still active, and there is time left, and motors are not within the target threshold.
+
+            // Stop all motion;
+            //initpostsetup.motor_lift.setPower(0);
+
+            // Turn off RUN_TO_POSITION
+            //initpostsetup.motor_lift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+            //opMode.sleep(50);   // optional pause after each move.
+        }
+    }
+    public void encoderSwivel(double swvDG, LinearOpMode opMode, InitSetup initpostsetup) {
+        int newswvTarget;
+
+        // Ensure that the opmode is still active
+        if (opMode.opModeIsActive()) {
+
+            // Determine new target position, and pass to motor controller
+            newswvTarget = (int)(swvDG * InitSetup.COUNTS_PER_DG_SWIVEL);
+
+            initpostsetup.motor_swivel.setTargetPosition(newswvTarget);
+
+            // Turn On RUN_TO_POSITION
+            initpostsetup.motor_swivel.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+            // reset the timeout time and start motion.
+            runtime.reset();
+
+            // keep looping while we are still active, and there is time left, and motors are not within the target threshold.
+
+
+            //opMode.sleep(50);   // optional pause after each move.
+        }
+    }
 }
+

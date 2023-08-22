@@ -21,9 +21,10 @@
 
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-
+@Disabled
 @Autonomous(name = "Autonomous With Object Detection Left")
 public class AutoWithObjectDetectionLeft extends LinearOpMode
 {
@@ -43,56 +44,21 @@ public class AutoWithObjectDetectionLeft extends LinearOpMode
         START OF AUTONOMOUS STEPS    |
                                      V
          */
-
+        //shorthand definitions: (TbTW=To be tweaked) (
         //Initial lift to be able to grab cone
         encoderClass.encoderDrive(1, 0, 0, 0, 0, 50, 0, InitSetup.SERVO_CLOSED_AUTO, 5.0, this, initsetup);
-        //Drive forward to move signal
-        encoderClass.encoderDrive(0.55, 1500, 1500, 1500, 1500, 300, 0, InitSetup.SERVO_CLOSED_AUTO, 5.0, this, initsetup);
-        sleep(250);
-        //Back up to free signal
-        encoderClass.encoderDrive(0.5, -250, -250, -250, -250, 0, 0, InitSetup.SERVO_CLOSED_AUTO, 5.0, this, initsetup);
-        //Strafe to the right and lift for initial score
-        encoderClass.encoderDrive(0.5, 350, -350, -350, 350, 800, 0, InitSetup.SERVO_CLOSED_AUTO, 3.5, this, initsetup);
-        //Forward for initial score
-        encoderClass.encoderDrive(0.4, 180, 180, 180, 180, 0, 0, InitSetup.SERVO_CLOSED_AUTO, 2.0, this, initsetup);
-        //Reset swivel position
-        initsetup.motor_swivel.setPower(-1);
-        sleep(100);
-        initsetup.motor_swivel.setPower(0);
-        //Slightly lower lift for more accurate scoring
-        encoderClass.encoderDrive(0.6, 0, 0, 0, 0, -100, 0, InitSetup.SERVO_CLOSED_AUTO, 2.0, this, initsetup);
-        //Drop cone
-        initsetup.claw_servo.setPosition(InitSetup.SERVO_OPEN_AUTO);
-        //Back up after initial score
-        encoderClass.encoderDrive(0.4, -180, -180, -180, -180, 0, 0, InitSetup.SERVO_OPEN_AUTO, 2.0, this, initsetup);
-        //Turn towards cones and drop lift part of the way (2)
-        encoderClass.encoderDrive(0.5, -460, 460, -460, 460, -440, 0, InitSetup.SERVO_CLOSED_AUTO, 5.0, this, initsetup);
-        //Reset swivel position
-        initsetup.motor_swivel.setPower(-1);
-        sleep(100);
-        initsetup.motor_swivel.setPower(0);
-        //Drive to cones and finish lowering arm (2)
-        encoderClass.encoderDrive(0.6, 1000, 1000, 1000, 1000, -300, 0, InitSetup.SERVO_OPEN_AUTO, 5.0, this, initsetup);
-        //Close claw (2)
-        initsetup.claw_servo.setPosition(InitSetup.SERVO_CLOSED_AUTO);
-        sleep(100);
-        //Lift cone (2)
-        encoderClass.encoderDrive(1, 0, 0, 0, 0, 300, 0, InitSetup.SERVO_CLOSED_AUTO, 2.0, this, initsetup);
-        //Back up to score (2)
-        encoderClass.encoderDrive(0.5, -980, -980, -980, -980, 0, 0, InitSetup.SERVO_CLOSED_AUTO, 5.0, this, initsetup);
-        //Turn towards junction and raise lift (2)
-        encoderClass.encoderDrive(0.5, 480, -480, 480, -480, 950, 0, InitSetup.SERVO_CLOSED_AUTO, 2.5, this, initsetup);
-        //Forward to score (2)
-        encoderClass.encoderDrive(0.4, 140, 140, 140, 140, 0, 0, InitSetup.SERVO_CLOSED_AUTO, 2.5, this, initsetup);
-        initsetup.motor_swivel.setPower(-1);
-        sleep(100);
-        initsetup.motor_swivel.setPower(0);
-        encoderClass.encoderDrive(0.6, 0, 0, 0, 0, -100, 0, InitSetup.SERVO_CLOSED_AUTO, 2.0, this, initsetup);
-        //Drop cone (2)
-        initsetup.claw_servo.setPosition(InitSetup.SERVO_OPEN_AUTO);
-        //Back up from score (2)
-        encoderClass.encoderDrive(0.4, -180, -180, -180, -180, 0, 0, InitSetup.SERVO_OPEN_AUTO, 5.0, this, initsetup);
-
+        //strafe right
+        encoderClass.encoderDrive(0.5, 660, -660, -660, 660, 0, 0, InitSetup.SERVO_CLOSED_AUTO, 5.0, this, initsetup);
+        //move forward
+        encoderClass.encoderDrive(0.5, 980, 980, 980, 980, 0, 0, InitSetup.SERVO_CLOSED_AUTO, 5.0, this, initsetup);
+        //turn left and raise arm (TbTW)
+        encoderClass.encoderDrive(0.5, 230, 230, 230, 230, 1100, 0, InitSetup.SERVO_CLOSED_AUTO, 5.0, this, initsetup);
+        //move forward
+        encoderClass.encoderDrive(0.5, 560, 560, 560, 560, 0, 0, InitSetup.SERVO_CLOSED_AUTO, 5.0, this, initsetup);
+        //drop cone (open servo)
+        encoderClass.encoderDrive(0.5, 0, 0, 0, 0, 0, 0, InitSetup.SERVO_OPEN_AUTO, 5.0, this, initsetup);
+        //move backward
+        encoderClass.encoderDrive(0.5, -280, -280, -280, -280, 0, 0, InitSetup.SERVO_OPEN_AUTO, 5.0, this, initsetup);
 
         /* Actually do something useful */
         if(aprilTagsSetup.tagOfInterest == null){
