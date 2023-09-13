@@ -45,38 +45,20 @@ public class AutoWithObjectDetectionLeft extends LinearOpMode
                                      V
          */
         //shorthand definitions: (TbTW=To be tweaked) (
-        //Initial lift to be able to grab cone
-        encoderClass.encoderDrive(1, 0, 0, 0, 0, 50, 0, InitSetup.SERVO_CLOSED_AUTO, 5.0, this, initsetup);
-        //strafe right
-        encoderClass.encoderDrive(0.5, 660, -660, -660, 660, 0, 0, InitSetup.SERVO_CLOSED_AUTO, 5.0, this, initsetup);
-        //move forward
-        encoderClass.encoderDrive(0.5, 980, 980, 980, 980, 0, 0, InitSetup.SERVO_CLOSED_AUTO, 5.0, this, initsetup);
-        //turn left and raise arm (TbTW)
-        encoderClass.encoderDrive(0.5, 230, 230, 230, 230, 1100, 0, InitSetup.SERVO_CLOSED_AUTO, 5.0, this, initsetup);
-        //move forward
-        encoderClass.encoderDrive(0.5, 560, 560, 560, 560, 0, 0, InitSetup.SERVO_CLOSED_AUTO, 5.0, this, initsetup);
-        //drop cone (open servo)
-        encoderClass.encoderDrive(0.5, 0, 0, 0, 0, 0, 0, InitSetup.SERVO_OPEN_AUTO, 5.0, this, initsetup);
-        //move backward
-        encoderClass.encoderDrive(0.5, -280, -280, -280, -280, 0, 0, InitSetup.SERVO_OPEN_AUTO, 5.0, this, initsetup);
 
         /* Actually do something useful */
         if(aprilTagsSetup.tagOfInterest == null){
             //default trajectory here if preferred
             //Park
-            encoderClass.encoderDrive(0.5, -360, 360, 360, -360, 0, 0, InitSetup.SERVO_CLOSED_AUTO, 5.0, this, initsetup);
         }else if(aprilTagsSetup.tagOfInterest.id == aprilTagsSetup.ONE){
             //Trajectory if tag one is detected
             //Park
-            encoderClass.encoderDrive(0.5, -1060, 1060, 1060, -1060, 0, 0, InitSetup.SERVO_CLOSED_AUTO, 5.0, this, initsetup);
         }else if(aprilTagsSetup.tagOfInterest.id == aprilTagsSetup.TWO){
             //Trajectory if tag two is detected
             //Park
-            encoderClass.encoderDrive(0.5, -360, 360, 360, -360, 0, 0, InitSetup.SERVO_CLOSED_AUTO, 5.0, this, initsetup);
         }else{
             //Trajectory if tag three is detected
             //Park
-            encoderClass.encoderDrive(0.5, 360, -360, -360, 360, 0, 0, InitSetup.SERVO_CLOSED_AUTO, 5.0, this, initsetup);
         }
     }
 }

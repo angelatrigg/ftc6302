@@ -12,9 +12,6 @@ public class InitSetup {
     public DcMotor motor_drive_rf;
     public DcMotor motor_drive_lr;
     public DcMotor motor_drive_rr;
-    public DcMotor motor_lift;
-    public DcMotor motor_swivel;
-    public Servo claw_servo;
 
     //Variable for joystick speed
     public double JOY_SPEED;
@@ -66,18 +63,15 @@ public class InitSetup {
         motor_drive_rf = hardwareMap.get(DcMotor.class, "motor_drive_rf");
         motor_drive_lr = hardwareMap.get(DcMotor.class, "motor_drive_lr");
         motor_drive_rr = hardwareMap.get(DcMotor.class, "motor_drive_rr");
-        motor_lift = hardwareMap.get(DcMotor.class, "motor_lift");
-        motor_swivel = hardwareMap.get(DcMotor.class, "motor_swivel");
-        claw_servo = hardwareMap.get(Servo.class, "claw_servo");
+
 
         //Reverse directions of motors
         motor_drive_lr.setDirection(DcMotorSimple.Direction.REVERSE);
         motor_drive_lf.setDirection(DcMotorSimple.Direction.REVERSE);
-        motor_lift.setDirection(DcMotorSimple.Direction.REVERSE);
+
 
         //Set brake behavior on motors
-        motor_lift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        motor_swivel.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
         /**
          * REMEMBER TO REMOVE THIS
          */
@@ -99,62 +93,32 @@ public class InitSetup {
         motor_drive_rf = hardwareMap.get(DcMotor.class, "motor_drive_rf");
         motor_drive_lr = hardwareMap.get(DcMotor.class, "motor_drive_lr");
         motor_drive_rr = hardwareMap.get(DcMotor.class, "motor_drive_rr");
-        motor_lift = hardwareMap.get(DcMotor.class, "motor_lift");
-        motor_swivel = hardwareMap.get(DcMotor.class, "motor_swivel");
-        claw_servo = hardwareMap.get(Servo.class, "claw_servo");
+
 
         //Reverse directions of motors
         motor_drive_lr.setDirection(DcMotorSimple.Direction.REVERSE);
         motor_drive_lf.setDirection(DcMotorSimple.Direction.REVERSE);
-        motor_lift.setDirection(DcMotorSimple.Direction.REVERSE);
+
 
         //Set brake behavior on motors
         motor_drive_lf.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         motor_drive_rf.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         motor_drive_lr.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         motor_drive_rr.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        motor_lift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        motor_swivel.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
 
         //Reset encoder values
         motor_drive_lf.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         motor_drive_rf.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         motor_drive_lr.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         motor_drive_rr.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        motor_lift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        motor_swivel.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
 
         //Enable encoders
         motor_drive_lf.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         motor_drive_rf.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         motor_drive_lr.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         motor_drive_rr.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        motor_lift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        motor_swivel.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-    }
-    public void autoSetupLiftSwivelOnly(HardwareMap hardwareMap) {
 
-        //Set initial servo position
-        SERVO_POS = SERVO_CLOSED;
-
-        //Define motors via hardwareMap
-        motor_lift = hardwareMap.get(DcMotor.class, "motor_lift");
-        motor_swivel = hardwareMap.get(DcMotor.class, "motor_swivel");
-        claw_servo = hardwareMap.get(Servo.class, "claw_servo");
-
-        //Reverse directions of motors
-        motor_lift.setDirection(DcMotorSimple.Direction.REVERSE);
-
-        //Set brake behavior on motors
-        motor_lift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        motor_swivel.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-
-        //Reset encoder values
-        motor_lift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        //motor_swivel.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-
-        //Enable encoders
-        motor_lift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        //motor_swivel.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
 }
