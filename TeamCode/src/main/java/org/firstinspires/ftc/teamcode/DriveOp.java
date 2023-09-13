@@ -109,7 +109,6 @@ public class DriveOp extends LinearOpMode {
                 if (!gamepad2.b && !gamepad2.a && !gamepad2.x && !gamepad2.y && !gamepad2.right_bumper && !gamepad2.left_bumper) {
 
                 }
-                initsetup.claw_servo.setPosition(initsetup.SERVO_POS);
                 telemetry.addData("Left Rear Pow", initsetup.motor_drive_lr.getPower());
                 telemetry.addData("Left Front Pow", initsetup.motor_drive_lf.getPower());
                 telemetry.addData("Right Rear Pow", initsetup.motor_drive_rr.getPower());

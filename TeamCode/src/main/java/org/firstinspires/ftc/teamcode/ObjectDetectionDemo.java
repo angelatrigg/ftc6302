@@ -40,7 +40,6 @@ public class ObjectDetectionDemo extends LinearOpMode
         RoadrunnerSetup rrSetup = new RoadrunnerSetup(hardwareMap);
         InitSetup initsetup = new InitSetup();
         EncoderClass encoderClass = new EncoderClass();
-        initsetup.autoSetupLiftSwivelOnly(hardwareMap);
 
         rrSetup.setPoseEstimate(new Pose2d(0, 0, Math.toRadians(0)));
 
