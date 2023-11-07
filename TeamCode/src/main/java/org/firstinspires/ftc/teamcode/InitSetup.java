@@ -12,6 +12,7 @@ public class InitSetup {
     public DcMotor motor_drive_rf;
     public DcMotor motor_drive_lr;
     public DcMotor motor_drive_rr;
+    public DcMotor motor_arm;
 
     //Variable for joystick speed
     public double JOY_SPEED;
@@ -27,12 +28,12 @@ public class InitSetup {
 
     //Number of ticks for each motor type
     public static final double     COUNTS_PER_MOTOR_REV_DRIVE    = 537.7 ;
-    public static final double     COUNTS_PER_MOTOR_REV_LIFT    = 537.7 ;
+    public static final double     COUNTS_PER_MOTOR_REV_ARM    = 537.7 ;
     public static final double     COUNTS_PER_MOTOR_REV_SWIVEL    = 1120 ;
 
     //Gear reductions (if any, just leave 1 if direct mounted)
     public static final double     DRIVE_GEAR_REDUCTION    = 1.0 ;
-    public static final double     LIFT_GEAR_REDUCTION    = 1.0 ;
+    public static final double     ARM_GEAR_REDUCTION    = 1.0 ;
     public static final double     SWIVEL_GEAR_REDUCTION    = 1.0 ;
 
     //Wheel diameters for driving by millimeters
@@ -42,7 +43,7 @@ public class InitSetup {
     //Formulas for driving by millimeters and degrees
     public static final double     COUNTS_PER_MM_DRIVE        = (COUNTS_PER_MOTOR_REV_DRIVE * DRIVE_GEAR_REDUCTION) /
             (WHEEL_DIAMETER_MM_DRIVE * 3.1415); //Drive motors
-    public static final double     COUNTS_PER_MM_LIFT         = (COUNTS_PER_MOTOR_REV_LIFT * LIFT_GEAR_REDUCTION) /
+    public static final double     COUNTS_PER_MM_ARM         = (COUNTS_PER_MOTOR_REV_ARM * ARM_GEAR_REDUCTION) /
             (WHEEL_DIAMETER_MM_LIFT * 3.1415); //Uses separate gear reduction and wheel diameter for lift / arm
     public static final double     COUNTS_PER_DG_SWIVEL       = ((COUNTS_PER_MOTOR_REV_SWIVEL * SWIVEL_GEAR_REDUCTION) /
             360) / (COUNTS_PER_MOTOR_REV_SWIVEL * SWIVEL_GEAR_REDUCTION); //Converts counts per rev into degrees
@@ -63,6 +64,7 @@ public class InitSetup {
         motor_drive_rf = hardwareMap.get(DcMotor.class, "motor_drive_rf");
         motor_drive_lr = hardwareMap.get(DcMotor.class, "motor_drive_lr");
         motor_drive_rr = hardwareMap.get(DcMotor.class, "motor_drive_rr");
+        motor_arm = hardwareMap.get(DcMotor.class, "motor_arm");
 
 
         //Reverse directions of motors
@@ -93,7 +95,7 @@ public class InitSetup {
         motor_drive_rf = hardwareMap.get(DcMotor.class, "motor_drive_rf");
         motor_drive_lr = hardwareMap.get(DcMotor.class, "motor_drive_lr");
         motor_drive_rr = hardwareMap.get(DcMotor.class, "motor_drive_rr");
-
+        motor_arm = hardwareMap.get(DcMotor.class, "motor_arm");
 
         //Reverse directions of motors
         motor_drive_lr.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -105,6 +107,7 @@ public class InitSetup {
         motor_drive_rf.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         motor_drive_lr.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         motor_drive_rr.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        motor_arm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
 
         //Reset encoder values
@@ -112,6 +115,7 @@ public class InitSetup {
         motor_drive_rf.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         motor_drive_lr.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         motor_drive_rr.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        motor_arm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
 
         //Enable encoders
@@ -119,6 +123,7 @@ public class InitSetup {
         motor_drive_rf.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         motor_drive_lr.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         motor_drive_rr.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        motor_arm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
     }
 }
