@@ -101,10 +101,10 @@ public class DriveOp extends LinearOpMode {
 
                 }
                 if (gamepad2.x) {
-
+                    initsetup.launch_servo.setPosition(InitSetup.SERVO_CLOSED);
                 }
                 if (gamepad2.y) {
-
+                    initsetup.launch_servo.setPosition(InitSetup.SERVO_OPEN);
                 }
                 if (!gamepad2.b && !gamepad2.a && !gamepad2.x && !gamepad2.y && !gamepad2.right_bumper && !gamepad2.left_bumper) {
 

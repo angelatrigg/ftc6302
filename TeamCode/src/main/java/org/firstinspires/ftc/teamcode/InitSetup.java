@@ -13,7 +13,7 @@ public class InitSetup {
     public DcMotor motor_drive_lr;
     public DcMotor motor_drive_rr;
     public DcMotor motor_arm;
-
+    public Servo launch_servo;
     //Variable for joystick speed
     public double JOY_SPEED;
 
@@ -65,7 +65,7 @@ public class InitSetup {
         motor_drive_lr = hardwareMap.get(DcMotor.class, "motor_drive_lr");
         motor_drive_rr = hardwareMap.get(DcMotor.class, "motor_drive_rr");
         motor_arm = hardwareMap.get(DcMotor.class, "motor_arm");
-
+        launch_servo = hardwareMap.get(Servo.class, "launch_servo");
 
         //Reverse directions of motors
         motor_drive_lr.setDirection(DcMotorSimple.Direction.REVERSE);
