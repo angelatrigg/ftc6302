@@ -1,9 +1,12 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
+
+import org.firstinspires.ftc.teamcode.roadrunner.util.Encoder;
 
 public class InitSetup {
 
@@ -14,6 +17,10 @@ public class InitSetup {
     public DcMotor motor_drive_rr;
     public DcMotor motor_arm;
     public Servo launch_servo;
+
+    public Encoder leftEncoder;
+    public Encoder rightEncoder;
+    public Encoder frontEncoder;
     //Variable for joystick speed
     public double JOY_SPEED;
 
@@ -125,5 +132,42 @@ public class InitSetup {
         motor_drive_rr.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         motor_arm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
+    }
+    public void deadwheelSetup(HardwareMap hardwareMap) {
+
+        //Set initial joystick speed limit
+        JOY_SPEED = 0.8;
+
+        //Set initial servo position
+        SERVO_POS = SERVO_CLOSED;
+
+        //Define motors via hardwareMap
+        motor_drive_lf = hardwareMap.get(DcMotor.class, "motor_drive_lf");
+        motor_drive_rf = hardwareMap.get(DcMotor.class, "motor_drive_rf");
+        motor_drive_lr = hardwareMap.get(DcMotor.class, "motor_drive_lr");
+        motor_drive_rr = hardwareMap.get(DcMotor.class, "motor_drive_rr");
+        motor_arm = hardwareMap.get(DcMotor.class, "motor_arm");
+        launch_servo = hardwareMap.get(Servo.class, "launch_servo");
+        leftEncoder = new Encoder(hardwareMap.get(DcMotorEx.class, "leftEncoder"));
+        rightEncoder = new Encoder(hardwareMap.get(DcMotorEx.class, "rightEncoder"));
+        frontEncoder = new Encoder(hardwareMap.get(DcMotorEx.class, "frontEncoder"));
+
+        //Reverse directions of motors
+        motor_drive_lr.setDirection(DcMotorSimple.Direction.REVERSE);
+        motor_drive_lf.setDirection(DcMotorSimple.Direction.REVERSE);
+
+
+        //Set brake behavior on motors
+
+        /**
+         * REMEMBER TO REMOVE THIS
+         */
+        //Reset encoder values
+        //motor_lift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        //motor_swivel.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        //Enable encoders
+        //motor_lift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        //motor_swivel.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
 }
