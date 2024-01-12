@@ -33,9 +33,9 @@ public class RoadrunnerDriveConstants {
      * from DriveVelocityPIDTuner.\
      * getMotorVelocityF(MAX_RPM / 60 * TICKS_PER_REV)
      */
-    public static final boolean RUN_USING_ENCODER = true;
-    public static PIDFCoefficients MOTOR_VELO_PID = new PIDFCoefficients(10, 0, 10,
-            13);
+    public static final boolean RUN_USING_ENCODER = false;
+    public static PIDFCoefficients MOTOR_VELO_PID = new PIDFCoefficients(0, 0, 0,
+            12.162920117646188);
 
     /*
      * These are physical constants that can be determined from your robot (including the track
@@ -47,7 +47,7 @@ public class RoadrunnerDriveConstants {
      */
     public static double WHEEL_RADIUS = 1.87; // in
     public static double GEAR_RATIO = 1; // output (wheel) speed / input (motor) speed
-    public static double TRACK_WIDTH = 13.24; // in
+    public static double TRACK_WIDTH = 16.3; // in
 
     /*
      * These are the feedforward parameters used to model the drive motor behavior. If you are using
@@ -56,7 +56,8 @@ public class RoadrunnerDriveConstants {
      * empirically tuned.
      */
     public static double kV = 1.0 / rpmToVelocity(MAX_RPM);
-    public static double kA = 0;
+    //public static double kV = 0.0172;
+    public static double kA = 0.002;
     public static double kStatic = 0;
 
     /*
@@ -66,8 +67,8 @@ public class RoadrunnerDriveConstants {
      * small and gradually increase them later after everything is working. All distance units are
      * inches. 13.05 12.46
      */
-    public static double MAX_VEL = 32;
-    public static double MAX_ACCEL = 32;
+    public static double MAX_VEL = 50;
+    public static double MAX_ACCEL = 20;
     public static double MAX_ANG_VEL = Math.toRadians(136.6);
     public static double MAX_ANG_ACCEL = Math.toRadians(136.6);
 

@@ -38,7 +38,7 @@ import org.firstinspires.ftc.teamcode.roadrunner.ExamplesAndTuners.SampleMecanum
  *
  * Uncomment the @Disabled tag below to use this opmode.
  */
-@Disabled
+
 @Config
 @TeleOp(group = "drive")
 public class MotorDirectionDebugger extends LinearOpMode {
