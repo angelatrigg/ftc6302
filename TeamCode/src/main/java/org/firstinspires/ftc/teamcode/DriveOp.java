@@ -79,6 +79,7 @@ public class DriveOp extends LinearOpMode {
                 if (gamepad1.a) {
                     initsetup.JOY_SPEED = 0.5;
                 }
+
                 if (gamepad1.b) {
                     initsetup.JOY_SPEED = 0.8;
                 }
@@ -89,10 +90,11 @@ public class DriveOp extends LinearOpMode {
                     initsetup.JOY_SPEED = 1;
                 }
                 if (gamepad2.a) {
-                    initsetup.motor_arm.setPower(0.1);
-                }
-                if (gamepad2.b) {
-                    initsetup.motor_arm.setPower(-0.1);
+                    initsetup.motor_arm.setPower(0.5);
+                } else if (gamepad2.b) {
+                    initsetup.motor_arm.setPower(-0.5);
+                } else {
+                    initsetup.motor_arm.setPower(0);
                 }
                 if (gamepad2.left_bumper) {
 

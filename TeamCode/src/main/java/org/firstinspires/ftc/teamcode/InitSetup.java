@@ -17,6 +17,11 @@ public class InitSetup {
     public DcMotor motor_drive_rr;
     public DcMotor motor_arm;
     public Servo launch_servo;
+    public Servo claw_arm_servo;
+    public Servo claw_pan_servo;
+    public Servo claw_tilt_servo;
+    public Servo claw_left_servo;
+    public Servo claw_right_servo;
 
     public Encoder leftEncoder;
     public Encoder rightEncoder;
@@ -73,13 +78,21 @@ public class InitSetup {
         motor_drive_rr = hardwareMap.get(DcMotor.class, "motor_drive_rr");
         motor_arm = hardwareMap.get(DcMotor.class, "motor_arm");
         launch_servo = hardwareMap.get(Servo.class, "launch_servo");
+        claw_arm_servo = hardwareMap.get(Servo.class, "claw_arm_servo");
+        claw_pan_servo = hardwareMap.get(Servo.class, "claw_pan_servo");
+        claw_tilt_servo = hardwareMap.get(Servo.class, "claw_tilt_servo");
+        claw_left_servo = hardwareMap.get(Servo.class, "claw_left_servo");
+        claw_right_servo = hardwareMap.get(Servo.class, "claw_right_servo");
+
 
         //Reverse directions of motors
         motor_drive_lr.setDirection(DcMotorSimple.Direction.REVERSE);
         motor_drive_lf.setDirection(DcMotorSimple.Direction.REVERSE);
+        motor_arm.setDirection(DcMotorSimple.Direction.REVERSE);
 
 
         //Set brake behavior on motors
+        motor_arm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         /**
          * REMEMBER TO REMOVE THIS
