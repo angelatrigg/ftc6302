@@ -45,6 +45,15 @@ public class InitSetup {
     public static final double SERVO_ARM_DOWN = 0.55;
     public static final double SERVO_LEFT_OPEN = 1.55;
     public static final double SERVO_LEFT_CLOSED = 0.5;
+    public static final double SERVO_RIGHT_OPEN = 1.55;
+    public static final double SERVO_RIGHT_CLOSED = 0.5;
+    public double SERVO_TILT_POS = 0;
+    public double SERVO_PAN_POS = 0;
+
+    //State variables for claw (true = closed, false = open)
+    public boolean SERVO_LEFT_STATE = true;
+    public boolean SERVO_RIGHT_STATE = true;
+
 
     //Number of ticks for each motor type
     public static final double     COUNTS_PER_MOTOR_REV_DRIVE    = 537.7 ;

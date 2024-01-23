@@ -110,11 +110,19 @@ public class DriveOp extends LinearOpMode {
                 }
 
                 //Pixel claw controls
-                if (gamepad2.left_bumper) {
-
+                if (gamepad2.left_bumper && initsetup.SERVO_LEFT_STATE) {
+                    initsetup.claw_left_servo.setPosition(InitSetup.SERVO_LEFT_OPEN);
+                    initsetup.SERVO_LEFT_STATE = false;
+                } else if (gamepad2.left_bumper && !initsetup.SERVO_LEFT_STATE) {
+                    initsetup.claw_left_servo.setPosition(InitSetup.SERVO_LEFT_CLOSED);
+                    initsetup.SERVO_LEFT_STATE = true;
                 }
-                if (gamepad2.right_bumper) {
-
+                if (gamepad2.right_bumper && initsetup.SERVO_RIGHT_STATE) {
+                    initsetup.claw_right_servo.setPosition(InitSetup.SERVO_RIGHT_OPEN);
+                    initsetup.SERVO_RIGHT_STATE = false;
+                } else if (gamepad2.right_bumper && !initsetup.SERVO_RIGHT_STATE) {
+                    initsetup.claw_right_servo.setPosition(InitSetup.SERVO_RIGHT_CLOSED);
+                    initsetup.SERVO_RIGHT_STATE = true;
                 }
 
                 //Claw arm controls
@@ -127,16 +135,16 @@ public class DriveOp extends LinearOpMode {
 
                 //Claw gimbal controls
                 if (gamepad2.dpad_up){
-
+                    initsetup.SERVO_TILT_POS = (initsetup.SERVO_TILT_POS + 0.01);
                 }
                 if (gamepad2.dpad_left) {
-
+                    initsetup.SERVO_PAN_POS = (initsetup.SERVO_PAN_POS - 0.01);
                 }
                 if (gamepad2.dpad_right) {
-
+                    initsetup.SERVO_PAN_POS = (initsetup.SERVO_PAN_POS + 0.01);
                 }
                 if (gamepad2.dpad_down) {
-
+                    initsetup.SERVO_TILT_POS = (initsetup.SERVO_TILT_POS - 0.01);
                 }
 
                 telemetry.addData("Left Rear Pow", initsetup.motor_drive_lr.getPower());
