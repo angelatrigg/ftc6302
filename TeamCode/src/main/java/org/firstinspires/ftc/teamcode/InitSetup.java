@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
@@ -10,6 +11,7 @@ import org.firstinspires.ftc.teamcode.roadrunner.util.Encoder;
 
 public class InitSetup {
 
+    hardwareMapChecker hardwareMapChecker = new hardwareMapChecker();
     //Variables to define motors
     public DcMotor motor_drive_lf;
     public DcMotor motor_drive_rf;
@@ -37,6 +39,12 @@ public class InitSetup {
     public static final double SERVO_OPEN_AUTO = 2;
     public static final double SERVO_CLOSED = 0.85;
     public static final double SERVO_OPEN = 1.55;
+    public static final double SERVO_LAUNCHER_OPEN = 2.55;
+    public static final double SERVO_LAUNCHER_CLOSED = 0.5;
+    public static final double SERVO_ARM_UP = 1.55;
+    public static final double SERVO_ARM_DOWN = 0.55;
+    public static final double SERVO_LEFT_OPEN = 1.55;
+    public static final double SERVO_LEFT_CLOSED = 0.5;
 
     //Number of ticks for each motor type
     public static final double     COUNTS_PER_MOTOR_REV_DRIVE    = 537.7 ;
@@ -63,7 +71,7 @@ public class InitSetup {
     //Tolerance of encoders to reduce hangs trying to get the perfect position
     public static final double     ENCODER_TOLERANCE       = 7;
 
-    public void standardSetup(HardwareMap hardwareMap) {
+    public void standardSetup(HardwareMap hardwareMap, LinearOpMode linearOpMode) {
 
         //Set initial joystick speed limit
         JOY_SPEED = 0.8;
@@ -84,6 +92,12 @@ public class InitSetup {
         claw_left_servo = hardwareMap.get(Servo.class, "claw_left_servo");
         claw_right_servo = hardwareMap.get(Servo.class, "claw_right_servo");
 
+        //Freeze code when hardwareMap returns a null value
+        if (hardwareMapChecker.hardwareMapChecker(this)) {
+            linearOpMode.telemetry.addLine("ERROR: HardwareMap returned a null value. Check hardware configuration.");
+            linearOpMode.telemetry.update();
+            linearOpMode.sleep(1500);
+        }
 
         //Reverse directions of motors
         motor_drive_lr.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -104,6 +118,8 @@ public class InitSetup {
         //Enable encoders
         //motor_lift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         //motor_swivel.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+
     }
     public void autoSetup(HardwareMap hardwareMap) {
 
