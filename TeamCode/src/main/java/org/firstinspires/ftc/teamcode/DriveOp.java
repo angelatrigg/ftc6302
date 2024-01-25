@@ -110,19 +110,23 @@ public class DriveOp extends LinearOpMode {
                 }
 
                 //Pixel claw controls
-                if (gamepad2.left_bumper && initsetup.SERVO_LEFT_STATE) {
+                if (gamepad2.left_bumper && initsetup.SERVO_LEFT_STATE && initsetup.left_cooldown == 0) {
                     initsetup.claw_left_servo.setPosition(InitSetup.SERVO_LEFT_OPEN);
                     initsetup.SERVO_LEFT_STATE = false;
-                } else if (gamepad2.left_bumper && !initsetup.SERVO_LEFT_STATE) {
+                    initsetup.left_cooldown = 10;
+                } else if (gamepad2.left_bumper && !initsetup.SERVO_LEFT_STATE && initsetup.left_cooldown == 0) {
                     initsetup.claw_left_servo.setPosition(InitSetup.SERVO_LEFT_CLOSED);
                     initsetup.SERVO_LEFT_STATE = true;
+                    initsetup.left_cooldown = 10;
                 }
-                if (gamepad2.right_bumper && initsetup.SERVO_RIGHT_STATE) {
+                if (gamepad2.right_bumper && initsetup.SERVO_RIGHT_STATE && initsetup.right_cooldown == 0) {
                     initsetup.claw_right_servo.setPosition(InitSetup.SERVO_RIGHT_OPEN);
                     initsetup.SERVO_RIGHT_STATE = false;
-                } else if (gamepad2.right_bumper && !initsetup.SERVO_RIGHT_STATE) {
+                    initsetup.right_cooldown = 10;
+                } else if (gamepad2.right_bumper && !initsetup.SERVO_RIGHT_STATE && initsetup.right_cooldown == 0) {
                     initsetup.claw_right_servo.setPosition(InitSetup.SERVO_RIGHT_CLOSED);
                     initsetup.SERVO_RIGHT_STATE = true;
+                    initsetup.right_cooldown = 10;
                 }
 
                 //Claw arm controls
@@ -135,17 +139,27 @@ public class DriveOp extends LinearOpMode {
 
                 //Claw gimbal controls
                 if (gamepad2.dpad_up){
-                    initsetup.SERVO_TILT_POS = (initsetup.SERVO_TILT_POS + 0.01);
+                    initsetup.SERVO_TILT_POS = (initsetup.SERVO_TILT_POS - 0.005);
+                    initsetup.claw_tilt_servo.setPosition(initsetup.SERVO_TILT_POS);
                 }
                 if (gamepad2.dpad_left) {
-                    initsetup.SERVO_PAN_POS = (initsetup.SERVO_PAN_POS - 0.01);
+                    initsetup.SERVO_PAN_POS = (initsetup.SERVO_PAN_POS + 0.005);
+                    initsetup.claw_pan_servo.setPosition(initsetup.SERVO_PAN_POS);
                 }
                 if (gamepad2.dpad_right) {
-                    initsetup.SERVO_PAN_POS = (initsetup.SERVO_PAN_POS + 0.01);
+                    initsetup.SERVO_PAN_POS = (initsetup.SERVO_PAN_POS - 0.005);
+                    initsetup.claw_pan_servo.setPosition(initsetup.SERVO_PAN_POS);
                 }
                 if (gamepad2.dpad_down) {
-                    initsetup.SERVO_TILT_POS = (initsetup.SERVO_TILT_POS - 0.01);
+                    initsetup.SERVO_TILT_POS = (initsetup.SERVO_TILT_POS + 0.005);
+                    initsetup.claw_tilt_servo.setPosition(initsetup.SERVO_TILT_POS);
                 }
+
+
+                //Cooldowns
+                if (initsetup.left_cooldown > 0 && !gamepad2.left_bumper) {initsetup.left_cooldown = initsetup.left_cooldown-1;}
+                if (initsetup.right_cooldown > 0 && !gamepad2.right_bumper) {initsetup.right_cooldown = initsetup.right_cooldown-1;}
+
 
                 telemetry.addData("Left Rear Pow", initsetup.motor_drive_lr.getPower());
                 telemetry.addData("Left Front Pow", initsetup.motor_drive_lf.getPower());
@@ -154,6 +168,11 @@ public class DriveOp extends LinearOpMode {
                 telemetry.addData("Left Joystick Y", gamepad1.left_stick_y);
                 telemetry.addData("Right Joystick Y", gamepad1.right_stick_y);
                 telemetry.addData("Joystick Max Speed", initsetup.JOY_SPEED);
+                telemetry.addData("Right Cooldown", initsetup.right_cooldown);
+                /*telemetry.addData("Tilt Servo Pos:", initsetup.claw_tilt_servo.getPosition());
+                telemetry.addData("Pan Servo Pos:", initsetup.claw_pan_servo.getPosition());
+                telemetry.addData("Left Servo Pos:", initsetup.claw_left_servo.getPosition());
+                telemetry.addData("Right Servo Pos:", initsetup.claw_right_servo.getPosition());*/
                 telemetry.update();
             }
         }
