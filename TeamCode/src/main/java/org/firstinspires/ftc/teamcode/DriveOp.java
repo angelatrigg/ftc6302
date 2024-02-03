@@ -2,6 +2,10 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DistanceSensor;
+import com.qualcomm.robotcore.hardware.SwitchableLight;
+
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
 @TeleOp(name = "DriveOp")
 public class DriveOp extends LinearOpMode {
@@ -98,15 +102,15 @@ public class DriveOp extends LinearOpMode {
                     initsetup.JOY_SPEED = 1;
                 }
 
+                initsetup.motor_hang.setPower(-gamepad2.right_stick_y);
+
                 //Arm controls
-                if (gamepad2.a) {
-                    initsetup.motor_arm.setPower(0.5);
-                }
-                if (gamepad2.b) {
-                    initsetup.motor_arm.setPower(-0.5);
-                }
-                if (!(gamepad2.a || gamepad1.b)) {
-                    initsetup.motor_arm.setPower(0);
+                if (gamepad2.a && (initsetup.motor_arm.getCurrentPosition() <= 1600)) {
+                    initsetup.motor_arm.setPower(0.7);
+                } else if (gamepad2.b && (initsetup.motor_arm.getCurrentPosition() >= 50)) {
+                    initsetup.motor_arm.setPower(-0.6);
+                } else {
+                    initsetup.motor_arm.setPower(0.1);
                 }
 
                 //Pixel claw controls
@@ -131,16 +135,21 @@ public class DriveOp extends LinearOpMode {
 
                 //Claw arm controls
                 if (gamepad2.x) {
-                    initsetup.claw_arm_servo.setPosition(InitSetup.SERVO_LAUNCHER_CLOSED);
+                    initsetup.claw_tilt_servo.setPosition(InitSetup.SERVO_TILT_DOWN);
+                    if (initsetup.claw_arm_servo.getPosition() > InitSetup.SERVO_ARM_DOWN) {
+                        initsetup.claw_arm_servo.setPosition(initsetup.claw_arm_servo.getPosition() - 0.005);
+                    }
                 }
                 if (gamepad2.y) {
-                    initsetup.claw_arm_servo.setPosition(InitSetup.SERVO_LAUNCHER_OPEN);
+                    initsetup.claw_tilt_servo.setPosition(InitSetup.SERVO_TILT_UP);
+                    if (initsetup.claw_arm_servo.getPosition() < InitSetup.SERVO_ARM_UP) {
+                        initsetup.claw_arm_servo.setPosition(initsetup.claw_arm_servo.getPosition() + 0.01);
+                    }
                 }
 
                 //Claw gimbal controls
                 if (gamepad2.dpad_up){
-                    initsetup.SERVO_TILT_POS = (initsetup.SERVO_TILT_POS - 0.005);
-                    initsetup.claw_tilt_servo.setPosition(initsetup.SERVO_TILT_POS);
+                    initsetup.claw_tilt_servo.setPosition(InitSetup.SERVO_TILT_UP);
                 }
                 if (gamepad2.dpad_left) {
                     initsetup.SERVO_PAN_POS = (initsetup.SERVO_PAN_POS + 0.005);
@@ -151,8 +160,17 @@ public class DriveOp extends LinearOpMode {
                     initsetup.claw_pan_servo.setPosition(initsetup.SERVO_PAN_POS);
                 }
                 if (gamepad2.dpad_down) {
-                    initsetup.SERVO_TILT_POS = (initsetup.SERVO_TILT_POS + 0.005);
-                    initsetup.claw_tilt_servo.setPosition(initsetup.SERVO_TILT_POS);
+                    initsetup.claw_tilt_servo.setPosition(InitSetup.SERVO_TILT_DOWN);
+                }
+
+                //Distance checking
+                if (((DistanceSensor) initsetup.colorSensor).getDistance(DistanceUnit.CM) > 4.6) {
+                    telemetry.addData("No Object Detected ", ((DistanceSensor) initsetup.colorSensor).getDistance(DistanceUnit.CM));
+
+                }
+                if (((DistanceSensor) initsetup.colorSensor).getDistance(DistanceUnit.CM) < 4.6) {
+                    telemetry.addData("Object Detected! ", ((DistanceSensor) initsetup.colorSensor).getDistance(DistanceUnit.CM));
+
                 }
 
 
@@ -169,10 +187,14 @@ public class DriveOp extends LinearOpMode {
                 telemetry.addData("Right Joystick Y", gamepad1.right_stick_y);
                 telemetry.addData("Joystick Max Speed", initsetup.JOY_SPEED);
                 telemetry.addData("Right Cooldown", initsetup.right_cooldown);
-                /*telemetry.addData("Tilt Servo Pos:", initsetup.claw_tilt_servo.getPosition());
+                telemetry.addData("Arm Position: ", initsetup.motor_arm.getCurrentPosition());
+                //telemetry.addData("Tilt Servo Pos:", initsetup.claw_tilt_servo.getPosition());
                 telemetry.addData("Pan Servo Pos:", initsetup.claw_pan_servo.getPosition());
-                telemetry.addData("Left Servo Pos:", initsetup.claw_left_servo.getPosition());
-                telemetry.addData("Right Servo Pos:", initsetup.claw_right_servo.getPosition());*/
+                //telemetry.addData("Left Servo Pos:", initsetup.claw_left_servo.getPosition());
+                //telemetry.addData("Right Servo Pos:", initsetup.claw_right_servo.getPosition());
+                if (initsetup.colorSensor instanceof DistanceSensor) {
+                    telemetry.addData("Distance (cm)", "%.3f", ((DistanceSensor) initsetup.colorSensor).getDistance(DistanceUnit.CM));
+                }
                 telemetry.update();
             }
         }

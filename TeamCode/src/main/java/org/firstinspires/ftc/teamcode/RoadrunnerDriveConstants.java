@@ -47,7 +47,7 @@ public class RoadrunnerDriveConstants {
      */
     public static double WHEEL_RADIUS = 1.87; // in
     public static double GEAR_RATIO = 1; // output (wheel) speed / input (motor) speed
-    public static double TRACK_WIDTH = 16.3; // in
+    public static double TRACK_WIDTH = 16.68; // in
 
     /*
      * These are the feedforward parameters used to model the drive motor behavior. If you are using
@@ -69,8 +69,8 @@ public class RoadrunnerDriveConstants {
      */
     public static double MAX_VEL = 50;
     public static double MAX_ACCEL = 20;
-    public static double MAX_ANG_VEL = Math.toRadians(136.6);
-    public static double MAX_ANG_ACCEL = Math.toRadians(136.6);
+    public static double MAX_ANG_VEL = Math.toRadians(182.986);
+    public static double MAX_ANG_ACCEL = Math.toRadians(182.986);
 
     /*
      * Adjust the orientations here to match your robot. See the FTC SDK documentation for details.
