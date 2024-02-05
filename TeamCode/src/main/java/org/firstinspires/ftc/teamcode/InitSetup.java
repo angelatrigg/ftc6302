@@ -45,8 +45,8 @@ public class InitSetup {
     public static final double SERVO_OPEN = 1.55;
     public static final double SERVO_LAUNCHER_OPEN = 2.55;
     public static final double SERVO_LAUNCHER_CLOSED = 0.5;
-    public static final double SERVO_ARM_UP = 0.5;
-    public static final double SERVO_ARM_DOWN = 0.01;
+    public static final double SERVO_ARM_UP = 0.65;
+    public static final double SERVO_ARM_DOWN = 0.02;
     public static final double SERVO_LEFT_OPEN = 0.05;
     public static final double SERVO_LEFT_CLOSED = 0.2;
     public static final double SERVO_RIGHT_OPEN = 0.2;
@@ -155,6 +155,8 @@ public class InitSetup {
         claw_arm_servo.setPosition(SERVO_ARM_DOWN);
         claw_left_servo.setPosition(SERVO_LEFT_CLOSED);
         claw_right_servo.setPosition(SERVO_RIGHT_CLOSED);
+        //launch_servo.setPosition(1);
+
 
     }
     public void autoSetup(HardwareMap hardwareMap) {

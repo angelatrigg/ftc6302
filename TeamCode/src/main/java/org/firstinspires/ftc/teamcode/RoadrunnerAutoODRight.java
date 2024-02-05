@@ -42,18 +42,18 @@ public class RoadrunnerAutoODRight extends LinearOpMode {
                 .build();
         TrajectorySequence InitialTrajectory = rrSetup.trajectorySequenceBuilder(startPose)
                 //Check right spike
-                .strafeTo(new Vector2d(39, -43))
+                .strafeTo(new Vector2d(38.5, -43.8))
                 .build();
         TrajectorySequence SecondTrajectory = rrSetup.trajectorySequenceBuilder(InitialTrajectory.end())
                 //Check left spike from right spike
                 .turn(-Math.toRadians(-90))
                 .back(8)
-                .strafeTo(new Vector2d(44, -33))
+                .strafeTo(new Vector2d(44, -34))
                 //.strafeTo(new Vector2d(18, -38))
                 .build();
         TrajectorySequence ThirdTrajectory = rrSetup.trajectorySequenceBuilder(SecondTrajectory.end())
                //Check center spike from left spike
-                .strafeTo(new Vector2d(32, -39.5))
+                .strafeTo(new Vector2d(32, -40))
                 .build();
 
         waitForStart();

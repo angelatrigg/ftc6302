@@ -101,6 +101,11 @@ public class DriveOp extends LinearOpMode {
                 if (gamepad1.y) {
                     initsetup.JOY_SPEED = 1;
                 }
+                if ((gamepad1.right_trigger == 1.0) && (gamepad1.left_trigger == 1.0)) {
+                    initsetup.launch_servo.setPosition(0.8);
+                } else {
+                    initsetup.launch_servo.setPosition(0.5);
+                }
 
                 initsetup.motor_hang.setPower(-gamepad2.right_stick_y);
 
@@ -135,7 +140,7 @@ public class DriveOp extends LinearOpMode {
 
                 //Claw arm controls
                 if (gamepad2.x) {
-                    initsetup.claw_tilt_servo.setPosition(InitSetup.SERVO_TILT_DOWN);
+                    //initsetup.claw_tilt_servo.setPosition(InitSetup.SERVO_TILT_DOWN);
                     if (initsetup.claw_arm_servo.getPosition() > InitSetup.SERVO_ARM_DOWN) {
                         initsetup.claw_arm_servo.setPosition(initsetup.claw_arm_servo.getPosition() - 0.005);
                     }
@@ -190,6 +195,7 @@ public class DriveOp extends LinearOpMode {
                 telemetry.addData("Arm Position: ", initsetup.motor_arm.getCurrentPosition());
                 //telemetry.addData("Tilt Servo Pos:", initsetup.claw_tilt_servo.getPosition());
                 telemetry.addData("Pan Servo Pos:", initsetup.claw_pan_servo.getPosition());
+                //telemetry.addData("Right Trigger Pos", gamepad1.right_trigger);
                 //telemetry.addData("Left Servo Pos:", initsetup.claw_left_servo.getPosition());
                 //telemetry.addData("Right Servo Pos:", initsetup.claw_right_servo.getPosition());
                 if (initsetup.colorSensor instanceof DistanceSensor) {
