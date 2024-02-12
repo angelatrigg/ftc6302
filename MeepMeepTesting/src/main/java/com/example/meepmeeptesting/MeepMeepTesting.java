@@ -22,7 +22,31 @@ public class MeepMeepTesting {
                     // Set bot constraints: maxVel, maxAccel, maxAngVel, maxAngAccel, track width
                     .setConstraints(32, 32, Math.toRadians(136.6), Math.toRadians(136.6), 13.24)
                     .followTrajectorySequence(drive ->
-                            drive.trajectorySequenceBuilder(new Pose2d(35, -65, Math.toRadians(90)))
+                            drive.trajectorySequenceBuilder(new Pose2d(-35, -65, Math.toRadians(90)))
+                                    .strafeTo(new Vector2d(-53, -43.8))
+
+
+                                    .turn(-Math.toRadians(90))
+                                    .back(4)
+                                    .strafeTo(new Vector2d(-44, -20))
+//-43 -36 -28
+
+                                    .strafeTo(new Vector2d(-32, -28.5))
+
+
+                                    .strafeTo(new Vector2d(0, -45))
+                                    .turn(-Math.toRadians(-90))
+                                    /*.back(8)
+                                    .turn(Math.toRadians(180))
+                                    .strafeRight(2.5)
+                                    .back(4.5)\
+
+                                     */
+                                    .strafeTo(new Vector2d(38.5, -43.8))
+                                    .turn(-Math.toRadians(-90))
+                                    .back(8)
+                                    .strafeTo(new Vector2d(44, -34))
+                                    .strafeTo(new Vector2d(32, -40))
                                     /*//Grab cone
                                     .addTemporalMarker(() -> {
                                         ////initsetup.claw_servo.setPosition(InitSetup.SERVO_CLOSED_AUTO);
@@ -173,7 +197,7 @@ public class MeepMeepTesting {
                                     .lineTo(new Vector2d(60, -12))
 
                                      */
-
+/*
                                     //Start lifting
                                     .addTemporalMarker(() -> {
                                         //initsetup.motor_lift.setPower(1);
@@ -365,7 +389,11 @@ public class MeepMeepTesting {
                                     .setReversed(false)
                                     //Curve back to stack of cones
                                     .splineToLinearHeading(new Pose2d(37, -12, Math.toRadians(0)), Math.toRadians(0))
+
+ */
                                     .build()
+
+
                     );
 
             meepMeep.setBackground(MeepMeep.Background.FIELD_POWERPLAY_OFFICIAL)

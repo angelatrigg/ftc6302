@@ -41,6 +41,7 @@ import com.qualcomm.robotcore.hardware.VoltageSensor;
 import com.qualcomm.robotcore.hardware.configuration.typecontainers.MotorConfigurationType;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+import org.firstinspires.ftc.teamcode.roadrunner.ExamplesAndTuners.StandardTrackingWheelLocalizer;
 import org.firstinspires.ftc.teamcode.roadrunner.trajectorysequence.TrajectorySequence;
 import org.firstinspires.ftc.teamcode.roadrunner.trajectorysequence.TrajectorySequenceBuilder;
 import org.firstinspires.ftc.teamcode.roadrunner.trajectorysequence.TrajectorySequenceRunner;
@@ -55,8 +56,8 @@ import java.util.List;
  */
 @Config
 public class RoadrunnerSetup extends MecanumDrive {
-    public static PIDCoefficients TRANSLATIONAL_PID = new PIDCoefficients(6, 0, 0);
-    public static PIDCoefficients HEADING_PID = new PIDCoefficients(5, 0, 0);
+    public static PIDCoefficients TRANSLATIONAL_PID = new PIDCoefficients(11, 0, 1);
+    public static PIDCoefficients HEADING_PID = new PIDCoefficients(15, 0, 1);
 
     public static double LATERAL_MULTIPLIER = 1;
 
@@ -71,7 +72,7 @@ public class RoadrunnerSetup extends MecanumDrive {
 
     private TrajectoryFollower follower;
 
-    private DcMotorEx motor_drive_lf, motor_drive_lr, motor_drive_rr, motor_drive_rf;
+    private DcMotorEx leftFront, leftRear, rightRear, rightFront;
     private List<DcMotorEx> motors;
 
     private IMU imu;
@@ -95,17 +96,19 @@ public class RoadrunnerSetup extends MecanumDrive {
         }
 
         // TODO: adjust the names of the following hardware devices to match your configuration
+       /*
         imu = hardwareMap.get(IMU.class, "imu");
         IMU.Parameters parameters = new IMU.Parameters(new RevHubOrientationOnRobot(
                 RoadrunnerDriveConstants.LOGO_FACING_DIR, RoadrunnerDriveConstants.USB_FACING_DIR));
         imu.initialize(parameters);
+        */
 
-        motor_drive_lf = hardwareMap.get(DcMotorEx.class, "motor_drive_lf");
-        motor_drive_lr = hardwareMap.get(DcMotorEx.class, "motor_drive_lr");
-        motor_drive_rr = hardwareMap.get(DcMotorEx.class, "motor_drive_rr");
-        motor_drive_rf = hardwareMap.get(DcMotorEx.class, "motor_drive_rf");
+        leftFront = hardwareMap.get(DcMotorEx.class, "motor_drive_lf");
+        leftRear = hardwareMap.get(DcMotorEx.class, "motor_drive_lr");
+        rightRear = hardwareMap.get(DcMotorEx.class, "motor_drive_rr");
+        rightFront = hardwareMap.get(DcMotorEx.class, "motor_drive_rf");
 
-        motors = Arrays.asList(motor_drive_lf, motor_drive_lr, motor_drive_rr, motor_drive_rf);
+        motors = Arrays.asList(leftFront, leftRear, rightRear, rightFront);
 
         for (DcMotorEx motor : motors) {
             MotorConfigurationType motorConfigurationType = motor.getMotorType().clone();
@@ -124,14 +127,14 @@ public class RoadrunnerSetup extends MecanumDrive {
         }
 
         // TODO: reverse any motors using DcMotor.setDirection()
-        motor_drive_lr.setDirection(DcMotorSimple.Direction.REVERSE);
-        motor_drive_lf.setDirection(DcMotorSimple.Direction.REVERSE);
+        leftRear.setDirection(DcMotorSimple.Direction.REVERSE);
+        leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
 
         List<Integer> lastTrackingEncPositions = new ArrayList<>();
         List<Integer> lastTrackingEncVels = new ArrayList<>();
 
         // TODO: if desired, use setLocalizer() to change the localization method
-        // setLocalizer(new StandardTrackingWheelLocalizer(hardwareMap, lastTrackingEncPositions, lastTrackingEncVels));
+        setLocalizer(new StandardTrackingWheelLocalizer(hardwareMap, lastTrackingEncPositions, lastTrackingEncVels));
 
         trajectorySequenceRunner = new TrajectorySequenceRunner(
                 follower, HEADING_PID, batteryVoltageSensor,
@@ -285,20 +288,22 @@ public class RoadrunnerSetup extends MecanumDrive {
 
     @Override
     public void setMotorPowers(double v, double v1, double v2, double v3) {
-        motor_drive_lf.setPower(v);
-        motor_drive_lr.setPower(v1);
-        motor_drive_rr.setPower(v2);
-        motor_drive_rf.setPower(v3);
+        leftFront.setPower(v);
+        leftRear.setPower(v1);
+        rightRear.setPower(v2);
+        rightFront.setPower(v3);
     }
 
     @Override
     public double getRawExternalHeading() {
-        return imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS);
+        //return imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS);
+        return (double) 0;
     }
 
     @Override
     public Double getExternalHeadingVelocity() {
-        return (double) imu.getRobotAngularVelocity(AngleUnit.RADIANS).zRotationRate;
+        //return (double) imu.getRobotAngularVelocity(AngleUnit.RADIANS).zRotationRate;
+        return (double) 0.0;
     }
 
     public static TrajectoryVelocityConstraint getVelocityConstraint(double maxVel, double maxAngularVel, double trackWidth) {
