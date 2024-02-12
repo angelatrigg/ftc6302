@@ -109,6 +109,9 @@ public class DriveOp extends LinearOpMode {
 
                 initsetup.motor_hang.setPower(-gamepad2.right_stick_y);
 
+                if ((gamepad2.right_trigger == 1.0) && (gamepad2.left_trigger == 1.0)) {
+                    initsetup.claw_pan_servo.setPosition(0.6);
+                }
                 //Arm controls
                 if (gamepad2.a && (initsetup.motor_arm.getCurrentPosition() <= 1600)) {
                     initsetup.motor_arm.setPower(0.7);

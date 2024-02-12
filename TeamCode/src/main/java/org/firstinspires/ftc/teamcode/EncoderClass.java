@@ -77,7 +77,7 @@ public class EncoderClass {
         int newarmTarget;
 
         // Ensure that the opmode is still active
-        if (opMode.opModeIsActive()) {
+        //if (opMode.opModeIsActive()) {
 
             // Determine new target position, and pass to motor controller
             newarmTarget = initpostsetup.motor_arm.getCurrentPosition() + (int) (armMM * InitSetup.COUNTS_PER_MM_ARM);
@@ -110,7 +110,7 @@ public class EncoderClass {
 
                 opMode.sleep(50);   // optional pause after each move.
             }
-        }
+        //}
     }
 }
 

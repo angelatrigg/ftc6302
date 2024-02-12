@@ -42,18 +42,18 @@ public class RoadrunnerAutoODRight extends LinearOpMode {
                 .build();
         TrajectorySequence InitialTrajectory = rrSetup.trajectorySequenceBuilder(startPose)
                 //Check right spike
-                .strafeTo(new Vector2d(38.5, -43.8))
+                .strafeTo(new Vector2d(37, -44.5))
                 .build();
         TrajectorySequence SecondTrajectory = rrSetup.trajectorySequenceBuilder(InitialTrajectory.end())
                 //Check left spike from right spike
                 .turn(-Math.toRadians(-90))
                 .back(8)
-                .strafeTo(new Vector2d(44, -34))
+                .strafeTo(new Vector2d(43, -34))
                 //.strafeTo(new Vector2d(18, -38))
                 .build();
         TrajectorySequence ThirdTrajectory = rrSetup.trajectorySequenceBuilder(SecondTrajectory.end())
-               //Check center spike from left spike
-                .strafeTo(new Vector2d(32, -40))
+                //Check center spike from left spike
+                .strafeTo(new Vector2d(33, -43))
                 .build();
 
         waitForStart();
@@ -72,17 +72,17 @@ public class RoadrunnerAutoODRight extends LinearOpMode {
         }
 
         TrajectorySequence PostDetectionTrajectoryOne = rrSetup.trajectorySequenceBuilder(detectionEnd)
-                .back(8)
+                .back(6)
                 .turn(Math.toRadians(180))
                 .strafeLeft(2)
                 .build();
         TrajectorySequence PostDetectionTrajectoryTwo = rrSetup.trajectorySequenceBuilder(detectionEnd)
-                .back(8)
+                .back(6)
                 .turn(Math.toRadians(180))
                 .strafeLeft(2.5)
                 .build();
         TrajectorySequence PostDetectionTrajectoryThree = rrSetup.trajectorySequenceBuilder(detectionEnd)
-                .back(8)
+                .back(6)
                 .turn(Math.toRadians(180))
                 .strafeRight(2.5)
                 .back(4.5)
@@ -92,20 +92,20 @@ public class RoadrunnerAutoODRight extends LinearOpMode {
             rrSetup.followTrajectorySequence(PostDetectionTrajectoryOne);
             spikePlaceEnd = PostDetectionTrajectoryOne.end();
         }
-       if (detectionEnd == SecondTrajectory.end()) {
-           rrSetup.followTrajectorySequence(PostDetectionTrajectoryTwo);
-           spikePlaceEnd = PostDetectionTrajectoryTwo.end();
-       }
-       if (detectionEnd == ThirdTrajectory.end()) {
-           rrSetup.followTrajectorySequence(PostDetectionTrajectoryThree);
-           spikePlaceEnd = PostDetectionTrajectoryThree.end();
-       }
+        if (detectionEnd == SecondTrajectory.end()) {
+            rrSetup.followTrajectorySequence(PostDetectionTrajectoryTwo);
+            spikePlaceEnd = PostDetectionTrajectoryTwo.end();
+        }
+        if (detectionEnd == ThirdTrajectory.end()) {
+            rrSetup.followTrajectorySequence(PostDetectionTrajectoryThree);
+            spikePlaceEnd = PostDetectionTrajectoryThree.end();
+        }
 
-       //Drop pixel on designated spike mark
+        //Drop pixel on designated spike mark
         initsetup.claw_tilt_servo.setPosition(InitSetup.SERVO_TILT_DOWN);
         rrSetup.followTrajectorySequence(WaitTraj);
-       initsetup.claw_right_servo.setPosition(InitSetup.SERVO_RIGHT_OPEN);
-       rrSetup.followTrajectorySequence(WaitTraj);
+        initsetup.claw_right_servo.setPosition(InitSetup.SERVO_RIGHT_OPEN);
+        rrSetup.followTrajectorySequence(WaitTraj);
        //rrSetup.followTrajectorySequence(ForwardTraj);
 
 

@@ -245,6 +245,7 @@ public class InitSetup {
 
         //Set motor encoder operating mode
         motor_arm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        //motor_arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         //Set brake behavior on motors
         motor_arm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
