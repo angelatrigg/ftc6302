@@ -7,9 +7,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.roadrunner.trajectorysequence.TrajectorySequence;
-
-@Autonomous(name = "Autonomous Left Side Without Backdrop")
-public class RoadrunnerAutoODLeft extends LinearOpMode {
+@Autonomous(name = "Autonomous Left Side With Backdrop")
+public class RoadrunnerAutoODLeftPlusYellow extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -110,6 +109,72 @@ public class RoadrunnerAutoODLeft extends LinearOpMode {
         initsetup.claw_tilt_servo.setPosition(InitSetup.SERVO_TILT_DOWN);
         sleep(500);
         initsetup.claw_right_servo.setPosition(InitSetup.SERVO_RIGHT_OPEN);
+       // rrSetup.followTrajectorySequence(WaitTraj);
+        //encoderClass.encoderArm(1, 500, 5, this, initsetup);
+        //initsetup.motor_arm.setPower(0.1);
+        //rrSetup.followTrajectorySequence(WaitTraj);
         sleep(500);
+        initsetup.claw_tilt_servo.setPosition(InitSetup.SERVO_TILT_UP);
+        TrajectorySequence BackDropOne = rrSetup.trajectorySequenceBuilder(PostDetectionTrajectoryOne.end())
+                .forward(5)
+                .turn(-Math.toRadians(90))
+                .strafeTo(new Vector2d(-72, -41))
+                .build();
+        TrajectorySequence BackDropTwo = rrSetup.trajectorySequenceBuilder(PostDetectionTrajectoryTwo.end())
+                .forward(5)
+                .strafeTo(new Vector2d(-71, -43.5))
+                .build();
+        TrajectorySequence BackDropThree = rrSetup.trajectorySequenceBuilder(BackTraj.end())
+                .forward(5)
+                .strafeTo(new Vector2d(-71.5, -35))
+                .build();
+
+        if (detectionEnd == InitialTrajectory.end() && !detectionFallback) {
+            rrSetup.followTrajectorySequence(BackDropOne);
+        }
+        if (detectionEnd == SecondTrajectory.end() && !detectionFallback) {
+            rrSetup.followTrajectorySequence(BackDropTwo);
+        }
+        if (detectionFallback) {
+            rrSetup.followTrajectorySequence(BackDropThree);
+        }
+
+        initsetup.claw_arm_servo.setPosition(InitSetup.SERVO_ARM_UP);
+        sleep(1000);
+        while ((initsetup.motor_arm.getCurrentPosition() <= 100)) {
+            initsetup.motor_arm.setPower(0.7);
+        }
+        initsetup.motor_arm.setPower(0.1);
+        sleep(500);
+        initsetup.claw_left_servo.setPosition(InitSetup.SERVO_LEFT_OPEN);
+        sleep(500);
+        while ((initsetup.motor_arm.getCurrentPosition() >= 50)) {
+            initsetup.motor_arm.setPower(-0.6);
+        }
+        initsetup.motor_arm.setPower(0);
+        while(initsetup.claw_arm_servo.getPosition() > InitSetup.SERVO_ARM_DOWN_AUTO) {
+            initsetup.claw_arm_servo.setPosition((initsetup.claw_arm_servo.getPosition() - 0.002));
+        }
+        finalPos = BackDropOne.end();
+        if (detectionEnd == InitialTrajectory.end() && !detectionFallback) {
+            finalPos = BackDropOne.end();
+        }
+        if (detectionEnd == SecondTrajectory.end() && !detectionFallback) {
+            finalPos = BackDropTwo.end();
+        }
+        if (detectionFallback) {
+            finalPos = BackDropThree.end();
+        }
+        TrajectorySequence FinalTraj = rrSetup.trajectorySequenceBuilder(finalPos)
+                //Check right spike
+                .strafeTo(new Vector2d(-70, -65))
+                .build();
+
+        rrSetup.followTrajectorySequence(FinalTraj);
+
+        sleep(3000);
+
+
+
     }
 }

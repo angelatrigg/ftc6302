@@ -1,9 +1,11 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.hardware.rev.Rev2mDistanceSensor;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.NormalizedColorSensor;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -20,14 +22,15 @@ public class InitSetup {
     public DcMotor motor_drive_lr;
     public DcMotor motor_drive_rr;
     public DcMotor motor_arm;
-    public DcMotor motor_hang;
+    public DcMotor motor_hang_right;
+    public DcMotor motor_hang_left;
     public Servo launch_servo;
     public Servo claw_arm_servo;
     public Servo claw_pan_servo;
     public Servo claw_tilt_servo;
     public Servo claw_left_servo;
     public Servo claw_right_servo;
-    public NormalizedColorSensor colorSensor;
+    public DistanceSensor sensorDistance;
 
     public Encoder leftEncoder;
     public Encoder rightEncoder;
@@ -45,8 +48,9 @@ public class InitSetup {
     public static final double SERVO_OPEN = 1.55;
     public static final double SERVO_LAUNCHER_OPEN = 2.55;
     public static final double SERVO_LAUNCHER_CLOSED = 0.5;
-    public static final double SERVO_ARM_UP = 0.65;
+    public static final double SERVO_ARM_UP = 0.6;
     public static final double SERVO_ARM_DOWN = 0.02;
+    public static final double SERVO_ARM_DOWN_AUTO = 0;
     public static final double SERVO_LEFT_OPEN = 0.05;
     public static final double SERVO_LEFT_CLOSED = 0.2;
     public static final double SERVO_RIGHT_OPEN = 0.2;
@@ -109,13 +113,12 @@ public class InitSetup {
         claw_tilt_servo = hardwareMap.get(Servo.class, "claw_tilt_servo");
         claw_left_servo = hardwareMap.get(Servo.class, "claw_left_servo");
         claw_right_servo = hardwareMap.get(Servo.class, "claw_right_servo");
-        colorSensor = hardwareMap.get(NormalizedColorSensor.class, "colorSensor");
-        motor_hang = hardwareMap.get(DcMotor.class, "frontEncoder");
+        sensorDistance = hardwareMap.get(DistanceSensor.class, "sensor_distance");
+        motor_hang_right = hardwareMap.get(DcMotor.class, "frontEncoder");
+        motor_hang_left = hardwareMap.get(DcMotor.class, "leftEncoder");
 
-        //Toggle Color Sensor light
-        if (colorSensor instanceof SwitchableLight) {
-            ((SwitchableLight)colorSensor).enableLight(true);
-        }
+        //Allow extra distance sensor functions to work
+        Rev2mDistanceSensor sensorTimeOfFlight = (Rev2mDistanceSensor) sensorDistance;
 
         //Freeze code when hardwareMap returns a null value **DOES NOT WORK**
         if (hardwareMapChecker.hardwareMapChecker(this)) {
@@ -155,6 +158,7 @@ public class InitSetup {
         claw_arm_servo.setPosition(SERVO_ARM_DOWN);
         claw_left_servo.setPosition(SERVO_LEFT_CLOSED);
         claw_right_servo.setPosition(SERVO_RIGHT_CLOSED);
+        motor_hang_left.setDirection(DcMotorSimple.Direction.REVERSE);
         //launch_servo.setPosition(1);
 
 
@@ -226,10 +230,13 @@ public class InitSetup {
         claw_tilt_servo = hardwareMap.get(Servo.class, "claw_tilt_servo");
         claw_left_servo = hardwareMap.get(Servo.class, "claw_left_servo");
         claw_right_servo = hardwareMap.get(Servo.class, "claw_right_servo");
-        colorSensor = hardwareMap.get(NormalizedColorSensor.class, "colorSensor");
+        sensorDistance = hardwareMap.get(DistanceSensor.class, "sensor_distance");
         leftEncoder = new Encoder(hardwareMap.get(DcMotorEx.class, "leftEncoder"));
         rightEncoder = new Encoder(hardwareMap.get(DcMotorEx.class, "rightEncoder"));
         frontEncoder = new Encoder(hardwareMap.get(DcMotorEx.class, "frontEncoder"));
+
+        //Allow extra distance sensor functions to work
+        Rev2mDistanceSensor sensorTimeOfFlight = (Rev2mDistanceSensor) sensorDistance;
 
         //Reverse directions of motors
         motor_drive_lr.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -244,15 +251,16 @@ public class InitSetup {
         motor_arm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         //Set motor encoder operating mode
-        motor_arm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        //motor_arm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         //motor_arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motor_arm.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         //Set brake behavior on motors
         motor_arm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         claw_tilt_servo.setPosition(SERVO_TILT_UP);
         claw_pan_servo.setPosition(SERVO_PAN_POS);
-        claw_arm_servo.setPosition(SERVO_ARM_DOWN);
+        claw_arm_servo.setPosition(SERVO_ARM_DOWN_AUTO);
         claw_left_servo.setPosition(SERVO_LEFT_CLOSED);
         claw_right_servo.setPosition(SERVO_RIGHT_CLOSED);
         /**

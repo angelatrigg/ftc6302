@@ -107,10 +107,12 @@ public class DriveOp extends LinearOpMode {
                     initsetup.launch_servo.setPosition(0.5);
                 }
 
-                initsetup.motor_hang.setPower(-gamepad2.right_stick_y);
+                initsetup.motor_hang_right.setPower(-gamepad2.left_stick_y);
+                initsetup.motor_hang_left.setPower(-gamepad2.left_stick_y);
 
                 if ((gamepad2.right_trigger == 1.0) && (gamepad2.left_trigger == 1.0)) {
-                    initsetup.claw_pan_servo.setPosition(0.6);
+                    initsetup.SERVO_PAN_POS = 0.6;
+                    initsetup.claw_pan_servo.setPosition(initsetup.SERVO_PAN_POS);
                 }
                 //Arm controls
                 if (gamepad2.a && (initsetup.motor_arm.getCurrentPosition() <= 1600)) {
@@ -149,10 +151,12 @@ public class DriveOp extends LinearOpMode {
                     }
                 }
                 if (gamepad2.y) {
-                    initsetup.claw_tilt_servo.setPosition(InitSetup.SERVO_TILT_UP);
+                    /*initsetup.claw_tilt_servo.setPosition(InitSetup.SERVO_TILT_UP);
                     if (initsetup.claw_arm_servo.getPosition() < InitSetup.SERVO_ARM_UP) {
                         initsetup.claw_arm_servo.setPosition(initsetup.claw_arm_servo.getPosition() + 0.01);
                     }
+                     */
+                    initsetup.claw_arm_servo.setPosition(InitSetup.SERVO_ARM_UP);
                 }
 
                 //Claw gimbal controls
@@ -171,39 +175,39 @@ public class DriveOp extends LinearOpMode {
                     initsetup.claw_tilt_servo.setPosition(InitSetup.SERVO_TILT_DOWN);
                 }
 
-                //Distance checking
-                if (((DistanceSensor) initsetup.colorSensor).getDistance(DistanceUnit.CM) > 4.6) {
-                    telemetry.addData("No Object Detected ", ((DistanceSensor) initsetup.colorSensor).getDistance(DistanceUnit.CM));
+             /*   //Distance checking
+                if ((((DistanceSensor) initsetup.sensorDistance).getDistance(DistanceUnit.CM) >= 10)) {
+                    telemetry.addData("No Object Detected ", (((DistanceSensor) initsetup.sensorDistance).getDistance(DistanceUnit.CM)));
 
                 }
-                if (((DistanceSensor) initsetup.colorSensor).getDistance(DistanceUnit.CM) < 4.6) {
-                    telemetry.addData("Object Detected! ", ((DistanceSensor) initsetup.colorSensor).getDistance(DistanceUnit.CM));
+                if ((((DistanceSensor) initsetup.sensorDistance).getDistance(DistanceUnit.CM) < 10)) {
+                    telemetry.addData("Object Detected! ", (((DistanceSensor) initsetup.sensorDistance).getDistance(DistanceUnit.CM)));
 
                 }
 
+
+              */
 
                 //Cooldowns
                 if (initsetup.left_cooldown > 0 && !gamepad2.left_bumper) {initsetup.left_cooldown = initsetup.left_cooldown-1;}
                 if (initsetup.right_cooldown > 0 && !gamepad2.right_bumper) {initsetup.right_cooldown = initsetup.right_cooldown-1;}
 
 
-                telemetry.addData("Left Rear Pow", initsetup.motor_drive_lr.getPower());
-                telemetry.addData("Left Front Pow", initsetup.motor_drive_lf.getPower());
-                telemetry.addData("Right Rear Pow", initsetup.motor_drive_rr.getPower());
-                telemetry.addData("Right Front Pow", initsetup.motor_drive_rf.getPower());
-                telemetry.addData("Left Joystick Y", gamepad1.left_stick_y);
-                telemetry.addData("Right Joystick Y", gamepad1.right_stick_y);
+                //telemetry.addData("Left Rear Pow", initsetup.motor_drive_lr.getPower());
+                //telemetry.addData("Left Front Pow", initsetup.motor_drive_lf.getPower());
+                //telemetry.addData("Right Rear Pow", initsetup.motor_drive_rr.getPower());
+                //telemetry.addData("Right Front Pow", initsetup.motor_drive_rf.getPower());
+                //telemetry.addData("Left Joystick Y", gamepad1.left_stick_y);
+                //telemetry.addData("Right Joystick Y", gamepad1.right_stick_y);
                 telemetry.addData("Joystick Max Speed", initsetup.JOY_SPEED);
-                telemetry.addData("Right Cooldown", initsetup.right_cooldown);
+                //telemetry.addData("Right Cooldown", initsetup.right_cooldown);
                 telemetry.addData("Arm Position: ", initsetup.motor_arm.getCurrentPosition());
                 //telemetry.addData("Tilt Servo Pos:", initsetup.claw_tilt_servo.getPosition());
                 telemetry.addData("Pan Servo Pos:", initsetup.claw_pan_servo.getPosition());
                 //telemetry.addData("Right Trigger Pos", gamepad1.right_trigger);
                 //telemetry.addData("Left Servo Pos:", initsetup.claw_left_servo.getPosition());
                 //telemetry.addData("Right Servo Pos:", initsetup.claw_right_servo.getPosition());
-                if (initsetup.colorSensor instanceof DistanceSensor) {
-                    telemetry.addData("Distance (cm)", "%.3f", ((DistanceSensor) initsetup.colorSensor).getDistance(DistanceUnit.CM));
-                }
+               // telemetry.addData("Distance Sensor (CM): ", ((DistanceSensor) initsetup.sensorDistance).getDistance(DistanceUnit.CM));
                 telemetry.update();
             }
         }
